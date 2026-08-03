@@ -486,12 +486,20 @@ button {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 18px;
-  flex-wrap: nowrap;
-  white-space: nowrap;
   flex-shrink: 1;
   min-width: 0;
   overflow: hidden;
+}
+
+.nav-links ul {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .nav-item a {

@@ -1,0 +1,171 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
+  const closeDrawer = () => setIsDrawerOpen(false);
+
+  return (
+    <>
+      <header className={`navbar ${isScrolled ? "scrolled" : ""}`} id="navbar">
+        <div className="container navbar-container">
+          <a href="#hero" className="brand-cluster">
+            <div className="jv-partners">
+              <img
+                src="/assets/images/mahalaxmi-logo.svg"
+                alt="Mahalaxmi Group"
+                className="partner-img"
+              />
+              <div className="jv-divider"></div>
+              <img
+                src="/assets/images/kohinoor-logo.svg"
+                alt="Kohinoor Group"
+                className="partner-img"
+              />
+            </div>
+            <div className="logo-wrapper">
+              <div className="logo-icon">
+                <i className="ri-run-line"></i>
+              </div>
+              <div className="logo-text">
+                <div className="logo-title">
+                  THE <span>ARENA</span>
+                </div>
+                <div className="logo-subtitle">PIMPRI'S SPORTS TOWNSHIP</div>
+              </div>
+            </div>
+          </a>
+
+          <nav className="nav-links" id="navLinks">
+            <ul>
+              <li className="nav-item">
+                <a href="#philosophy">Vision</a>
+              </li>
+              <li className="nav-item">
+                <a href="#operating-system">Ecosystem</a>
+              </li>
+              <li className="nav-item">
+                <a href="#masterplan">Masterplan</a>
+              </li>
+              <li className="nav-item">
+                <a href="#gallery">Sanctuaries</a>
+              </li>
+              <li className="nav-item">
+                <a href="#residences">Residences</a>
+              </li>
+              <li className="nav-item">
+                <a href="#rhythms">Rhythms</a>
+              </li>
+              <li className="nav-item">
+                <a href="#connectivity">Connectivity</a>
+              </li>
+              <li className="nav-item">
+                <a href="#specifications">Specs</a>
+              </li>
+              <li className="nav-item">
+                <a href="#calculator">Investment</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="nav-actions">
+            <button className="btn btn-neon trigger-schedule">
+              <i className="ri-vip-crown-line"></i> <span>VIP Site Visit</span>
+            </button>
+            <button
+              className="mobile-toggle"
+              id="mobileToggle"
+              aria-label="Toggle Navigation"
+              onClick={toggleDrawer}
+            >
+              <i className="ri-menu-3-line"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* ==================== MOBILE DRAWER ==================== */}
+      <div
+        className={`mobile-drawer-backdrop ${isDrawerOpen ? "active" : ""}`}
+        id="drawerBackdrop"
+        onClick={closeDrawer}
+      ></div>
+      <nav
+        className={`mobile-drawer ${isDrawerOpen ? "active" : ""}`}
+        id="mobileDrawer"
+        aria-label="Mobile Navigation"
+      >
+        <button
+          className="drawer-close-btn"
+          id="drawerCloseBtn"
+          aria-label="Close Navigation"
+          onClick={closeDrawer}
+        >
+          <i className="ri-close-line"></i>
+        </button>
+        <div className="drawer-brand">
+          <div className="drawer-brand-icon">
+            <i className="ri-run-line"></i>
+          </div>
+          <div className="drawer-brand-name">
+            MAHALAXMI <span>THE ARENA</span>
+          </div>
+        </div>
+        <a href="#philosophy" className="drawer-nav-link" onClick={closeDrawer}>
+          <i className="ri-lightbulb-flash-line"></i> Philosophy
+        </a>
+        <a href="#operating-system" className="drawer-nav-link" onClick={closeDrawer}>
+          <i className="ri-run-line"></i> 80k Sq.Ft. OS
+        </a>
+        <a href="#masterplan" className="drawer-nav-link" onClick={closeDrawer}>
+          <i className="ri-building-4-line"></i> 11 Towers &amp; Map
+        </a>
+        <a href="#gallery" className="drawer-nav-link" onClick={closeDrawer}>
+          <i className="ri-image-2-line"></i> Sanctuaries
+        </a>
+        <a href="#residences" className="drawer-nav-link" onClick={closeDrawer}>
+          <i className="ri-home-4-line"></i> Residences
+        </a>
+        <a href="#rhythms" className="drawer-nav-link" onClick={closeDrawer}>
+          <i className="ri-user-heart-line"></i> 4 Rhythms
+        </a>
+        <a href="#connectivity" className="drawer-nav-link" onClick={closeDrawer}>
+          <i className="ri-map-pin-line"></i> Pimpri Map
+        </a>
+        <a href="#specifications" className="drawer-nav-link" onClick={closeDrawer}>
+          <i className="ri-list-check-2"></i> Specs
+        </a>
+        <a href="#calculator" className="drawer-nav-link" onClick={closeDrawer}>
+          <i className="ri-calculator-line"></i> ROI Calc
+        </a>
+        <div className="drawer-footer">
+          <button
+            className="btn btn-neon trigger-schedule"
+            style={{ width: "100%", justifyContent: "center" }}
+          >
+            <i className="ri-vip-crown-line"></i> VIP Site Visit
+          </button>
+          <button
+            className="btn btn-glass trigger-brochure"
+            style={{ width: "100%", justifyContent: "center" }}
+          >
+            <i className="ri-download-cloud-2-line"></i> Download Brochure
+          </button>
+        </div>
+      </nav>
+    </>
+  );
+}
