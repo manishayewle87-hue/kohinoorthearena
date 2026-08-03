@@ -126,6 +126,12 @@ export default function Modals() {
           <input type="text" placeholder="Full Name" required className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
           <input type="tel" placeholder="Mobile Number" required className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
           <input type="email" placeholder="Email Address (Required for Digital Brochure)" className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+          
+          <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', textAlign: 'left', fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', marginTop: '0.5rem', cursor: 'pointer' }}>
+            <input type="checkbox" required defaultChecked style={{ marginTop: '4px', accentColor: 'var(--neon-lime)' }} />
+            <span>I consent to receive updates, offers, and digital brochures via WhatsApp from Mahalaxmi The Arena.</span>
+          </label>
+          
           <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>Submit Request</button>
         </form>
       </div>

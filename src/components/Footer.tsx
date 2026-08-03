@@ -128,13 +128,31 @@ export default function Footer() {
         </div>
       </div>
 
+      {/*  RERA & Legal Compliance */}
+      <div className="footer-legal" style={{ marginTop: '2rem', padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', textAlign: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Image src="/assets/images/maharera-logo.png" alt="MahaRERA Logo" width={40} height={40} style={{ filter: 'grayscale(1) brightness(1.5)' }} />
+            <span style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--neon-lime)' }}>MahaRERA No: P5210005XXXX</span>
+          </div>
+          <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', margin: 0 }}>
+            The project has been registered via MahaRERA registration number and is available on the website <a href="https://maharera.mahaonline.gov.in" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'underline' }}>maharera.mahaonline.gov.in</a> under registered projects.
+          </p>
+        </div>
+      </div>
+
       {/*  Disclaimer from Brochure  */}
       <div className="footer-disclaimer">
         <strong>Disclaimer:</strong> This website and brochure content is a draft prepared solely for internal circulation and reference, and does not constitute a sales offer, commitment, or contract of any kind. All information, images, plans, and specifications shown are indicative and subject to change without notice. Any decisions or actions taken based on the contents of this website are at the sole discretion and risk of the reader, and The Arena Pimpri, Mahalaxmi Group, Kohinoor Group, and Agarwal Sukhwani Associates accept no liability for any errors, omissions, or reliance placed on this material. For accurate and binding details, please refer to the official sale agreement and RERA approved project documents.
       </div>
 
-      <div className="footer-bottom">
+      <div className="footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <div>&copy; 2026 Mahalaxmi The ARENA. All rights reserved.</div>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <a href="/privacy-policy" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.9rem' }}>Privacy Policy</a>
+          <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
+          <a href="/terms" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.9rem' }}>Terms of Service</a>
+        </div>
         <div>Designed with <span style={{ color: "var(--neon-lime)" }}>Life in Motion</span> • Pimpri, Pune</div>
       </div>
     </div>

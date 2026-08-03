@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { headers } from 'next/headers';
-import { getAllPosts } from '@/lib/blog';
+import { getBlogPosts } from '@/lib/blog';
 import { generatePSEOMatrix } from '@/lib/pseo-data';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // Blog Posts
-  const posts = getAllPosts();
+  const posts = getBlogPosts();
   const blogRoutes = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
