@@ -18,78 +18,87 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL('https://kohinoorthearena.vercel.app'),
-  title: {
-    default: "Mahalaxmi The ARENA | Life in Motion | 2, 3 & 4 BHK in Pimpri",
-    template: "%s | Mahalaxmi The ARENA | Life in Motion"
-  },
-  description: "Discover Mahalaxmi The ARENA in Pimpri, Pune — an ultra-modern 2, 3 & 4 BHK residential sports township featuring an 80,000 sq. ft. sports operating system managed by ILESEUM Sports Management across 11 luxury 34-storey towers.",
-  keywords: [
-    "Mahalaxmi The Arena",
-    "Kohinoor The Arena",
-    "Life in Motion Pimpri",
-    "Pimpri Real Estate",
-    "Pune Real Estate Market",
-    "Entire Pune real estate market",
-    "Pimpri Chinchwad real estate market",
-    "PCMC real estate",
-    "Kohinoor Pimpri real estate",
-    "Mahalaxmi real estate Pimpri",
-    "Flats in Pimpri",
-    "Luxury apartments in Pimpri",
-    "Buy flat in Pimpri",
-    "Property in Pimpri",
-    "2 BHK in Pimpri",
-    "3 BHK in Pimpri",
-    "4 BHK flats in Pimpri",
-    "Premium apartments PCMC",
-    "Flats near PCMC Metro",
-    "Flats in Chinchwad",
-    "Luxury apartments Pune",
-    "New launch projects Pimpri",
-    "Upcoming projects Pimpri",
-    "Ready possession flats Pimpri",
-    "Best property investment in Pune",
-    "Top real estate developers in PCMC"
-  ],
-  authors: [{ name: "Kohinoor Group & Mahalaxmi Group" }],
-  creator: "Kohinoor Group",
-  publisher: "Mahalaxmi The ARENA",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  openGraph: {
-    title: "Mahalaxmi The Arena | Premium Real Estate in Pimpri Chinchwad, Pune",
-    description: "Discover the ultimate sports township in PCMC. Premium 2, 3 & 4 BHK luxury residences by Mahalaxmi and Kohinoor Group.",
-    url: "https://kohinoorthearena.vercel.app",
-    siteName: "Mahalaxmi The Arena",
-    images: [
-      {
-        url: "https://kohinoorthearena.vercel.app/assets/images/hero-bg.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Mahalaxmi The Arena Aerial View",
-      },
+import { headers } from 'next/headers';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const protocol = host.includes('localhost') ? 'http' : 'https';
+  const baseUrl = `${protocol}://${host}`;
+
+  return {
+    metadataBase: new URL(baseUrl),
+    title: {
+      default: "Mahalaxmi The ARENA | Life in Motion | 2, 3 & 4 BHK in Pimpri",
+      template: "%s | Mahalaxmi The ARENA | Life in Motion"
+    },
+    description: "Discover Mahalaxmi The ARENA in Pimpri, Pune — an ultra-modern 2, 3 & 4 BHK residential sports township featuring an 80,000 sq. ft. sports operating system managed by ILESEUM Sports Management across 11 luxury 34-storey towers.",
+    keywords: [
+      "Mahalaxmi The Arena",
+      "Kohinoor The Arena",
+      "Life in Motion Pimpri",
+      "Pimpri Real Estate",
+      "Pune Real Estate Market",
+      "Entire Pune real estate market",
+      "Pimpri Chinchwad real estate market",
+      "PCMC real estate",
+      "Kohinoor Pimpri real estate",
+      "Mahalaxmi real estate Pimpri",
+      "Flats in Pimpri",
+      "Luxury apartments in Pimpri",
+      "Buy flat in Pimpri",
+      "Property in Pimpri",
+      "2 BHK in Pimpri",
+      "3 BHK in Pimpri",
+      "4 BHK flats in Pimpri",
+      "Premium apartments PCMC",
+      "Flats near PCMC Metro",
+      "Flats in Chinchwad",
+      "Luxury apartments Pune",
+      "New launch projects Pimpri",
+      "Upcoming projects Pimpri",
+      "Ready possession flats Pimpri",
+      "Best property investment in Pune",
+      "Top real estate developers in PCMC"
     ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Mahalaxmi The Arena Pimpri | Kohinoor Life in Motion",
-    description: "Premium 2, 3 & 4 BHK luxury sports township in PCMC, Pune.",
-    images: ["https://kohinoorthearena.vercel.app/assets/images/hero-bg.jpg"],
-  },
-  alternates: {
-    canonical: "https://kohinoorthearena.vercel.app",
-  },
-  verification: {
-    google: "2ra2pGDEk6-2G2LYEGVQG6f5zRnF_3UG_gMJWAwAbE8",
-  }
-};
+    authors: [{ name: "Kohinoor Group & Mahalaxmi Group" }],
+    creator: "Kohinoor Group",
+    publisher: "Mahalaxmi The ARENA",
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    openGraph: {
+      title: "Mahalaxmi The Arena | Premium Real Estate in Pimpri Chinchwad, Pune",
+      description: "Discover the ultimate sports township in PCMC. Premium 2, 3 & 4 BHK luxury residences by Mahalaxmi and Kohinoor Group.",
+      url: baseUrl,
+      siteName: "Mahalaxmi The Arena",
+      images: [
+        {
+          url: `${baseUrl}/assets/images/hero-bg.jpg`,
+          width: 1200,
+          height: 630,
+          alt: "Mahalaxmi The Arena Aerial View",
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Mahalaxmi The Arena Pimpri | Kohinoor Life in Motion",
+      description: "Premium 2, 3 & 4 BHK luxury sports township in PCMC, Pune.",
+      images: [`${baseUrl}/assets/images/hero-bg.jpg`],
+    },
+    alternates: {
+      canonical: baseUrl,
+    },
+    verification: {
+      google: "2ra2pGDEk6-2G2LYEGVQG6f5zRnF_3UG_gMJWAwAbE8",
+    }
+  };
+}
 
 const jsonLd = [
   {
