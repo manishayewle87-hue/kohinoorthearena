@@ -8,8 +8,11 @@ import Modals from '@/components/Modals';
 import GlobalScripts from '@/components/GlobalScripts';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 
+import { headers } from 'next/headers';
+import { getDomainConfig } from '@/lib/domain-config';
+
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export const revalidate = 3600; // Edge Route Caching (1 Hour)
@@ -22,44 +25,61 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = getPSEOPageData(params.slug);
+  const p = await params;
+  const data = getPSEOPageData(p.slug);
   
   if (!data) {
     return { title: 'Page Not Found' };
   }
 
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
+  const pageUrl = `${cfg.canonical}/flats-in-pune/${p.slug}`;
+
   return {
     title: data.title,
     description: data.description,
     keywords: [data.keyword, `Buy ${data.bhk} in ${data.location}`, `Mahalaxmi The Arena ${data.location}`],
+    alternates: {
+      canonical: pageUrl,
+    },
     openGraph: {
       title: data.title,
       description: data.description,
+      url: pageUrl,
       type: "website",
+      images: [{ url: `${cfg.canonical}/assets/images/hero.jpg`, width: 1200, height: 630, alt: data.h1 }],
     }
   };
 }
 
-export default function PSEOPage({ params }: Props) {
-  const data = getPSEOPageData(params.slug);
+export default async function PSEOPage({ params }: Props) {
+  const p = await params;
+  const data = getPSEOPageData(p.slug);
   
   if (!data) {
     notFound();
   }
+
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
+  const pageUrl = `${cfg.canonical}/flats-in-pune/${p.slug}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": data.h1,
     "description": data.description,
-    "image": "https://kohinoorthearena.vercel.app/assets/images/hero-bg.jpg",
+    "image": `${cfg.canonical}/assets/images/hero.jpg`,
     "brand": {
       "@type": "Brand",
-      "name": "Mahalaxmi The Arena"
+      "name": cfg.projectName
     },
     "offers": {
       "@type": "Offer",
-      "url": `https://kohinoorthearena.vercel.app/flats-in-pune/${params.slug}`,
+      "url": pageUrl,
       "priceCurrency": "INR",
       "price": data.price.includes('Cr') ? parseFloat(data.price) * 10000000 : parseFloat(data.price) * 100000,
       "availability": "https://schema.org/PreOrder"

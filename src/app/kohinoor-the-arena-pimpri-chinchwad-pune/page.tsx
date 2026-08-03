@@ -14,38 +14,72 @@ import Booking from "@/components/Booking";
 import Footer from "@/components/Footer";
 import FAQ from "@/components/FAQ";
 
-export const metadata: Metadata = {
-  title: "Kohinoor The Arena | Premium Flats in Pimpri Chinchwad",
-  description: "Kohinoor The Arena offers luxury 2, 3 & 4 BHK residences in PCMC. A flagship sports township project in Pimpri by Kohinoor Group.",
-  keywords: [
-    "Kohinoor The Arena",
-    "Kohinoor Group Pimpri",
-    "Kohinoor Arena PCMC",
-    "Kohinoor Pimpri real estate",
-    "Pune real estate market",
-    "Pimpri Chinchwad real estate",
-    "Buy flat in Kohinoor The Arena",
-    "Kohinoor The Arena price",
-    "Luxury flats in Pimpri",
-    "PCMC real estate"
-  ],
-  alternates: {
-    canonical: "https://kohinoorthearena.vercel.app/kohinoor-the-arena-pimpri-chinchwad-pune",
-  },
-  openGraph: {
-    title: "Kohinoor The Arena | Premium Real Estate PCMC",
-    description: "Kohinoor Group's flagship sports township in Pimpri.",
-    url: "https://kohinoorthearena.vercel.app/kohinoor-the-arena-pimpri-chinchwad-pune",
-  }
-};
+import { headers } from 'next/headers';
+import { getDomainConfig } from '@/lib/domain-config';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
+  const pageUrl = `${cfg.canonical}/kohinoor-the-arena-pimpri-chinchwad-pune`;
+
+  return {
+    title: "Kohinoor The Arena | Premium Flats in Pimpri Chinchwad",
+    description: "Kohinoor The Arena offers luxury 2, 3 & 4 BHK residences in PCMC. A flagship sports township project in Pimpri by Kohinoor Group.",
+    keywords: [
+      "Kohinoor The Arena",
+      "Kohinoor Group Pimpri",
+      "Kohinoor Arena PCMC",
+      "Kohinoor Pimpri real estate",
+      "Pune real estate market",
+      "Pimpri Chinchwad real estate",
+      "Buy flat in Kohinoor The Arena",
+      "Kohinoor The Arena price",
+      "Luxury flats in Pimpri",
+      "PCMC real estate"
+    ],
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: "Kohinoor The Arena | Premium Real Estate PCMC",
+      description: "Kohinoor Group's flagship sports township in Pimpri.",
+      url: pageUrl,
+      images: [{ url: `${cfg.canonical}/assets/images/hero.jpg`, width: 1200, height: 630, alt: "Kohinoor The Arena PCMC" }],
+    }
+  };
+}
 
 export const revalidate = 3600; // Edge Route Caching (1 Hour)
 
-export default function KohinoorSilo() {
+export default async function KohinoorSilo() {
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
+  const pageUrl = `${cfg.canonical}/kohinoor-the-arena-pimpri-chinchwad-pune`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ApartmentComplex",
+    "name": "Kohinoor The Arena",
+    "description": "Kohinoor Group flagship sports township offering 2, 3 & 4 BHK luxury residences in Pimpri Chinchwad.",
+    "url": pageUrl,
+    "image": `${cfg.canonical}/assets/images/hero.jpg`,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pimpri-Chinchwad",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    }
+  };
   return (
     <>
       <Navbar />
       <main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <h1 style={{ position: "absolute", width: "1px", height: "1px", padding: 0, margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", border: 0 }}>
           Kohinoor The Arena - Premium Real Estate & Luxury Flats in Pimpri, PCMC. Kohinoor Pimpri real estate, top property in Pune real estate market.
         </h1>

@@ -49,7 +49,10 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
-
+        - name: Generate sitemap and check broken links
+          run: |
+            npm run generate:sitemap
+            npx broken-link-checker "public/**/*.html"
       - name: Run ESLint
         run: npx next lint --max-warnings 0
         continue-on-error: true # Warnings don't block deploy, only errors do
