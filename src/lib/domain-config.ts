@@ -77,10 +77,8 @@ export const DOMAIN_CONFIGS: Record<string, DomainConfig> = {
       orgName: 'Mahalaxmi Group',
       logoUrl: 'https://mahalaxmithearena.in/assets/images/mahalaxmi-logo.svg',
     },
-    // ⚠️ ACTION REQUIRED: Add mahalaxmithearena.in to Google Search Console separately
-    // and replace this with the verification code from:
-    // GSC → Settings → Ownership Verification → HTML Tag method
-    googleVerification: '2ra2pGDEk6-2G2LYEGVQG6f5zRnF_3UG_gMJWAwAbE8', // Replace with mahalaxmithearena.in GSC code
+    // mahalaxmithearena.in Google Search Console verified ✅
+    googleVerification: '_px3Bz_W6ls9fFGFy-vocVmcJ-t5mcdVUjo5T2B9TY0',
   },
 };
 
