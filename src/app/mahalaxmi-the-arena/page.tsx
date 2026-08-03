@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     "Mahalaxmi Group Pimpri",
     "Mahalaxmi Group Pune",
     "Mahalaxmi The Arena PCMC",
+    "Mahalaxmi real estate Pimpri",
+    "Pune real estate market",
+    "Pimpri Chinchwad real estate",
     "Mahalaxmi The Arena floor plan",
     "Buy flat in Mahalaxmi The Arena",
     "Pune real estate"
@@ -42,7 +45,7 @@ export default function MahalaxmiSilo() {
       <Navbar />
       <main>
         <h1 style={{ position: "absolute", width: "1px", height: "1px", padding: 0, margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", border: 0 }}>
-          Mahalaxmi The Arena - Luxury Flats & Sports Township by Mahalaxmi Group in Pimpri, Pune
+          Mahalaxmi The Arena - Luxury Flats & Sports Township by Mahalaxmi Group in Pimpri, Pune. Mahalaxmi real estate Pimpri, top property in Pune real estate market.
         </h1>
         <Hero />
         <Philosophy />

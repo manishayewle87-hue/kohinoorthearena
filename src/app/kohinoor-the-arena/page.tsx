@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     "Kohinoor The Arena",
     "Kohinoor Group Pimpri",
     "Kohinoor Arena PCMC",
+    "Kohinoor Pimpri real estate",
+    "Pune real estate market",
+    "Pimpri Chinchwad real estate",
     "Buy flat in Kohinoor The Arena",
     "Kohinoor The Arena price",
     "Luxury flats in Pimpri",
@@ -42,7 +45,7 @@ export default function KohinoorSilo() {
       <Navbar />
       <main>
         <h1 style={{ position: "absolute", width: "1px", height: "1px", padding: 0, margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", border: 0 }}>
-          Kohinoor The Arena - Premium Real Estate & Luxury Flats in Pimpri, PCMC
+          Kohinoor The Arena - Premium Real Estate & Luxury Flats in Pimpri, PCMC. Kohinoor Pimpri real estate, top property in Pune real estate market.
         </h1>
         <Hero />
         <Philosophy />

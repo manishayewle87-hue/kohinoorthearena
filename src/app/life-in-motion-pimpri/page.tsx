@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     "Life in Motion Pune",
     "Life in Motion Codename",
     "Sports township PCMC",
+    "Pune real estate market",
+    "Pimpri Chinchwad real estate",
+    "Entire Pune real estate market",
     "Ileseum Sports Pimpri",
     "Flats near PCMC Metro",
     "Active ecosystem Pune"
@@ -42,7 +45,7 @@ export default function LifeInMotionSilo() {
       <Navbar />
       <main>
         <h1 style={{ position: "absolute", width: "1px", height: "1px", padding: 0, margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", border: 0 }}>
-          Life in Motion Pimpri - The Ultimate Active Ecosystem & Sports Township in Pune
+          Life in Motion Pimpri - The Ultimate Active Ecosystem & Sports Township in Pune. Best property investment in Pune, PCMC real estate.
         </h1>
         <Hero />
         <Philosophy />
