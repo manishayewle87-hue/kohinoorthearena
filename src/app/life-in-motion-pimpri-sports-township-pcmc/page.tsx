@@ -15,39 +15,39 @@ import Footer from "@/components/Footer";
 import FAQ from "@/components/FAQ";
 
 export const metadata: Metadata = {
-  title: "Kohinoor The Arena | Premium Flats in Pimpri Chinchwad",
-  description: "Kohinoor The Arena offers luxury 2, 3 & 4 BHK residences in PCMC. A flagship sports township project in Pimpri by Kohinoor Group.",
+  title: "Life in Motion Pimpri | The Ultimate Sports Township",
+  description: "Life in Motion is an 80,000 Sq.Ft. sports township in Pimpri Chinchwad. Premium residences managed by Ileseum Sports.",
   keywords: [
-    "Kohinoor The Arena",
-    "Kohinoor Group Pimpri",
-    "Kohinoor Arena PCMC",
-    "Kohinoor Pimpri real estate",
+    "Life in Motion Pimpri",
+    "Life in Motion Pune",
+    "Life in Motion Codename",
+    "Sports township PCMC",
     "Pune real estate market",
     "Pimpri Chinchwad real estate",
-    "Buy flat in Kohinoor The Arena",
-    "Kohinoor The Arena price",
-    "Luxury flats in Pimpri",
-    "PCMC real estate"
+    "Entire Pune real estate market",
+    "Ileseum Sports Pimpri",
+    "Flats near PCMC Metro",
+    "Active ecosystem Pune"
   ],
   alternates: {
-    canonical: "https://kohinoorthearena.vercel.app/kohinoor-the-arena",
+    canonical: "https://kohinoorthearena.vercel.app/life-in-motion-pimpri-sports-township-pcmc",
   },
   openGraph: {
-    title: "Kohinoor The Arena | Premium Real Estate PCMC",
-    description: "Kohinoor Group's flagship sports township in Pimpri.",
-    url: "https://kohinoorthearena.vercel.app/kohinoor-the-arena",
+    title: "Life in Motion Pimpri | Ultimate Sports Township",
+    description: "Pune's finest active ecosystem and premium residences.",
+    url: "https://kohinoorthearena.vercel.app/life-in-motion-pimpri-sports-township-pcmc",
   }
 };
 
 export const revalidate = 3600; // Edge Route Caching (1 Hour)
 
-export default function KohinoorSilo() {
+export default function LifeInMotionSilo() {
   return (
     <>
       <Navbar />
       <main>
         <h1 style={{ position: "absolute", width: "1px", height: "1px", padding: 0, margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", border: 0 }}>
-          Kohinoor The Arena - Premium Real Estate & Luxury Flats in Pimpri, PCMC. Kohinoor Pimpri real estate, top property in Pune real estate market.
+          Life in Motion Pimpri - The Ultimate Active Ecosystem & Sports Township in Pune. Best property investment in Pune, PCMC real estate.
         </h1>
         <Hero />
         <Philosophy />

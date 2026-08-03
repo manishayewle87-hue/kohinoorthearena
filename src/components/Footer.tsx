@@ -40,13 +40,14 @@ export default function Footer() {
 
         <div className="footer-col">
           <h5>Residences</h5>
-          <div className="footer-links">
-            <a href="#residences">2 BHK Luxury Residence</a>
-            <a href="#residences">3 BHK Premium Residence</a>
-            <a href="#residences">3 BHK Grand Corner Suite</a>
-            <a href="#residences">4 BHK Sky Penthouse</a>
-            <a href="#specifications">Salient Specifications</a>
-          </div>
+          <ul className="footer-links">
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/kohinoor-the-arena-pimpri-chinchwad-pune">Kohinoor The Arena</Link></li>
+            <li><Link href="/mahalaxmi-the-arena-luxury-flats-in-pimpri">Mahalaxmi The Arena</Link></li>
+            <li><Link href="/life-in-motion-pimpri-sports-township-pcmc">Life in Motion</Link></li>
+            <li><Link href="#residences">Residences</Link></li>
+            <li><a href="#specifications">Salient Specifications</a></li>
+          </ul>
         </div>
 
         <div className="footer-col">
@@ -65,9 +66,9 @@ export default function Footer() {
         <h6 style={{ color: "rgba(255,255,255,0.7)", marginBottom: "1rem", letterSpacing: "1px", textTransform: "uppercase", fontSize: "0.8rem" }}>Explore Premium Properties Across PCMC & Pune</h6>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", lineHeight: "1.6" }}>
           {/* Brands & Projects Silos */}
-          <a href="/mahalaxmi-the-arena" className="seo-link">Mahalaxmi The Arena Pimpri</a> &bull;
-          <a href="/kohinoor-the-arena" className="seo-link">Kohinoor The Arena</a> &bull;
-          <a href="/life-in-motion-pimpri" className="seo-link">Life in Motion Pimpri</a> &bull;
+          <a href="/mahalaxmi-the-arena-luxury-flats-in-pimpri" className="seo-link">Mahalaxmi The Arena Pimpri</a> &bull;
+          <a href="/kohinoor-the-arena-pimpri-chinchwad-pune" className="seo-link">Kohinoor The Arena</a> &bull;
+          <a href="/life-in-motion-pimpri-sports-township-pcmc" className="seo-link">Life in Motion Pimpri</a> &bull;
           <span className="seo-link">Life in Motion Pune</span> &bull;
           <span className="seo-link">Kohinoor Arena Pimpri</span> &bull;
           <span className="seo-link">The Arena PCMC</span> &bull;

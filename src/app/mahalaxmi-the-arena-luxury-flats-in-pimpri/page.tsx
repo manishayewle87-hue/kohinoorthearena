@@ -30,12 +30,12 @@ export const metadata: Metadata = {
     "Pune real estate"
   ],
   alternates: {
-    canonical: "https://kohinoorthearena.vercel.app/mahalaxmi-the-arena",
+    canonical: "https://kohinoorthearena.vercel.app/mahalaxmi-the-arena-luxury-flats-in-pimpri",
   },
   openGraph: {
     title: "Mahalaxmi The Arena | Premium Real Estate PCMC",
     description: "Mahalaxmi Group's flagship sports township in Pimpri.",
-    url: "https://kohinoorthearena.vercel.app/mahalaxmi-the-arena",
+    url: "https://kohinoorthearena.vercel.app/mahalaxmi-the-arena-luxury-flats-in-pimpri",
   }
 };
 
