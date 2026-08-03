@@ -29,7 +29,7 @@ export default function Residences() {
             <div>
               <div className="residence-header">
                 <span className="res-tag">SMART URBAN LIVING</span>
-                <h3>2 BHK Luxury Sports Residence</h3>
+                <h3>2 BHK Luxury Sports Residence in Pimpri</h3>
                 <div className="res-price">₹ 88.5 Lakhs Onwards*</div>
               </div>
 
@@ -87,7 +87,7 @@ export default function Residences() {
             <div>
               <div className="residence-header">
                 <span className="res-tag">SMART FAMILY LIVING</span>
-                <h3>3 BHK Smart Residence</h3>
+                <h3>3 BHK Smart Residence in PCMC</h3>
                 <div className="res-price">₹ 1.28 Cr Onwards*</div>
               </div>
 
@@ -145,7 +145,7 @@ export default function Residences() {
             <div>
               <div className="residence-header">
                 <span className="res-tag">DUAL ASPECT LUXURY</span>
-                <h3>3 BHK Grand Corner Suite</h3>
+                <h3>3 BHK Grand Corner Suite in Pimpri</h3>
                 <div className="res-price">₹ 1.49 Cr Onwards*</div>
               </div>
 
@@ -203,7 +203,7 @@ export default function Residences() {
             <div>
               <div className="residence-header">
                 <span className="res-tag">THE PINNACLE OF ARENA</span>
-                <h3>4 BHK Sky Residence & Penthouse</h3>
+                <h3>Premium 4 BHK Sky Residence in PCMC</h3>
                 <div className="res-price">₹ 2.15 Cr Onwards*</div>
               </div>
 

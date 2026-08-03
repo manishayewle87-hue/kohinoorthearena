@@ -5,13 +5,13 @@ export default function Philosophy() {
     <section className="philosophy-section section-padding" id="philosophy">
       <div className="container">
         <div className="text-center">
-          <span className="badge-purple">&bull; THE ARENA PHILOSOPHY &bull;</span>
+          <span className="badge-purple">&bull; MAHALAXMI THE ARENA PHILOSOPHY &bull;</span>
           <h2 className="section-title">
             LIFE IS MOVING. <span className="highlight-neon">WE ARE NOT.</span>
           </h2>
           <p className="section-subtitle">
             Why Pimpri requires a paradigm shift from traditional residential
-            apartments to an integrated athletic operating system.
+            apartments to an integrated Life in Motion athletic operating system.
           </p>
         </div>
 
@@ -94,7 +94,7 @@ export default function Philosophy() {
             </div>
             <div className="system-quote">
               &ldquo;We don&rsquo;t lack motivation. We lack a system. Mahalaxmi The
-              Arena is that system.&rdquo;
+              Arena and Kohinoor The Arena bring you that system.&rdquo;
             </div>
           </div>
         </div>
