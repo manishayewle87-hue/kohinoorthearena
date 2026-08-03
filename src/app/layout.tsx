@@ -188,6 +188,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         
+        {/* Core Web Vitals (LCP) Hardening */}
+        <link rel="preload" href="https://kohinoorthearena.vercel.app/assets/images/hero-bg.jpg" as="image" />
+
         {/* Performance Hardening: Preconnect to Analytics Domains */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
