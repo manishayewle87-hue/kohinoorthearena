@@ -308,7 +308,7 @@ export default function Ecosystem() {
                 Track Real Progress For Every Member Of The Family
               </h3>
               <p className="pillar-desc">
-                We don't just provide space; we celebrate progress. With our
+                We don&apos;t just provide space; we celebrate progress. With our
                 digital milestone tracking and regular athletic evaluations, every
                 day is a step forward in energy and health.
               </p>

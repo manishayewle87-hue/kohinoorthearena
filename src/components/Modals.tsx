@@ -10,16 +10,113 @@ export default function Modals() {
   // App context for Shortlist
   const { isShortlistDrawerOpen, setShortlistDrawerOpen, shortlist } = useAppContext();
 
+  const showLeadModal = (title: string, subtitle: string) => {
+    const handleFormSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
+      ev.preventDefault();
+      const form = ev.currentTarget;
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+      // ── Honeypot check (client-side guard) ──
+      const honeypot = (form.elements.namedItem('website') as HTMLInputElement)?.value;
+      if (honeypot) {
+        // Silent block for bot submissions
+        window.dispatchEvent(new CustomEvent('arena-close-modal'));
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      const formData = new FormData(form);
+      const name = formData.get('name') as string;
+      const phone = formData.get('phone') as string;
+      const email = formData.get('email') as string;
+
+      // Extract saved UTM parameters from localStorage
+      let utmData = {};
+      try {
+        const savedUtm = localStorage.getItem('mta_utm_params');
+        if (savedUtm) utmData = JSON.parse(savedUtm);
+      } catch {
+        // Fallback gracefully
+      }
+
+      try {
+        const response = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            phone,
+            email,
+            source: title,
+            utm: utmData,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          sessionStorage.setItem('mta_lead_captured', 'true');
+          window.dispatchEvent(new CustomEvent('arena-close-modal'));
+          window.dispatchEvent(new CustomEvent('arena-toast', { detail: '✅ Success! Our luxury team will contact you shortly.' }));
+
+          const win = window as Window & { dataLayer?: Record<string, unknown>[] };
+          if (typeof window !== 'undefined' && win.dataLayer) {
+            win.dataLayer.push({ event: 'lead_captured', lead_type: title, lead_source: window.location.href });
+          }
+        } else {
+          const errMsg = data.error || 'Submission failed. Please try again.';
+          window.dispatchEvent(new CustomEvent('arena-toast', { detail: `⚠️ ${errMsg}` }));
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Request';
+        }
+      } catch {
+        window.dispatchEvent(new CustomEvent('arena-toast', { detail: '❌ Network error. Please check your connection and retry.' }));
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Request';
+      }
+    };
+
+    const formContent = (
+      <div className="modal-lead-box">
+        <h3 className="modal-title">{title}</h3>
+        <p className="modal-subtitle">{subtitle}</p>
+
+        <form onSubmit={handleFormSubmit} className="modal-form">
+          {/* Honeypot field (hidden from human users, visible to bots) */}
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" style={{ display: 'none', position: 'absolute', left: '-9999px' }} />
+
+          <div className="form-group">
+            <input type="text" name="name" placeholder="Full Name *" required className="form-input" />
+          </div>
+          <div className="form-group">
+            <input type="tel" name="phone" placeholder="Phone Number *" required pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" className="form-input" />
+          </div>
+          <div className="form-group">
+            <input type="email" name="email" placeholder="Email Address (Optional)" className="form-input" />
+          </div>
+
+          <button type="submit" className="btn btn-primary btn-block" style={{ width: '100%', marginTop: '10px' }}>
+            Submit Request
+          </button>
+        </form>
+      </div>
+    );
+
+    window.dispatchEvent(new CustomEvent('arena-modal', { detail: formContent }));
+  };
+
   useEffect(() => {
     // Toast Handler
-    const handleToast = (e: any) => {
-      setToastMessage(e.detail);
+    const handleToast = (e: Event) => {
+      setToastMessage((e as CustomEvent<string>).detail);
       setTimeout(() => setToastMessage(null), 4500);
     };
 
     // Modal Handler
-    const handleModal = (e: any) => {
-      setModalContent(e.detail);
+    const handleModal = (e: Event) => {
+      setModalContent((e as CustomEvent<React.ReactNode>).detail);
       document.body.style.overflow = 'hidden';
     };
 
@@ -70,111 +167,6 @@ export default function Modals() {
     };
   }, []);
 
-  const showLeadModal = (title: string, subtitle: string) => {
-    const handleFormSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
-      ev.preventDefault();
-      const form = ev.currentTarget;
-      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-
-      // ── Honeypot check (client-side guard) ──
-      const honeypot = (form.elements.namedItem('website') as HTMLInputElement)?.value;
-      if (honeypot) return; // Bot detected silently
-
-      // ── Prevent double submit ──
-      if (submitBtn.disabled) return;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-
-      const name = (form.elements.namedItem('name') as HTMLInputElement).value.trim();
-      const phone = (form.elements.namedItem('phone') as HTMLInputElement).value.trim();
-      const email = (form.elements.namedItem('email') as HTMLInputElement)?.value.trim();
-
-      // ── Client-side validation ──
-      if (!name || name.length < 2) {
-        window.dispatchEvent(new CustomEvent('arena-toast', { detail: 'Please enter your full name.' }));
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Request';
-        return;
-      }
-      if (!phone || !/^[0-9\s\+\-\(\)]{7,15}$/.test(phone)) {
-        window.dispatchEvent(new CustomEvent('arena-toast', { detail: 'Please enter a valid phone number.' }));
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Request';
-        return;
-      }
-
-      window.dispatchEvent(new CustomEvent('arena-toast', { detail: 'Submitting your request...' }));
-
-      // ── Extract UTM cookie ──
-      let utmData = {};
-      const utmCookie = document.cookie.split('; ').find(row => row.startsWith('arena_utm_data='));
-      if (utmCookie) {
-        try { utmData = JSON.parse(decodeURIComponent(utmCookie.split('=').slice(1).join('='))); } catch { /**/ }
-      }
-
-      try {
-        const response = await fetch('/api/lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, phone, email, source: window.location.href, utm: utmData }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok && data.success) {
-          sessionStorage.setItem('mta_lead_captured', 'true');
-          window.dispatchEvent(new CustomEvent('arena-close-modal'));
-          window.dispatchEvent(new CustomEvent('arena-toast', { detail: '✅ Success! Our luxury team will contact you shortly.' }));
-
-          if (typeof window !== 'undefined' && (window as any).dataLayer) {
-            (window as any).dataLayer.push({ event: 'lead_captured', lead_type: title, lead_source: window.location.href });
-          }
-        } else {
-          const errMsg = data.error || 'Submission failed. Please try again.';
-          window.dispatchEvent(new CustomEvent('arena-toast', { detail: `⚠️ ${errMsg}` }));
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Submit Request';
-        }
-      } catch {
-        window.dispatchEvent(new CustomEvent('arena-toast', { detail: '❌ Network error. Please check your connection and retry.' }));
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Request';
-      }
-    };
-
-    const formContent = (
-      <div className="text-center">
-        <span className="badge-neon">• VIP PRIORITY ACCESS •</span>
-        <h2 className="section-title">{title}</h2>
-        <p className="section-subtitle">{subtitle}</p>
-        <form onSubmit={handleFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }} noValidate>
-          
-          {/* Honeypot field — hidden from humans, bots fill it */}
-          <input
-            type="text"
-            name="website"
-            autoComplete="off"
-            tabIndex={-1}
-            style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }}
-          />
-
-          <input name="name" type="text" placeholder="Full Name *" required minLength={2} maxLength={100} className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
-          <input name="phone" type="tel" placeholder="Mobile Number *" required className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
-          <input name="email" type="email" placeholder="Email Address (for Digital Brochure)" maxLength={200} className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
-
-          <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', textAlign: 'left', fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', marginTop: '0.5rem', cursor: 'pointer' }}>
-            <input type="checkbox" required defaultChecked style={{ marginTop: '4px', accentColor: 'var(--neon-lime)' }} />
-            <span>I consent to receive updates and digital brochures via WhatsApp from Mahalaxmi The Arena.</span>
-          </label>
-
-          <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>Submit Request</button>
-          <p style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.3)', margin: 0 }}>🔒 Your information is private and secure.</p>
-        </form>
-      </div>
-    );
-    window.dispatchEvent(new CustomEvent('arena-modal', { detail: formContent }));
-  };
-
   return (
     <>
       {/* Dynamic Modal Overlay */}
@@ -221,7 +213,7 @@ export default function Modals() {
         
         <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {shortlist.length === 0 ? (
-            <p style={{ color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginTop: '2rem' }}>You haven't saved any floor plans yet.</p>
+            <p style={{ color: 'rgba(255,255,255,0.5)', textAlign: 'center', marginTop: '2rem' }}>You haven&apos;t saved any floor plans yet.</p>
           ) : (
             shortlist.map(id => (
               <div key={id} className="glass-card" style={{ padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

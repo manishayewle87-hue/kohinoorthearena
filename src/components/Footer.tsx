@@ -19,7 +19,7 @@ export default function Footer() {
               <div className="logo-icon"><i className="ri-run-line"></i></div>
               <div className="logo-text">
                 <div className="logo-title">THE <span>ARENA</span></div>
-                <div className="logo-subtitle">PIMPRI'S SPORTS TOWNSHIP</div>
+                <div className="logo-subtitle">PIMPRI&apos;S SPORTS TOWNSHIP</div>
               </div>
             </div>
           </a>

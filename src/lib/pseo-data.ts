@@ -24,7 +24,6 @@ const locations = [
   { val: "pune", display: "Pune" }
 ];
 
-const prefixes = ["buy", "ready-possession", "upcoming", "new-launch"];
 
 export function generatePSEOMatrix(): PSEOPageData[] {
   const pages: PSEOPageData[] = [];

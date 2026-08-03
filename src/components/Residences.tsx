@@ -55,7 +55,7 @@ export default function Residences() {
 
               <ul className="res-highlights-list">
                 <li><i className="ri-check-double-line"></i> <span>1800 x 1200 mm Large Format Vitrified Flooring in living/dining/bedrooms</span></li>
-                <li><i className="ri-check-double-line"></i> <span>Digital Smart Main Door Lock by Yale & 7" IP Video Door Phone</span></li>
+                <li><i className="ri-check-double-line"></i> <span>Digital Smart Main Door Lock by Yale &amp; 7&quot; IP Video Door Phone</span></li>
                 <li><i className="ri-check-double-line"></i> <span>Wet & Dry Kitchen Zoning with stone platform & dry balcony</span></li>
                 <li><i className="ri-check-double-line"></i> <span>Three-track UPVC soundproof sliding windows with mosquito mesh</span></li>
               </ul>

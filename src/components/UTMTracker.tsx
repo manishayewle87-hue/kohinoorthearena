@@ -11,7 +11,7 @@ export default function UTMTracker() {
 
     const utms = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"];
     let captured = false;
-    let utmData: Record<string, string> = {};
+    const utmData: Record<string, string> = {};
 
     utms.forEach((param) => {
       const val = searchParams.get(param);

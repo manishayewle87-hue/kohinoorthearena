@@ -13,7 +13,6 @@ import Calculator from "@/components/Calculator";
 import Booking from "@/components/Booking";
 import Footer from "@/components/Footer";
 import FAQ from "@/components/FAQ";
-import Modals from "@/components/Modals";
 
 export const revalidate = 3600; // Edge Route Caching (1 Hour)
 

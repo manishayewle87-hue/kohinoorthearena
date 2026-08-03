@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { useAppContext } from "@/context/AppContext";
+import { useAppContext, Currency } from "@/context/AppContext";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -50,7 +50,7 @@ export default function Navbar() {
                 <div className="logo-title">
                   THE <span>ARENA</span>
                 </div>
-                <div className="logo-subtitle">PIMPRI'S SPORTS TOWNSHIP</div>
+                <div className="logo-subtitle">PIMPRI&apos;S SPORTS TOWNSHIP</div>
               </div>
             </div>
           </a>
@@ -91,7 +91,7 @@ export default function Navbar() {
             {/* NRI Currency Toggle */}
             <select 
               value={currency} 
-              onChange={(e) => setCurrency(e.target.value as any)}
+              onChange={(e) => setCurrency(e.target.value as Currency)}
               style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', padding: '8px 12px', borderRadius: '4px', cursor: 'pointer', outline: 'none' }}
             >
               <option value="INR" style={{ color: '#000' }}>₹ INR</option>

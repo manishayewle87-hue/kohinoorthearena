@@ -60,7 +60,7 @@ export default function Specifications() {
             <ul className="spec-list">
               <li>Main door with high-security digital smart lock</li>
               <li>Engineered wood doors with profile-wrapped architrave</li>
-              <li>IP-based video door phone with 7" display screen</li>
+              <li>IP-based video door phone with 7&quot; display screen</li>
             </ul>
           </div>
 

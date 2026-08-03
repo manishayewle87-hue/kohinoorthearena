@@ -12,7 +12,7 @@ export default function Connectivity() {
     if (!ctx) return;
 
     let width = canvas.parentElement?.clientWidth || 500;
-    let height = 540;
+    const height = 540;
 
     const drawLocationMap = (ctx: CanvasRenderingContext2D, w: number, h: number) => {
       ctx.clearRect(0, 0, w, h);

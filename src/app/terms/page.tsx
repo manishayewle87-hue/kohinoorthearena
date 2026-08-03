@@ -23,7 +23,7 @@ export default function TermsOfService() {
             <p>By accessing this website, you agree to be bound by these Terms and Conditions of Use, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws.</p>
             
             <h2>2. Disclaimer</h2>
-            <p>The materials on this website are provided on an 'as is' basis. Mahalaxmi Group and Kohinoor Group make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+            <p>The materials on this website are provided on an &apos;as is&apos; basis. Mahalaxmi Group and Kohinoor Group make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
             <p>This website and its content are a draft prepared solely for internal circulation and reference, and do not constitute a sales offer, commitment, or contract of any kind. All images, plans, and specifications are indicative and subject to change without notice.</p>
             
             <h2>3. Limitations</h2>

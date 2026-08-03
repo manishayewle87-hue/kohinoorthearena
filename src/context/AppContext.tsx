@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-type Currency = 'INR' | 'USD' | 'AED';
+export type Currency = 'INR' | 'USD' | 'AED';
 
 interface AppContextType {
   currency: Currency;
@@ -24,25 +24,34 @@ const RATES = {
 };
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [currency, setCurrencyState] = useState<Currency>('INR');
-  const [shortlist, setShortlistState] = useState<string[]>([]);
+  const [currency, setCurrencyState] = useState<Currency>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('mta_currency') as Currency;
+      if (saved && ['INR', 'USD', 'AED'].includes(saved)) return saved;
+    }
+    return 'INR';
+  });
+
+  const [shortlist, setShortlistState] = useState<string[]>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('mta_shortlist');
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch {
+          // Fallback
+        }
+      }
+    }
+    return [];
+  });
+
   const [isShortlistDrawerOpen, setShortlistDrawerOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
-    // Load state from local storage on mount
-    const savedCurrency = localStorage.getItem('mta_currency') as Currency;
-    const savedShortlist = localStorage.getItem('mta_shortlist');
-    
-    if (savedCurrency && ['INR', 'USD', 'AED'].includes(savedCurrency)) {
-      setCurrencyState(savedCurrency);
-    }
-    if (savedShortlist) {
-      try {
-        setShortlistState(JSON.parse(savedShortlist));
-      } catch (e) {}
-    }
+    const timer = setTimeout(() => setIsMounted(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   const setCurrency = (c: Currency) => {

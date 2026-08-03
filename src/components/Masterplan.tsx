@@ -2,21 +2,39 @@
 import React, { useState } from 'react';
 import { MP_DATA } from '../data/masterplanData';
 
+interface SpecItem {
+  val: string;
+  lab: string;
+}
+
+interface MasterplanItem {
+  name: string;
+  badge: string;
+  badgeColor: string;
+  sub: string;
+  specs: SpecItem[];
+  list: string[];
+}
+
 export default function Masterplan() {
   const [activeFilter, setActiveFilter] = useState('all');
-  const [selectedItem, setSelectedItem] = useState<any>(null);
+  const [selectedItem, setSelectedItem] = useState<MasterplanItem | null>(null);
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const handleZoneClick = (zoneId: string) => {
-    // @ts-ignore
-    setSelectedItem(MP_DATA.zones[zoneId]);
-    setActiveId(zoneId);
+    const zone = MP_DATA.zones[zoneId as keyof typeof MP_DATA.zones];
+    if (zone) {
+      setSelectedItem(zone);
+      setActiveId(zoneId);
+    }
   };
 
   const handleTowerClick = (towerId: string) => {
-    // @ts-ignore
-    setSelectedItem(MP_DATA.towers[towerId]);
-    setActiveId(towerId);
+    const tower = MP_DATA.towers[towerId as keyof typeof MP_DATA.towers];
+    if (tower) {
+      setSelectedItem(tower);
+      setActiveId(towerId);
+    }
   };
 
   const handleBack = () => {
@@ -214,7 +232,7 @@ export default function Masterplan() {
                 <h3 className="mp-detail-title">{selectedItem.name}</h3>
                 <p className="mp-detail-sub">{selectedItem.sub}</p>
                 <div className="mp-detail-specs">
-                  {selectedItem.specs.map((s: any, idx: number) => (
+                  {selectedItem.specs.map((s, idx: number) => (
                     <div className="mp-spec-item" key={idx}>
                       <span className="mp-spec-val">{s.val}</span>
                       <span className="mp-spec-lab">{s.lab}</span>

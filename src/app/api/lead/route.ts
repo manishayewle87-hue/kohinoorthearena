@@ -234,7 +234,8 @@ export async function POST(request: Request) {
       ).catch(err => console.error('[LEAD][WHATSAPP] API failed:', err));
     }
 
-    // Return success. Email status is logged but not exposed to client.
+    // Return success. Email status logged.
+    console.log(`[LEAD] Processing complete for ${name}. Email status: ${emailStatus}`);
     return NextResponse.json(
       { success: true, message: 'Lead received. Our team will contact you shortly.' },
       {
