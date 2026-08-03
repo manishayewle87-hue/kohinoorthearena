@@ -99,7 +99,7 @@ export default function Connectivity() {
         <div className="text-center">
           <span className="badge-neon">• STRATEGIC LOCATION •</span>
           <h2 className="section-title">PIMPRI, IN MOTION <span className="highlight-neon">WITH YOU</span></h2>
-          <p className="section-subtitle">Located in the well-connected heart of Pimpri, Pune. Easy access to industrial hubs, schools, hospitals, and Metro Line 1.</p>
+          <p className="section-subtitle">Located in the well-connected heart of Pimpri, PCMC. Easy access to Hinjewadi IT Park, top schools, hospitals, and the PCMC Metro Line 1, making it one of the best residential projects in Pimpri.</p>
         </div>
 
         <div className="location-grid">

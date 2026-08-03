@@ -60,6 +60,24 @@ export default function Footer() {
         </div>
       </div>
 
+      <div className="footer-seo-block" style={{ marginTop: "3rem", paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.1)", fontSize: "0.8rem", color: "rgba(255,255,255,0.5)" }}>
+        <h6 style={{ color: "#fff", marginBottom: "1rem", letterSpacing: "1px", textTransform: "uppercase", fontSize: "0.85rem" }}>Explore PCMC & Nearby Properties</h6>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", lineHeight: "1.5" }}>
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Flats in Pimpri</span> &bull;
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Luxury apartments in PCMC</span> &bull;
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">2 BHK flats in Ravet</span> &bull;
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">3 BHK in Wakad</span> &bull;
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">New Launch projects in Moshi</span> &bull;
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Flats near Hinjewadi IT Park</span> &bull;
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Kohinoor Shangrila Pimpri</span> &bull;
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Kohinoor Courtyard One Wakad</span> &bull;
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Flats near PCMC Metro</span> &bull;
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Best residential projects in Pimpri</span> &bull;
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Ready possession flats in Chinchwad</span> &bull;
+          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Buy property in Pimpri</span>
+        </div>
+      </div>
+
       {/*  Disclaimer from Brochure  */}
       <div className="footer-disclaimer">
         <strong>Disclaimer:</strong> This website and brochure content is a draft prepared solely for internal circulation and reference, and does not constitute a sales offer, commitment, or contract of any kind. All information, images, plans, and specifications shown are indicative and subject to change without notice. Any decisions or actions taken based on the contents of this website are at the sole discretion and risk of the reader, and The Arena Pimpri, Mahalaxmi Group, Kohinoor Group, and Agarwal Sukhwani Associates accept no liability for any errors, omissions, or reliance placed on this material. For accurate and binding details, please refer to the official sale agreement and RERA approved project documents.

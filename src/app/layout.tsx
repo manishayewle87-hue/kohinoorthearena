@@ -23,7 +23,16 @@ export const metadata: Metadata = {
     template: "%s | Mahalaxmi The ARENA"
   },
   description: "Discover Mahalaxmi The ARENA in Pimpri, Pune — an ultra-modern 2, 3 & 4 BHK residential sports township featuring an 80,000 sq. ft. sports operating system managed by ILESEUM Sports Management across 11 luxury 34-storey towers.",
-  keywords: ["Mahalaxmi The Arena", "Arena Pimpri", "Sports Township Pune", "2 BHK Pimpri", "3 BHK Pimpri", "4 BHK Pimpri", "Kohinoor Group", "Agarwal Sukhwani Associates", "Ileseum Sports"],
+  keywords: [
+    "buy flat in Pimpri", "luxury apartments PCMC", "Life in Motion Pimpri", 
+    "Kohinoor The Arena price", "flats for sale in Pimpri", "premium apartments in Pimpri", 
+    "upcoming projects in Pimpri", "ready possession flats in Pimpri", 
+    "Mahalaxmi The Arena", "Kohinoor Arena Pimpri", "2 BHK flats in Pimpri", 
+    "3 BHK luxury apartments Pimpri", "4 BHK flats in Pimpri", 
+    "best residential projects in PCMC", "investment property PCMC",
+    "flats near Pimpri Metro", "buy luxury apartment in Pimpri", "Life in Motion floor plan",
+    "Mahalaxmi The Arena brochure", "Kohinoor Group projects Pimpri"
+  ],
   authors: [{ name: "Kohinoor Group & Mahalaxmi Group" }],
   creator: "Kohinoor Group",
   publisher: "Mahalaxmi The ARENA",

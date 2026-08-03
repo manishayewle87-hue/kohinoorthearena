@@ -14,7 +14,7 @@ export default function Hero() {
       <div className="hero-bg-overlay"></div>
       
       <div className="container hero-content">
-        <span className="badge-neon">PIMPRI &bull; SPORTS TOWNSHIP</span>
+        <span className="badge-neon">PIMPRI &bull; SPORTS TOWNSHIP PCMC</span>
 
         <h1 className="hero-title">
           LIVE WHERE<br />
@@ -22,7 +22,7 @@ export default function Hero() {
         </h1>
 
         <p className="hero-subtitle">
-          80,000 Sq. Ft. Sports Ecosystem. 11 Towers. Managed by Ileseum.
+          Discover premium 2, 3 & 4 BHK luxury apartments in Pimpri. Featuring an 80,000 Sq. Ft. Sports Ecosystem, 11 Towers, and managed by Ileseum.
         </p>
 
         <div className="hero-buttons">
