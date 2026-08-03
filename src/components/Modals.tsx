@@ -49,10 +49,32 @@ export default function Modals() {
             <h2 className="section-title">Schedule VIP Site Visit</h2>
             <p className="section-subtitle">Experience 80,000 Sq. Ft. of Life in Motion and tour our 34-storey architectural models.</p>
             <form 
-              onSubmit={(ev) => {
+              onSubmit={async (ev) => {
                 ev.preventDefault();
-                closeModal();
-                showToast("VIP Site Visit Scheduled! Our Senior Relationship Manager will contact you in 15 minutes.");
+                showToast("Processing request...");
+                
+                // Get form data
+                const form = ev.target as HTMLFormElement;
+                const name = (form.elements[0] as HTMLInputElement).value;
+                const phone = (form.elements[1] as HTMLInputElement).value;
+                const interest = (form.elements[2] as HTMLSelectElement).value;
+                const date = (form.elements[3] as HTMLInputElement).value;
+
+                try {
+                  const res = await fetch('/api/lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, interest, date, source: 'VIP Site Visit' })
+                  });
+                  if(res.ok) {
+                    closeModal();
+                    showToast("VIP Site Visit Scheduled! Our Senior Relationship Manager will contact you in 15 minutes.");
+                  } else {
+                    showToast("Failed to process request. Please try again.");
+                  }
+                } catch(e) {
+                  showToast("Error connecting to server.");
+                }
               }} 
               style={{ maxWidth: "500px", margin: "0 auto", textAlign: "left" }}
             >

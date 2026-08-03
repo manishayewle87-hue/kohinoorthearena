@@ -3,6 +3,7 @@ import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import GlobalScripts from "@/components/GlobalScripts";
 import Modals from "@/components/Modals";
+import LeadModal from "@/components/LeadModal";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -184,6 +185,7 @@ export default function RootLayout({
       <body>
         <GlobalScripts />
         <Modals />
+        <LeadModal />
         {children}
       </body>
     </html>
