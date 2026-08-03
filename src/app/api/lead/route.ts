@@ -1,6 +1,11 @@
 import { NextResponse } from 'next';
 import nodemailer from 'nodemailer';
 
+// CRITICAL: Forces this route onto the full Node.js runtime.
+// Without this, Vercel may run it on the Edge runtime where
+// Nodemailer native modules are completely blocked.
+export const runtime = 'nodejs';
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -26,10 +31,16 @@ export async function POST(request: Request) {
         },
       });
 
+      // Verify credentials before attempting to send
+      await transporter.verify().catch((err) => {
+        console.error('[NODEMAILER] Credential verification FAILED:', err.message);
+        throw new Error(`Nodemailer auth failed: ${err.message}`);
+      });
+
       const mailOptions = {
-        from: EMAIL_USER,
+        from: `"Mahalaxmi The Arena Leads" <${EMAIL_USER}>`,
         to: 'propsmartrealty@gmail.com',
-        subject: `New Lead: ${name || 'Unknown'} - Mahalaxmi The Arena`,
+        subject: `🏠 New Lead: ${name || 'Unknown'} - Mahalaxmi The Arena`,
         html: `
           <div style="font-family: sans-serif; padding: 20px; border: 1px solid #ccc; max-width: 600px;">
             <h2 style="color: #0D0818;">New Lead Notification</h2>
@@ -48,9 +59,10 @@ export async function POST(request: Request) {
         `,
       };
 
-      await transporter.sendMail(mailOptions).catch(err => {
-        console.error("Nodemailer failed to send lead email:", err);
-      });
+      await transporter.sendMail(mailOptions);
+      console.log('[NODEMAILER] Email sent successfully to propsmartrealty@gmail.com');
+    } else {
+      console.warn('[NODEMAILER] Skipped: EMAIL_USER or EMAIL_PASS env vars are not set in Vercel.');
     }
 
     // 2. Forward to CRM Webhook (with UTMs)
