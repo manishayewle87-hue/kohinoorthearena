@@ -1,4 +1,4 @@
-import { NextResponse } from 'next';
+import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 // CRITICAL: Forces this route onto the full Node.js runtime.
