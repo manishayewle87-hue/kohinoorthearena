@@ -60,21 +60,62 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="footer-seo-block" style={{ marginTop: "3rem", paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.1)", fontSize: "0.8rem", color: "rgba(255,255,255,0.5)" }}>
-        <h6 style={{ color: "#fff", marginBottom: "1rem", letterSpacing: "1px", textTransform: "uppercase", fontSize: "0.85rem" }}>Explore PCMC & Nearby Properties</h6>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", lineHeight: "1.5" }}>
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Flats in Pimpri</span> &bull;
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Luxury apartments in PCMC</span> &bull;
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">2 BHK flats in Ravet</span> &bull;
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">3 BHK in Wakad</span> &bull;
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">New Launch projects in Moshi</span> &bull;
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Flats near Hinjewadi IT Park</span> &bull;
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Kohinoor Shangrila Pimpri</span> &bull;
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Kohinoor Courtyard One Wakad</span> &bull;
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Flats near PCMC Metro</span> &bull;
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Best residential projects in Pimpri</span> &bull;
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Ready possession flats in Chinchwad</span> &bull;
-          <span style={{ cursor: "pointer", transition: "color 0.2s" }} className="seo-link">Buy property in Pimpri</span>
+      <div className="footer-seo-block" style={{ marginTop: "3rem", paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.1)", fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>
+        <h6 style={{ color: "rgba(255,255,255,0.7)", marginBottom: "1rem", letterSpacing: "1px", textTransform: "uppercase", fontSize: "0.8rem" }}>Explore Premium Properties Across PCMC & Pune</h6>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", lineHeight: "1.6" }}>
+          {/* Pimpri & PCMC Core */}
+          <span className="seo-link">Flats in Pimpri</span> &bull;
+          <span className="seo-link">Luxury apartments in Pimpri</span> &bull;
+          <span className="seo-link">Residential projects in Pimpri</span> &bull;
+          <span className="seo-link">Buy flat in Pimpri</span> &bull;
+          <span className="seo-link">2 BHK flats in Pimpri</span> &bull;
+          <span className="seo-link">3 BHK luxury apartments Pimpri</span> &bull;
+          <span className="seo-link">4 BHK flats in Pimpri</span> &bull;
+          <span className="seo-link">PCMC real estate</span> &bull;
+          <span className="seo-link">Premium apartments PCMC</span> &bull;
+          <span className="seo-link">Best residential projects PCMC</span> &bull;
+          {/* Chinchwad, Akurdi, Nigdi */}
+          <span className="seo-link">Flats in Chinchwad</span> &bull;
+          <span className="seo-link">Luxury apartments Chinchwad</span> &bull;
+          <span className="seo-link">Ready possession Chinchwad</span> &bull;
+          <span className="seo-link">Flats in Akurdi</span> &bull;
+          <span className="seo-link">Premium homes Akurdi</span> &bull;
+          <span className="seo-link">Flats in Nigdi</span> &bull;
+          <span className="seo-link">2 BHK Nigdi</span> &bull;
+          {/* Wakad, Hinjewadi, Tathawade */}
+          <span className="seo-link">Flats in Wakad</span> &bull;
+          <span className="seo-link">Buy apartment Wakad</span> &bull;
+          <span className="seo-link">Flats near Hinjewadi IT Park</span> &bull;
+          <span className="seo-link">Luxury apartments near Hinjewadi</span> &bull;
+          <span className="seo-link">Investment near Hinjewadi</span> &bull;
+          <span className="seo-link">Flats in Tathawade</span> &bull;
+          <span className="seo-link">2 BHK Tathawade</span> &bull;
+          {/* Ravet, Punawale */}
+          <span className="seo-link">Flats in Ravet</span> &bull;
+          <span className="seo-link">Premium homes Ravet</span> &bull;
+          <span className="seo-link">3 BHK Ravet</span> &bull;
+          <span className="seo-link">Flats in Punawale</span> &bull;
+          <span className="seo-link">New launch Punawale</span> &bull;
+          {/* Moshi, Bhosari */}
+          <span className="seo-link">Flats in Moshi</span> &bull;
+          <span className="seo-link">Luxury apartments Moshi</span> &bull;
+          <span className="seo-link">Ready possession Moshi</span> &bull;
+          <span className="seo-link">Flats in Bhosari</span> &bull;
+          <span className="seo-link">Investment property Bhosari</span> &bull;
+          {/* Baner, Balewadi */}
+          <span className="seo-link">Luxury apartments Baner</span> &bull;
+          <span className="seo-link">Flats in Baner</span> &bull;
+          <span className="seo-link">Ready possession Baner</span> &bull;
+          <span className="seo-link">Flats in Balewadi</span> &bull;
+          <span className="seo-link">New launch Balewadi</span> &bull;
+          {/* Landmarks */}
+          <span className="seo-link">Flats near Pimpri Metro Station</span> &bull;
+          <span className="seo-link">Flats near PCMC Metro</span> &bull;
+          <span className="seo-link">Apartments near MIDC Pimpri</span> &bull;
+          <span className="seo-link">Homes near Bhosari MIDC</span> &bull;
+          <span className="seo-link">Flats near Chakan MIDC</span> &bull;
+          <span className="seo-link">Flats near Aditya Birla Hospital</span> &bull;
+          <span className="seo-link">Flats near DY Patil College</span>
         </div>
       </div>
 
