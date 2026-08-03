@@ -1,38 +1,38 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getDomainConfig } from '@/lib/domain-config';
 
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
-  
-  // Get hostname from the request (e.g. kohinoorthearena.in, mahalaxmithearena.in)
   const hostname = request.headers.get('host') || '';
 
-  // Only rewrite the root path '/' to serve different silos
+  // ── Get domain config for this host ──
+  const cfg = getDomainConfig(hostname);
+
+  // ── Inject x-domain header so Server Components can read domain without calling headers() ──
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-arena-domain', hostname);
+  requestHeaders.set('x-arena-brand', cfg.brand);
+  requestHeaders.set('x-arena-canonical', cfg.canonical);
+
+  // ── Domain-based root routing ──
+  // Each custom domain's '/' serves its own brand-specific page
   if (url.pathname === '/') {
-    if (hostname.includes('kohinoorthearena.in')) {
-      url.pathname = '/kohinoor-the-arena-pimpri-chinchwad-pune';
-      return NextResponse.rewrite(url);
-    } 
-    
-    if (hostname.includes('mahalaxmithearena.in')) {
-      url.pathname = '/mahalaxmi-the-arena-luxury-flats-in-pimpri';
-      return NextResponse.rewrite(url);
+    if (cfg.primarySlug && cfg.primarySlug !== '/') {
+      url.pathname = cfg.primarySlug;
+      return NextResponse.rewrite(url, {
+        request: { headers: requestHeaders },
+      });
     }
   }
 
-  return NextResponse.next();
+  return NextResponse.next({
+    request: { headers: requestHeaders },
+  });
 }
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - assets (public assets)
-     */
     '/((?!api|_next/static|_next/image|favicon.ico|assets).*)',
   ],
 };

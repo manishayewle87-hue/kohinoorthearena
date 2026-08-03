@@ -1,49 +1,32 @@
 import { NextResponse } from 'next/server';
-import { submitBatchUrls, submitUrlToGoogle } from '@/lib/google-indexing';
+import { submitBatchUrls } from '@/lib/google-indexing';
 import { generatePSEOMatrix } from '@/lib/pseo-data';
 import { getBlogPosts } from '@/lib/blog';
+import { ALL_DOMAINS } from '@/lib/domain-config';
 
 export const runtime = 'nodejs';
 
-// ──────────────────────────────────────────────────────────
-// Vercel Cron Job Handler
-//
-// Schedule (set in vercel.json): "0 1 * * *"  → 1:00 AM UTC daily (6:30 AM IST)
-//
-// What it does every day at 6:30 AM IST:
-//   1. Builds the full URL list: core pages + all pSEO pages + all blog posts
-//   2. Pings Google Search Console's sitemap endpoint
-//   3. Submits up to 180 URLs to Google Indexing API (stays under 200/day free tier limit)
-//   4. Returns a detailed JSON report of every submission
-//
-// Security: Protected by CRON_SECRET env var (set in Vercel)
-// Vercel automatically sends this as Authorization: Bearer <CRON_SECRET>
-// ──────────────────────────────────────────────────────────
-
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://kohinoorthearena.vercel.app';
+const CORE_PATHS = [
+  '',
+  '/blog',
+  '/privacy-policy',
+  '/terms',
+  '/kohinoor-the-arena-pimpri-chinchwad-pune',
+  '/mahalaxmi-the-arena-luxury-flats-in-pimpri',
+  '/life-in-motion-pimpri-sports-township-pcmc',
+];
 
 function buildUrlList(): string[] {
   const urls: string[] = [];
-
-  // Core pages
-  const corePages = [
-    '',
-    '/blog',
-    '/privacy-policy',
-    '/terms',
-    '/kohinoor-the-arena-pimpri-chinchwad-pune',
-    '/mahalaxmi-the-arena-luxury-flats-in-pimpri',
-    '/life-in-motion-pimpri-sports-township-pcmc',
-  ];
-  corePages.forEach(p => urls.push(`${BASE_URL}${p}`));
-
-  // pSEO matrix pages
   const pseoPages = generatePSEOMatrix();
-  pseoPages.forEach(p => urls.push(`${BASE_URL}/flats-in-pune/${p.slug}`));
-
-  // Blog posts
   const posts = getBlogPosts();
-  posts.forEach(p => urls.push(`${BASE_URL}/blog/${p.slug}`));
+
+  // Submit all paths across ALL custom domains
+  for (const baseUrl of ALL_DOMAINS) {
+    CORE_PATHS.forEach(p => urls.push(`${baseUrl}${p}`));
+    pseoPages.forEach(p => urls.push(`${baseUrl}/flats-in-pune/${p.slug}`));
+    posts.forEach(p => urls.push(`${baseUrl}/blog/${p.slug}`));
+  }
 
   return urls;
 }
@@ -74,15 +57,18 @@ export async function GET(request: Request) {
     results: [],
   };
 
-  // ── Step 1: Ping Google Sitemap ──────────────────────────
-  try {
-    const sitemapUrl = `${BASE_URL}/sitemap.xml`;
-    const pingUrl = `https://www.google.com/ping?sitemap=${encodeURIComponent(sitemapUrl)}`;
-    const pingRes = await fetch(pingUrl, { method: 'GET' });
-    report.sitemapPing = pingRes.ok ? `✅ Pinged (${pingRes.status})` : `⚠️ Failed (${pingRes.status})`;
-  } catch (err) {
-    report.sitemapPing = `❌ Error: ${err instanceof Error ? err.message : String(err)}`;
+  // ── Step 1: Ping Google Sitemap for all domains ──────────
+  const sitemapPings: string[] = [];
+  for (const domain of ALL_DOMAINS) {
+    try {
+      const pingUrl = `https://www.google.com/ping?sitemap=${encodeURIComponent(`${domain}/sitemap.xml`)}`;
+      const pingRes = await fetch(pingUrl);
+      sitemapPings.push(`${domain}: ${pingRes.ok ? `✅ ${pingRes.status}` : `⚠️ ${pingRes.status}`}`);
+    } catch (err) {
+      sitemapPings.push(`${domain}: ❌ ${err instanceof Error ? err.message : String(err)}`);
+    }
   }
+  report.sitemapPing = sitemapPings.join(' | ');
 
   // ── Step 2: Build URL list & submit to Indexing API ──────
   const allUrls = buildUrlList();
