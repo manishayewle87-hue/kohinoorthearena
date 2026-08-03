@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Image from 'next/image';
 
 export default function Rhythms() {
   return (
@@ -15,7 +16,7 @@ export default function Rhythms() {
           {/*  1. The Working Achiever  */}
           <div className="rhythm-card" data-reveal data-delay="1">
             <div className="rhythm-card-img-wrapper">
-              <img src="assets/images/sports_club.jpg" alt="The Working Achiever" className="rhythm-card-img"/>
+              <Image src="/assets/images/sports_club.jpg" alt="The Working Achiever at Mahalaxmi The Arena Pimpri" width={400} height={300} className="rhythm-card-img" style={{ width: '100%', height: 'auto' }} />
               <div className="rhythm-card-img-gradient"></div>
             </div>
             <div>
@@ -40,7 +41,7 @@ export default function Rhythms() {
           {/*  2. The Ambitious Parent  */}
           <div className="rhythm-card" data-reveal data-delay="2">
             <div className="rhythm-card-img-wrapper">
-              <img src="assets/images/jogging_track.jpg" alt="The Ambitious Parent" className="rhythm-card-img"/>
+              <Image src="/assets/images/jogging_track.jpg" alt="The Ambitious Parent at Kohinoor The Arena PCMC" width={400} height={300} className="rhythm-card-img" style={{ width: '100%', height: 'auto' }} />
               <div className="rhythm-card-img-gradient"></div>
             </div>
             <div>
@@ -65,7 +66,7 @@ export default function Rhythms() {
           {/*  3. The Comeback Human  */}
           <div className="rhythm-card" data-reveal data-delay="3">
             <div className="rhythm-card-img-wrapper">
-              <img src="assets/images/garden_pond.jpg" alt="The Comeback Human" className="rhythm-card-img"/>
+              <Image src="/assets/images/garden_pond.jpg" alt="The Comeback Human at Life in Motion Pune" width={400} height={300} className="rhythm-card-img" style={{ width: '100%', height: 'auto' }} />
               <div className="rhythm-card-img-gradient"></div>
             </div>
             <div>
@@ -90,7 +91,7 @@ export default function Rhythms() {
           {/*  4. The Community Seeker  */}
           <div className="rhythm-card" data-reveal data-delay="4">
             <div className="rhythm-card-img-wrapper">
-              <img src="assets/images/tree_house.jpg" alt="The Community Seeker" className="rhythm-card-img"/>
+              <Image src="/assets/images/tree_house.jpg" alt="The Community Seeker at Mahalaxmi The Arena PCMC" width={400} height={300} className="rhythm-card-img" style={{ width: '100%', height: 'auto' }} />
               <div className="rhythm-card-img-gradient"></div>
             </div>
             <div>

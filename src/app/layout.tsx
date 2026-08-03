@@ -68,23 +68,47 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "RealEstateAgent",
-  "name": "Mahalaxmi The ARENA",
-  "alternateName": ["Kohinoor The Arena", "Life in Motion Pimpri", "Life in Motion Pune"],
-  "image": "https://kohinoorthearena.vercel.app/assets/images/hero-bg.jpg",
-  "description": "Discover Mahalaxmi The ARENA (Codename Life in Motion) in Pimpri, Pune — an ultra-modern 2, 3 & 4 BHK residential sports township featuring an 80,000 sq. ft. sports operating system.",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Pimpri",
-    "addressLocality": "Pune",
-    "addressRegion": "Maharashtra",
-    "addressCountry": "IN"
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Mahalaxmi The ARENA",
+    "alternateName": ["Kohinoor The Arena", "Life in Motion Pimpri", "Life in Motion Pune"],
+    "image": "https://kohinoorthearena.vercel.app/assets/images/hero-bg.jpg",
+    "description": "Discover Mahalaxmi The ARENA (Codename Life in Motion) in Pimpri, Pune — an ultra-modern 2, 3 & 4 BHK residential sports township featuring an 80,000 sq. ft. sports operating system.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Pimpri",
+      "addressLocality": "Pune",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "IN"
+    },
+    "url": "https://kohinoorthearena.vercel.app",
+    "telephone": "+91-0000000000"
   },
-  "url": "https://kohinoorthearena.vercel.app",
-  "telephone": "+91-0000000000"
-};
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the price of a 3 BHK in Mahalaxmi The Arena?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The price of a 3 BHK Smart Residence at Mahalaxmi The Arena starts from ₹ 1.28 Cr Onwards, while the 3 BHK Grand Corner Suite starts from ₹ 1.49 Cr Onwards."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is Kohinoor The Arena located in Pimpri?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kohinoor The Arena (also known as Life in Motion Pimpri) is strategically located in the heart of Pimpri, PCMC, just 2.4 km from the PCMC Metro Station."
+        }
+      }
+    ]
+  }
+];
 
 export default function RootLayout({
   children,

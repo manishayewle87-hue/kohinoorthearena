@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -9,9 +10,9 @@ export default function Footer() {
         <div className="footer-brand">
           <a href="#hero" className="brand-cluster footer-brand-cluster">
             <div className="jv-partners">
-              <img src="assets/images/mahalaxmi-logo.svg" alt="Mahalaxmi Group" className="partner-img"/>
+              <Image src="/assets/images/mahalaxmi-logo.svg" alt="Mahalaxmi Group Developer Pimpri" width={150} height={40} className="partner-img"/>
               <div className="jv-divider"></div>
-              <img src="assets/images/kohinoor-logo.svg" alt="Kohinoor Group" className="partner-img"/>
+              <Image src="/assets/images/kohinoor-logo.svg" alt="Kohinoor Group Real Estate Developer PCMC" width={150} height={40} className="partner-img"/>
             </div>
             <div className="logo-wrapper">
               <div className="logo-icon"><i className="ri-run-line"></i></div>

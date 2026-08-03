@@ -11,6 +11,7 @@ import Specifications from "@/components/Specifications";
 import Calculator from "@/components/Calculator";
 import Booking from "@/components/Booking";
 import Footer from "@/components/Footer";
+import FAQ from "@/components/FAQ";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <Specifications />
         <Calculator />
         <Booking />
+        <FAQ />
       </main>
       <Footer />
     </>

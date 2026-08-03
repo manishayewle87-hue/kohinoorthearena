@@ -24,15 +24,19 @@ export default function Navbar() {
         <div className="container navbar-container">
           <a href="#hero" className="brand-cluster">
             <div className="jv-partners">
-              <img
+              <Image
                 src="/assets/images/mahalaxmi-logo.svg"
                 alt="Mahalaxmi Group"
+                width={150}
+                height={40}
                 className="partner-img"
               />
               <div className="jv-divider"></div>
-              <img
+              <Image
                 src="/assets/images/kohinoor-logo.svg"
                 alt="Kohinoor Group"
+                width={150}
+                height={40}
                 className="partner-img"
               />
             </div>

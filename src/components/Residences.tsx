@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 export default function Residences() {
   const [activeTab, setActiveTab] = useState('2bhk');
@@ -75,7 +76,7 @@ export default function Residences() {
           </div>
 
           <div className="residence-visual-box">
-            <img src="assets/images/interior.jpg" alt="2 BHK Luxury Residence Living Room" className="residence-img"/>
+            <Image src="/assets/images/interior.jpg" alt="2 BHK Luxury Sports Residence Living Room Pimpri" width={800} height={600} className="residence-img" style={{ width: '100%', height: 'auto' }} />
           </div>
         </div>
         )}
@@ -133,7 +134,7 @@ export default function Residences() {
           </div>
 
           <div className="residence-visual-box">
-            <img src="assets/images/interior.jpg" alt="3 BHK Premium Residence" className="residence-img"/>
+            <Image src="/assets/images/interior.jpg" alt="3 BHK Smart Residence Living Area PCMC" width={800} height={600} className="residence-img" style={{ width: '100%', height: 'auto' }} />
           </div>
         </div>
         )}
@@ -191,7 +192,7 @@ export default function Residences() {
           </div>
 
           <div className="residence-visual-box">
-            <img src="assets/images/interior.jpg" alt="3 BHK Grand Corner Suite" className="residence-img"/>
+            <Image src="/assets/images/interior.jpg" alt="3 BHK Grand Corner Suite Pune" width={800} height={600} className="residence-img" style={{ width: '100%', height: 'auto' }} />
           </div>
         </div>
         )}
@@ -249,7 +250,7 @@ export default function Residences() {
           </div>
 
           <div className="residence-visual-box">
-            <img src="assets/images/interior.jpg" alt="4 BHK Sky Residence" className="residence-img"/>
+            <Image src="/assets/images/interior.jpg" alt="Premium 4 BHK Sky Penthouse PCMC" width={800} height={600} className="residence-img" style={{ width: '100%', height: 'auto' }} />
           </div>
         </div>
         )}
