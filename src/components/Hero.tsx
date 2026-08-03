@@ -26,10 +26,10 @@ export default function Hero() {
         </p>
 
         <div className="hero-buttons">
-          <a href="#residences" className="btn btn-neon">
+          <a href="#residences" className="btn btn-neon" title="View Luxury Flats in Pimpri" aria-label="Navigate to Residences section">
             <i className="ri-building-4-line"></i> View Residences
           </a>
-          <button className="btn btn-glass trigger-schedule">
+          <button className="btn btn-glass trigger-schedule" title="Book Mahalaxmi The Arena Site Visit" aria-label="Book a Site Visit to Mahalaxmi The Arena">
             <i className="ri-calendar-event-line"></i> Book Site Visit
           </button>
         </div>

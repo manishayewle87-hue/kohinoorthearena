@@ -78,13 +78,20 @@ const jsonLd = [
     "description": "Discover Mahalaxmi The ARENA (Codename Life in Motion) in Pimpri, Pune — an ultra-modern 2, 3 & 4 BHK residential sports township featuring an 80,000 sq. ft. sports operating system.",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Pimpri",
+      "streetAddress": "Pimpri-Chinchwad",
       "addressLocality": "Pune",
       "addressRegion": "Maharashtra",
+      "postalCode": "411018",
       "addressCountry": "IN"
     },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "18.6278",
+      "longitude": "73.7997"
+    },
     "url": "https://kohinoorthearena.vercel.app",
-    "telephone": "+91-0000000000"
+    "telephone": "+91-0000000000",
+    "priceRange": "₹88.5 L - ₹2.15 Cr"
   },
   {
     "@context": "https://schema.org",
@@ -105,6 +112,36 @@ const jsonLd = [
           "@type": "Answer",
           "text": "Kohinoor The Arena (also known as Life in Motion Pimpri) is strategically located in the heart of Pimpri, PCMC, just 2.4 km from the PCMC Metro Station."
         }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://kohinoorthearena.vercel.app/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Residential Projects in PCMC",
+        "item": "https://kohinoorthearena.vercel.app/#projects"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Flats in Pimpri",
+        "item": "https://kohinoorthearena.vercel.app/#pimpri"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Mahalaxmi The Arena",
+        "item": "https://kohinoorthearena.vercel.app/#hero"
       }
     ]
   }
