@@ -1,19 +1,27 @@
 import React from "react";
+import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section
-      className="hero-section"
-      id="hero"
-      style={{ backgroundImage: "url('/assets/images/hero.jpg')" }}
-    >
-      {/* Floating ambient orbs for depth */}
-      <div className="hero-orb hero-orb-1"></div>
-      <div className="hero-orb hero-orb-2"></div>
-      <div className="hero-orb hero-orb-3"></div>
-      <div className="hero-bg-overlay"></div>
+    <section className="hero-section" id="hero" style={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Hyper-Optimized LCP Image */}
+      <Image 
+        src="/assets/images/hero.jpg" 
+        alt="Mahalaxmi The Arena Aerial View" 
+        fill 
+        priority 
+        quality={85}
+        sizes="100vw"
+        style={{ objectFit: 'cover', zIndex: 0, opacity: 0.6 }} 
+      />
       
-      <div className="container hero-content">
+      {/* Floating ambient orbs for depth */}
+      <div className="hero-orb hero-orb-1" style={{ zIndex: 1 }}></div>
+      <div className="hero-orb hero-orb-2" style={{ zIndex: 1 }}></div>
+      <div className="hero-orb hero-orb-3" style={{ zIndex: 1 }}></div>
+      <div className="hero-bg-overlay" style={{ zIndex: 2 }}></div>
+      
+      <div className="container hero-content" style={{ position: 'relative', zIndex: 3 }}>
         <span className="badge-neon">MAHALAXMI THE ARENA &bull; LIFE IN MOTION PIMPRI</span>
 
         <h1 className="hero-title">

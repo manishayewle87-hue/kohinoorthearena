@@ -6,11 +6,16 @@ export async function POST(request: Request) {
     const body = await request.json();
     console.log("New Lead Captured:", body);
 
-    const { name, phone, email, source } = body;
+    const { name, phone, email, source, utm } = body;
+    
+    // Parse UTM String for Email
+    const utmHtml = utm && Object.keys(utm).length > 0 
+      ? Object.entries(utm).map(([k, v]) => `<li><strong>${k}:</strong> ${v}</li>`).join('')
+      : '<li>No ad tracking data (Direct/Organic)</li>';
 
     // 1. Send Email Notification to propsmartrealty@gmail.com using Nodemailer
-    const EMAIL_USER = process.env.EMAIL_USER; // Should be set to your gmail address
-    const EMAIL_PASS = process.env.EMAIL_PASS; // Should be the 16-character Google App Password
+    const EMAIL_USER = process.env.EMAIL_USER;
+    const EMAIL_PASS = process.env.EMAIL_PASS;
 
     if (EMAIL_USER && EMAIL_PASS) {
       const transporter = nodemailer.createTransport({
@@ -23,7 +28,7 @@ export async function POST(request: Request) {
 
       const mailOptions = {
         from: EMAIL_USER,
-        to: 'propsmartrealty@gmail.com', // Target email requested by user
+        to: 'propsmartrealty@gmail.com',
         subject: `New Lead: ${name || 'Unknown'} - Mahalaxmi The Arena`,
         html: `
           <div style="font-family: sans-serif; padding: 20px; border: 1px solid #ccc; max-width: 600px;">
@@ -33,7 +38,10 @@ export async function POST(request: Request) {
             <p><strong>Name:</strong> ${name || 'Not provided'}</p>
             <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
             <p><strong>Email:</strong> ${email || 'Not provided'}</p>
-            <p><strong>Source:</strong> ${source || 'Website'}</p>
+            <p><strong>Source URL:</strong> ${source || 'Website'}</p>
+            <hr />
+            <h3>Ad Tracking Data (UTM)</h3>
+            <ul>${utmHtml}</ul>
             <br/>
             <p style="font-size: 12px; color: #888;">Automated by Antigravity God-Tier Lead Engine</p>
           </div>
@@ -43,41 +51,52 @@ export async function POST(request: Request) {
       await transporter.sendMail(mailOptions).catch(err => {
         console.error("Nodemailer failed to send lead email:", err);
       });
-    } else {
-      console.warn("Nodemailer skipped: EMAIL_USER or EMAIL_PASS environment variables are missing.");
     }
 
-    // 2. Forward to CRM Webhook (if configured)
-    const CRM_WEBHOOK_URL = process.env.CRM_WEBHOOK_URL || null;
+    // 2. Forward to CRM Webhook (with UTMs)
+    const CRM_WEBHOOK_URL = process.env.CRM_WEBHOOK_URL;
     if (CRM_WEBHOOK_URL) {
       await fetch(CRM_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
+        body: JSON.stringify({
+          ...body,
+          timestamp: new Date().toISOString()
+        })
       }).catch(err => console.error("Webhook forwarding failed:", err));
     }
 
-    // 3. Optional Autoresponder via Resend (if configured)
-    const RESEND_API_KEY = process.env.RESEND_API_KEY || null;
-    if (RESEND_API_KEY && email) {
-      await fetch('https://api.resend.com/emails', {
+    // 3. Instant WhatsApp Automation via Meta Cloud API
+    const WHATSAPP_TOKEN = process.env.WHATSAPP_TOKEN;
+    const WHATSAPP_PHONE_ID = process.env.WHATSAPP_PHONE_ID;
+    if (WHATSAPP_TOKEN && WHATSAPP_PHONE_ID && phone) {
+      // Clean phone number (remove spaces/special chars)
+      const cleanPhone = phone.replace(/[^0-9]/g, '');
+      
+      await fetch(`https://graph.facebook.com/v19.0/${WHATSAPP_PHONE_ID}/messages`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${RESEND_API_KEY}`,
+          'Authorization': `Bearer ${WHATSAPP_TOKEN}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: 'Mahalaxmi The Arena <sales@kohinoorthearena.com>',
-          to: [email],
-          subject: 'Your Exclusive Brochure - Mahalaxmi The Arena',
-          html: `<div style="font-family:sans-serif;color:#333;">
-                  <h2>Welcome to Life in Motion, ${name || 'Future Resident'}!</h2>
-                  <p>Thank you for your interest in Mahalaxmi The Arena, Pimpri's premier sports township.</p>
-                  <p><a href="https://kohinoorthearena.vercel.app/assets/brochure.pdf" style="display:inline-block;padding:10px 20px;background:#DFFE00;color:#0D0818;text-decoration:none;font-weight:bold;border-radius:5px;">Download Your Digital Brochure Here</a></p>
-                  <p>One of our luxury property consultants will be in touch shortly to assist you.</p>
-                 </div>`
+          messaging_product: "whatsapp",
+          to: cleanPhone,
+          type: "template",
+          template: {
+            name: "brochure_delivery", // The pre-approved Meta Template Name
+            language: { code: "en" },
+            components: [
+              {
+                type: "body",
+                parameters: [
+                  { type: "text", text: name || "Future Resident" }
+                ]
+              }
+            ]
+          }
         })
-      }).catch(err => console.error("Email Autoresponder failed:", err));
+      }).catch(err => console.error("WhatsApp API failed:", err));
     }
 
     return NextResponse.json(

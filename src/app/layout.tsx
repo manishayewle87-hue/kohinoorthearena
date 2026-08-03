@@ -6,6 +6,8 @@ import GlobalScripts from "@/components/GlobalScripts";
 import Modals from "@/components/Modals";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import { AppProvider } from "@/context/AppContext";
+import { Suspense } from "react";
+import UTMTracker from "@/components/UTMTracker";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -258,7 +260,7 @@ export default function RootLayout({
         />
         
         {/* Core Web Vitals (LCP) Hardening */}
-        <link rel="preload" href="https://kohinoorthearena.vercel.app/assets/images/hero-bg.jpg" as="image" />
+        <link rel="preload" href="https://kohinoorthearena.vercel.app/assets/images/hero.jpg" as="image" />
 
         {/* Performance Hardening: Preconnect to Analytics Domains */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -297,6 +299,9 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
+        <Suspense fallback={null}>
+          <UTMTracker />
+        </Suspense>
         <AppProvider>
           <GlobalScripts />
           <Modals />

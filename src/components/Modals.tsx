@@ -82,11 +82,20 @@ export default function Modals() {
       const phone = (form.elements[1] as HTMLInputElement).value;
       const email = (form.elements[2] as HTMLInputElement)?.value;
       
+      // Extract UTM cookie if exists
+      let utmData = {};
+      const utmCookie = document.cookie.split('; ').find(row => row.startsWith('arena_utm_data='));
+      if (utmCookie) {
+        try {
+          utmData = JSON.parse(decodeURIComponent(utmCookie.split('=')[1]));
+        } catch(e) {}
+      }
+
       try {
         const response = await fetch("/api/lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, phone, email, source: window.location.href })
+          body: JSON.stringify({ name, phone, email, source: window.location.href, utm: utmData })
         });
         
         if(response.ok) {
