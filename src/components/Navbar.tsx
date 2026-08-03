@@ -2,10 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useAppContext } from "@/context/AppContext";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { currency, setCurrency, shortlist, setShortlistDrawerOpen } = useAppContext();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -85,9 +87,34 @@ export default function Navbar() {
             </ul>
           </nav>
 
-          <div className="nav-actions">
+          <div className="nav-actions" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            {/* NRI Currency Toggle */}
+            <select 
+              value={currency} 
+              onChange={(e) => setCurrency(e.target.value as any)}
+              style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', padding: '8px 12px', borderRadius: '4px', cursor: 'pointer', outline: 'none' }}
+            >
+              <option value="INR" style={{ color: '#000' }}>₹ INR</option>
+              <option value="USD" style={{ color: '#000' }}>$ USD</option>
+              <option value="AED" style={{ color: '#000' }}>د.إ AED</option>
+            </select>
+
+            {/* Shortlist Trigger */}
             <button 
-              className="btn btn-neon trigger-schedule" 
+              onClick={() => setShortlistDrawerOpen(true)}
+              style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '1.2rem', cursor: 'pointer', position: 'relative' }}
+              aria-label="View Shortlist"
+            >
+              <i className="ri-heart-3-line"></i>
+              {shortlist.length > 0 && (
+                <span style={{ position: 'absolute', top: '-8px', right: '-8px', background: 'var(--neon-lime)', color: '#000', fontSize: '0.6rem', fontWeight: 'bold', width: '16px', height: '16px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {shortlist.length}
+                </span>
+              )}
+            </button>
+
+            <button 
+              className="btn btn-neon trigger-schedule hidden-mobile" 
               title="Schedule a VIP Site Visit in Pimpri" 
               aria-label="Book a VIP Site Visit to Mahalaxmi The Arena"
             >

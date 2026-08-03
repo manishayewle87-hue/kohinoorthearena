@@ -18,6 +18,17 @@ export default function GlobalScripts() {
       els.forEach(el => observer.observe(el));
     };
 
+    // Exit Intent Detection (CRO)
+    let exitIntentTriggered = false;
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY < 0 && !exitIntentTriggered) {
+        exitIntentTriggered = true;
+        const event = new CustomEvent("openExitIntentModal");
+        window.dispatchEvent(event);
+      }
+    };
+    document.addEventListener("mouseleave", handleMouseLeave);
+
     // Navbar Scroll
     const initNavbar = () => {
       const navbar = document.querySelector('.navbar');
@@ -52,6 +63,7 @@ export default function GlobalScripts() {
     const cleanupProgress = initScrollProgress();
 
     return () => {
+      document.removeEventListener("mouseleave", handleMouseLeave);
       if (cleanupNav) cleanupNav();
       if (cleanupProgress) cleanupProgress();
     };

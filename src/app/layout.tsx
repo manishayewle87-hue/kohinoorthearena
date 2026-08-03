@@ -5,6 +5,7 @@ import "./globals.css";
 import GlobalScripts from "@/components/GlobalScripts";
 import Modals from "@/components/Modals";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import { AppProvider } from "@/context/AppContext";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -284,10 +285,12 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <GlobalScripts />
-        <Modals />
-        <FloatingWhatsApp />
-        {children}
+        <AppProvider>
+          <GlobalScripts />
+          <Modals />
+          <FloatingWhatsApp />
+          {children}
+        </AppProvider>
       </body>
     </html>
   );

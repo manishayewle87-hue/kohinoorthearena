@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useAppContext } from '@/context/AppContext';
 
 const floorPlans = [
   {
     id: '2bhk',
     title: '2 BHK Luxury',
     size: '768 - 820 Sq.Ft.',
-    price: '₹ 88.5 L*',
+    basePriceINR: 8850000,
     description: 'Perfect for modern families, featuring smart space utilization, a private balcony, and premium fixtures throughout.',
     image: '/assets/images/hero-bg.jpg', // Placeholder for actual floor plan
     features: ['Vastu Compliant', 'Zero Wastage Layout', 'Premium Finishes']
@@ -16,7 +17,7 @@ const floorPlans = [
     id: '3bhk-premium',
     title: '3 BHK Premium',
     size: '980 - 1050 Sq.Ft.',
-    price: '₹ 1.28 Cr*',
+    basePriceINR: 12800000,
     description: 'Spacious living areas designed for maximum natural light and cross ventilation, offering an unparalleled living experience.',
     image: '/assets/images/hero-bg.jpg', 
     features: ['East-West Entry', 'Dedicated Dining Area', 'Walk-in Wardrobe Space']
@@ -25,7 +26,7 @@ const floorPlans = [
     id: '4bhk-penthouse',
     title: '4 BHK Sky Penthouse',
     size: '1500+ Sq.Ft.',
-    price: '₹ 2.15 Cr*',
+    basePriceINR: 21500000,
     description: 'The pinnacle of luxury in Pimpri. Unobstructed city views, expansive decks, and elite craftsmanship.',
     image: '/assets/images/hero-bg.jpg',
     features: ['Panoramic Views', 'Private Elevator Lobby', 'Maids Room']
@@ -35,6 +36,9 @@ const floorPlans = [
 export default function FloorPlans() {
   const [activeTab, setActiveTab] = useState(floorPlans[0].id);
   const activePlan = floorPlans.find(plan => plan.id === activeTab) || floorPlans[0];
+  const { convertPrice, toggleShortlist, shortlist } = useAppContext();
+  
+  const isShortlisted = shortlist.includes(activePlan.id);
 
   return (
     <section className="floor-plans-section" id="residences" style={{ padding: '6rem 0', background: '#08050e' }}>
@@ -75,6 +79,13 @@ export default function FloorPlans() {
                   className="fp-img"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
+                <button 
+                  onClick={() => toggleShortlist(activePlan.id)}
+                  style={{ position: 'absolute', top: '15px', right: '15px', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 10, transition: 'all 0.3s ease' }}
+                  aria-label="Save to shortlist"
+                >
+                  <i className={isShortlisted ? "ri-heart-fill" : "ri-heart-line"} style={{ color: isShortlisted ? 'var(--neon-lime)' : '#fff', fontSize: '1.2rem' }}></i>
+                </button>
                 <div className="fp-image-overlay">
                   <span>Artist Impression</span>
                 </div>
@@ -82,7 +93,9 @@ export default function FloorPlans() {
             </div>
             
             <div className="fp-details-col">
-              <h3>{activePlan.title}</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                <h3>{activePlan.title}</h3>
+              </div>
               <div className="fp-metrics">
                 <div className="metric">
                   <span className="label">Carpet Area</span>
@@ -90,7 +103,7 @@ export default function FloorPlans() {
                 </div>
                 <div className="metric">
                   <span className="label">Starting Price</span>
-                  <span className="value" style={{ color: 'var(--neon-lime)' }}>{activePlan.price}</span>
+                  <span className="value" style={{ color: 'var(--neon-lime)' }}>{convertPrice(activePlan.basePriceINR)}*</span>
                 </div>
               </div>
               

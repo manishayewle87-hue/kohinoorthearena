@@ -1,7 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Philosophy from "@/components/Philosophy";
-import Amenities from "@/components/Amenities";
 import FloorPlans from "@/components/FloorPlans";
 import Ecosystem from "@/components/Ecosystem";
 import Masterplan from "@/components/Masterplan";
@@ -29,7 +28,6 @@ export default function Home() {
         <Hero />
         <Philosophy />
         <FloorPlans />
-        <Amenities />
         <Ecosystem />
         <Masterplan />
         <Gallery />
