@@ -243,6 +243,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${plusJakartaSans.variable}`}>
       <head>
+        <meta name="google-site-verification" content="2ra2pGDEk6-2G2LYEGVQG6f5zRnF_3UG_gMJWAwAbE8" />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
