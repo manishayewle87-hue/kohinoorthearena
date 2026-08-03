@@ -104,6 +104,17 @@ export async function generateMetadata(): Promise<Metadata> {
 const jsonLd = [
   {
     "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Mahalaxmi The Arena",
+    "url": "https://kohinoorthearena.vercel.app",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://kohinoorthearena.vercel.app/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Kohinoor Group & Mahalaxmi Group",
     "url": "https://kohinoorthearena.vercel.app",

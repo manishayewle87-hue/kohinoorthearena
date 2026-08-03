@@ -93,6 +93,15 @@ export default function Modals() {
           sessionStorage.setItem('mta_lead_captured', 'true');
           window.dispatchEvent(new CustomEvent('arena-close-modal'));
           window.dispatchEvent(new CustomEvent('arena-toast', { detail: "Success! Our luxury team will contact you shortly." }));
+          
+          // Push event to Google Tag Manager (GTM)
+          if (typeof window !== 'undefined' && (window as any).dataLayer) {
+            (window as any).dataLayer.push({
+              event: 'lead_captured',
+              lead_type: title,
+              lead_source: window.location.href
+            });
+          }
         }
       } catch (err) {
         window.dispatchEvent(new CustomEvent('arena-toast', { detail: "Failed to submit. Please try again." }));
