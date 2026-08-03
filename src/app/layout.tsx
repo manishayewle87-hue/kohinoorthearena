@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import GlobalScripts from "@/components/GlobalScripts";
+import Modals from "@/components/Modals";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -37,7 +39,11 @@ export default function RootLayout({
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%230D0818'/><text x='50%25' y='55%25' dominant-baseline='central' text-anchor='middle' font-size='50'>🏃</text></svg>"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <GlobalScripts />
+        <Modals />
+        {children}
+      </body>
     </html>
   );
 }

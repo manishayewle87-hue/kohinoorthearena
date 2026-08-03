@@ -1,7 +1,9 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Residences() {
+  const [activeTab, setActiveTab] = useState('2bhk');
+
   return (
     <section className="residences-section section-padding" id="residences">
       <div className="container">
@@ -13,15 +15,16 @@ export default function Residences() {
 
         {/*  Residence Selector Tabs  */}
         <div className="residence-tabs">
-          <button className="residence-tab-btn active" data-residence="2bhk">2 BHK (830 – 1,206 Sq.Ft.)</button>
-          <button className="residence-tab-btn" data-residence="3bhk_premium">3 BHK Smart (986 – 1,340 Sq.Ft.)</button>
-          <button className="residence-tab-btn" data-residence="3bhk_grand">3 BHK Grand (1,250 – 1,626 Sq.Ft.)</button>
-          <button className="residence-tab-btn" data-residence="4bhk">4 BHK Sky (1,600 – 2,600 Sq.Ft.)</button>
+          <button className={`residence-tab-btn ${activeTab === '2bhk' ? 'active' : ''}`} onClick={() => setActiveTab('2bhk')}>2 BHK (830 – 1,206 Sq.Ft.)</button>
+          <button className={`residence-tab-btn ${activeTab === '3bhk_premium' ? 'active' : ''}`} onClick={() => setActiveTab('3bhk_premium')}>3 BHK Smart (986 – 1,340 Sq.Ft.)</button>
+          <button className={`residence-tab-btn ${activeTab === '3bhk_grand' ? 'active' : ''}`} onClick={() => setActiveTab('3bhk_grand')}>3 BHK Grand (1,250 – 1,626 Sq.Ft.)</button>
+          <button className={`residence-tab-btn ${activeTab === '4bhk' ? 'active' : ''}`} onClick={() => setActiveTab('4bhk')}>4 BHK Sky (1,600 – 2,600 Sq.Ft.)</button>
           <button className="trigger-comparison" style={{ borderColor: "var(--neon-lime)", color: "var(--neon-lime)", fontWeight: "600", background: "transparent", border: "1px solid", padding: "8px 18px", borderRadius: "50px", cursor: "pointer", fontFamily: "inherit", fontSize: "0.85rem", letterSpacing: "0.5px", transition: "all 0.2s" }}><i className="ri-scales-3-line"></i> Compare All</button>
         </div>
 
         {/*  1. 2 BHK Card  */}
-        <div className="residence-showcase-card" id="res-2bhk">
+        {activeTab === '2bhk' && (
+        <div className="residence-showcase-card" id="res-2bhk" style={{ animation: "fadeIn 0.3s ease" }}>
           <div className="residence-info-box">
             <div>
               <div className="residence-header">
@@ -75,9 +78,11 @@ export default function Residences() {
             <img src="assets/images/interior.jpg" alt="2 BHK Luxury Residence Living Room" className="residence-img"/>
           </div>
         </div>
+        )}
 
         {/*  2. 3 BHK Premium Card  */}
-        <div className="residence-showcase-card" id="res-3bhk_premium" style={{ display: "none" }}>
+        {activeTab === '3bhk_premium' && (
+        <div className="residence-showcase-card" id="res-3bhk_premium" style={{ animation: "fadeIn 0.3s ease" }}>
           <div className="residence-info-box">
             <div>
               <div className="residence-header">
@@ -131,9 +136,11 @@ export default function Residences() {
             <img src="assets/images/interior.jpg" alt="3 BHK Premium Residence" className="residence-img"/>
           </div>
         </div>
+        )}
 
         {/*  3. 3 BHK Grand Corner Suite Card  */}
-        <div className="residence-showcase-card" id="res-3bhk_grand" style={{ display: "none" }}>
+        {activeTab === '3bhk_grand' && (
+        <div className="residence-showcase-card" id="res-3bhk_grand" style={{ animation: "fadeIn 0.3s ease" }}>
           <div className="residence-info-box">
             <div>
               <div className="residence-header">
@@ -187,9 +194,11 @@ export default function Residences() {
             <img src="assets/images/interior.jpg" alt="3 BHK Grand Corner Suite" className="residence-img"/>
           </div>
         </div>
+        )}
 
         {/*  4. 4 BHK Sky Residence Card  */}
-        <div className="residence-showcase-card" id="res-4bhk" style={{ display: "none" }}>
+        {activeTab === '4bhk' && (
+        <div className="residence-showcase-card" id="res-4bhk" style={{ animation: "fadeIn 0.3s ease" }}>
           <div className="residence-info-box">
             <div>
               <div className="residence-header">
@@ -243,6 +252,7 @@ export default function Residences() {
             <img src="assets/images/interior.jpg" alt="4 BHK Sky Residence" className="residence-img"/>
           </div>
         </div>
+        )}
 
       </div>
     </section>
