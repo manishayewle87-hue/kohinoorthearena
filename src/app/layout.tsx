@@ -86,6 +86,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://kohinoorthearena.vercel.app",
   },
+  verification: {
+    google: "2ra2pGDEk6-2G2LYEGVQG6f5zRnF_3UG_gMJWAwAbE8",
+  }
 };
 
 const jsonLd = [
