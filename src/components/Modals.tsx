@@ -71,49 +71,74 @@ export default function Modals() {
   }, []);
 
   const showLeadModal = (title: string, subtitle: string) => {
-    const handleFormSubmit = async (ev: any) => {
+    const handleFormSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
       ev.preventDefault();
-      
-      // Basic Toast Event Trigger
-      window.dispatchEvent(new CustomEvent('arena-toast', { detail: "Processing request..." }));
-      
-      const form = ev.target as HTMLFormElement;
-      const name = (form.elements[0] as HTMLInputElement).value;
-      const phone = (form.elements[1] as HTMLInputElement).value;
-      const email = (form.elements[2] as HTMLInputElement)?.value;
-      
-      // Extract UTM cookie if exists
+      const form = ev.currentTarget;
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+      // ── Honeypot check (client-side guard) ──
+      const honeypot = (form.elements.namedItem('website') as HTMLInputElement)?.value;
+      if (honeypot) return; // Bot detected silently
+
+      // ── Prevent double submit ──
+      if (submitBtn.disabled) return;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const name = (form.elements.namedItem('name') as HTMLInputElement).value.trim();
+      const phone = (form.elements.namedItem('phone') as HTMLInputElement).value.trim();
+      const email = (form.elements.namedItem('email') as HTMLInputElement)?.value.trim();
+
+      // ── Client-side validation ──
+      if (!name || name.length < 2) {
+        window.dispatchEvent(new CustomEvent('arena-toast', { detail: 'Please enter your full name.' }));
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Request';
+        return;
+      }
+      if (!phone || !/^[0-9\s\+\-\(\)]{7,15}$/.test(phone)) {
+        window.dispatchEvent(new CustomEvent('arena-toast', { detail: 'Please enter a valid phone number.' }));
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Request';
+        return;
+      }
+
+      window.dispatchEvent(new CustomEvent('arena-toast', { detail: 'Submitting your request...' }));
+
+      // ── Extract UTM cookie ──
       let utmData = {};
       const utmCookie = document.cookie.split('; ').find(row => row.startsWith('arena_utm_data='));
       if (utmCookie) {
-        try {
-          utmData = JSON.parse(decodeURIComponent(utmCookie.split('=')[1]));
-        } catch(e) {}
+        try { utmData = JSON.parse(decodeURIComponent(utmCookie.split('=').slice(1).join('='))); } catch { /**/ }
       }
 
       try {
-        const response = await fetch("/api/lead", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, phone, email, source: window.location.href, utm: utmData })
+        const response = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, email, source: window.location.href, utm: utmData }),
         });
-        
-        if(response.ok) {
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
           sessionStorage.setItem('mta_lead_captured', 'true');
           window.dispatchEvent(new CustomEvent('arena-close-modal'));
-          window.dispatchEvent(new CustomEvent('arena-toast', { detail: "Success! Our luxury team will contact you shortly." }));
-          
-          // Push event to Google Tag Manager (GTM)
+          window.dispatchEvent(new CustomEvent('arena-toast', { detail: '✅ Success! Our luxury team will contact you shortly.' }));
+
           if (typeof window !== 'undefined' && (window as any).dataLayer) {
-            (window as any).dataLayer.push({
-              event: 'lead_captured',
-              lead_type: title,
-              lead_source: window.location.href
-            });
+            (window as any).dataLayer.push({ event: 'lead_captured', lead_type: title, lead_source: window.location.href });
           }
+        } else {
+          const errMsg = data.error || 'Submission failed. Please try again.';
+          window.dispatchEvent(new CustomEvent('arena-toast', { detail: `⚠️ ${errMsg}` }));
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit Request';
         }
-      } catch (err) {
-        window.dispatchEvent(new CustomEvent('arena-toast', { detail: "Failed to submit. Please try again." }));
+      } catch {
+        window.dispatchEvent(new CustomEvent('arena-toast', { detail: '❌ Network error. Please check your connection and retry.' }));
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Request';
       }
     };
 
@@ -122,17 +147,28 @@ export default function Modals() {
         <span className="badge-neon">• VIP PRIORITY ACCESS •</span>
         <h2 className="section-title">{title}</h2>
         <p className="section-subtitle">{subtitle}</p>
-        <form onSubmit={handleFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
-          <input type="text" placeholder="Full Name" required className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
-          <input type="tel" placeholder="Mobile Number" required className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
-          <input type="email" placeholder="Email Address (Required for Digital Brochure)" className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+        <form onSubmit={handleFormSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }} noValidate>
           
+          {/* Honeypot field — hidden from humans, bots fill it */}
+          <input
+            type="text"
+            name="website"
+            autoComplete="off"
+            tabIndex={-1}
+            style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }}
+          />
+
+          <input name="name" type="text" placeholder="Full Name *" required minLength={2} maxLength={100} className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+          <input name="phone" type="tel" placeholder="Mobile Number *" required className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+          <input name="email" type="email" placeholder="Email Address (for Digital Brochure)" maxLength={200} className="form-input" style={{ width: '100%', padding: '1rem', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff' }} />
+
           <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', textAlign: 'left', fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', marginTop: '0.5rem', cursor: 'pointer' }}>
             <input type="checkbox" required defaultChecked style={{ marginTop: '4px', accentColor: 'var(--neon-lime)' }} />
-            <span>I consent to receive updates, offers, and digital brochures via WhatsApp from Mahalaxmi The Arena.</span>
+            <span>I consent to receive updates and digital brochures via WhatsApp from Mahalaxmi The Arena.</span>
           </label>
-          
+
           <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>Submit Request</button>
+          <p style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.3)', margin: 0 }}>🔒 Your information is private and secure.</p>
         </form>
       </div>
     );

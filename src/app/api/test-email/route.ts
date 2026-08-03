@@ -3,9 +3,17 @@ import nodemailer from 'nodemailer';
 
 export const runtime = 'nodejs';
 
-// TEST ENDPOINT: Visit /api/test-email in your browser after deployment.
-// DELETE THIS FILE once email is confirmed working.
-export async function GET() {
+// TEST ENDPOINT — Protected by secret token.
+// Usage: /api/test-email?secret=YOUR_TEST_SECRET
+// Set TEST_SECRET env var in Vercel. Delete this file after confirming email works.
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const secret = searchParams.get('secret');
+  const TEST_SECRET = process.env.TEST_SECRET;
+
+  if (!TEST_SECRET || secret !== TEST_SECRET) {
+    return NextResponse.json({ error: 'Forbidden.' }, { status: 403 });
+  }
   const EMAIL_USER = process.env.EMAIL_USER;
   const EMAIL_PASS = process.env.EMAIL_PASS;
 
