@@ -188,6 +188,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         
+        {/* Performance Hardening: Preconnect to Analytics Domains */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        
         {/* Google Analytics 4 Stub */}
         <Script 
           src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`} 
