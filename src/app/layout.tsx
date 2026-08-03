@@ -154,9 +154,15 @@ export default async function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        
-        {/* Core Web Vitals (LCP) Hardening */}
-        <link rel="preload" href="https://kohinoorthearena.vercel.app/assets/images/hero.jpg" as="image" />
+        {/* ── Google Compliance: hreflang + Canonical Cross-Domain Signals ── */}
+        {/* Tells Google these two domains are related, not duplicates */}
+        <link rel="alternate" hrefLang="en-IN" href="https://kohinoorthearena.in" />
+        <link rel="alternate" hrefLang="en-IN" href="https://mahalaxmithearena.in" />
+        <link rel="alternate" hrefLang="x-default" href={siteUrl} />
+        <link rel="canonical" href={siteUrl} />
+
+        {/* Core Web Vitals (LCP) Hardening — preload domain-specific hero */}
+        <link rel="preload" href={`${siteUrl}/assets/images/hero.jpg`} as="image" />
 
         {/* Performance Hardening: Preconnect to Analytics Domains */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
