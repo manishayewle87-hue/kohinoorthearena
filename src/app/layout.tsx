@@ -19,8 +19,8 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL('https://kohinoorthearena.vercel.app'),
   title: {
-    default: "Mahalaxmi The ARENA | 2, 3 & 4 BHK Sports Township in Pimpri, Pune",
-    template: "%s | Mahalaxmi The ARENA"
+    default: "Mahalaxmi The ARENA | Life in Motion | 2, 3 & 4 BHK in Pimpri",
+    template: "%s | Mahalaxmi The ARENA | Life in Motion"
   },
   description: "Discover Mahalaxmi The ARENA in Pimpri, Pune — an ultra-modern 2, 3 & 4 BHK residential sports township featuring an 80,000 sq. ft. sports operating system managed by ILESEUM Sports Management across 11 luxury 34-storey towers.",
   keywords: [
@@ -72,8 +72,9 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "RealEstateAgent",
   "name": "Mahalaxmi The ARENA",
+  "alternateName": ["Kohinoor The Arena", "Life in Motion Pimpri", "Life in Motion Pune"],
   "image": "https://kohinoorthearena.vercel.app/assets/images/hero-bg.jpg",
-  "description": "Discover Mahalaxmi The ARENA in Pimpri, Pune — an ultra-modern 2, 3 & 4 BHK residential sports township featuring an 80,000 sq. ft. sports operating system.",
+  "description": "Discover Mahalaxmi The ARENA (Codename Life in Motion) in Pimpri, Pune — an ultra-modern 2, 3 & 4 BHK residential sports township featuring an 80,000 sq. ft. sports operating system.",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Pimpri",

@@ -63,6 +63,13 @@ export default function Footer() {
       <div className="footer-seo-block" style={{ marginTop: "3rem", paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.1)", fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>
         <h6 style={{ color: "rgba(255,255,255,0.7)", marginBottom: "1rem", letterSpacing: "1px", textTransform: "uppercase", fontSize: "0.8rem" }}>Explore Premium Properties Across PCMC & Pune</h6>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", lineHeight: "1.6" }}>
+          {/* Brands & Projects */}
+          <span className="seo-link">Mahalaxmi The Arena Pimpri</span> &bull;
+          <span className="seo-link">Kohinoor The Arena</span> &bull;
+          <span className="seo-link">Life in Motion Pimpri</span> &bull;
+          <span className="seo-link">Life in Motion Pune</span> &bull;
+          <span className="seo-link">Kohinoor Arena Pimpri</span> &bull;
+          <span className="seo-link">The Arena PCMC</span> &bull;
           {/* Pimpri & PCMC Core */}
           <span className="seo-link">Flats in Pimpri</span> &bull;
           <span className="seo-link">Luxury apartments in Pimpri</span> &bull;

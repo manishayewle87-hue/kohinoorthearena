@@ -14,7 +14,7 @@ export default function Hero() {
       <div className="hero-bg-overlay"></div>
       
       <div className="container hero-content">
-        <span className="badge-neon">PIMPRI &bull; SPORTS TOWNSHIP PCMC</span>
+        <span className="badge-neon">MAHALAXMI THE ARENA &bull; LIFE IN MOTION PIMPRI</span>
 
         <h1 className="hero-title">
           LIVE WHERE<br />
