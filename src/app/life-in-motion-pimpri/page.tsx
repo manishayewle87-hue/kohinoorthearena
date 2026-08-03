@@ -39,6 +39,8 @@ export const metadata: Metadata = {
   }
 };
 
+export const revalidate = 3600; // Edge Route Caching (1 Hour)
+
 export default function LifeInMotionSilo() {
   return (
     <>

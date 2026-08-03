@@ -91,6 +91,50 @@ export const metadata: Metadata = {
 const jsonLd = [
   {
     "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Kohinoor Group & Mahalaxmi Group",
+    "url": "https://kohinoorthearena.vercel.app",
+    "logo": "https://kohinoorthearena.vercel.app/assets/images/favicon.ico",
+    "description": "Mahalaxmi Group and Kohinoor Group joint venture for premium real estate development in Pune."
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "2 BHK Luxury Sports Residence",
+    "image": "https://kohinoorthearena.vercel.app/assets/images/hero-bg.jpg",
+    "description": "Premium 2 BHK apartment in Mahalaxmi The Arena, Pimpri.",
+    "brand": {
+      "@type": "Brand",
+      "name": "Kohinoor Group"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://kohinoorthearena.vercel.app/#residences",
+      "priceCurrency": "INR",
+      "price": "8850000",
+      "availability": "https://schema.org/PreOrder"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "3 BHK Premium Residence",
+    "image": "https://kohinoorthearena.vercel.app/assets/images/hero-bg.jpg",
+    "description": "Luxury 3 BHK apartment in Mahalaxmi The Arena, Pimpri.",
+    "brand": {
+      "@type": "Brand",
+      "name": "Mahalaxmi Group"
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://kohinoorthearena.vercel.app/#residences",
+      "priceCurrency": "INR",
+      "price": "12800000",
+      "availability": "https://schema.org/PreOrder"
+    }
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     "name": "Mahalaxmi The ARENA",
     "alternateName": ["Kohinoor The Arena", "Life in Motion Pimpri", "Life in Motion Pune"],
