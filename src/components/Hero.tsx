@@ -34,9 +34,9 @@ export default function Hero() {
         </p>
 
         <div className="hero-buttons">
-          <a href="#residences" className="btn btn-neon" title="View Luxury Flats in Pimpri" aria-label="Navigate to Residences section">
+          <button className="btn btn-neon" title="View Luxury Flats in Pimpri" aria-label="Navigate to Residences section" onClick={() => { const el = document.getElementById('residences'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}>
             <i className="ri-building-4-line"></i> View Residences
-          </a>
+          </button>
           <button 
             className="btn btn-glass trigger-schedule" 
             title="Book Mahalaxmi The Arena Site Visit" 

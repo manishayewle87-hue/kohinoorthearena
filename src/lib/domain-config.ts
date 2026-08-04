@@ -7,8 +7,10 @@
 // ─────────────────────────────────────────────────────────────────
 
 export type DomainConfig = {
-  brand: string;
-  projectName: string;
+  brand: string;               // Developer / builder name
+  coDevName: string;           // Joint venture partner name
+  projectName: string;         // Full project name
+  arenaName: string;           // Short display name for the arena
   tagline: string;
   canonical: string;
   sitemapUrl: string;
@@ -16,9 +18,29 @@ export type DomainConfig = {
   title: string;
   description: string;
   keywords: string[];
-  primarySlug: string; // The page this domain's root '/' maps to
+  primarySlug: string;         // The page this domain's root '/' maps to
   mahaRera: string;
   contactPhone: string;
+  address: {
+    street: string;
+    locality: string;
+    city: string;
+    region: string;
+    postalCode: string;
+    country: string;
+    landmark: string;
+  };
+  projectConfig: {
+    towers: number;
+    units: number;
+    floors: number;
+    sportsSqFt: string;
+    startingPrice: string;
+    topPrice: string;
+    bhkOptions: string;        // e.g. '2, 3 & 4 BHK'
+    possessionYear: string;
+    managedBy: string;         // Sports management company
+  };
   schemaOrg: {
     websiteUrl: string;
     orgName: string;
@@ -39,17 +61,51 @@ export const DOMAIN_CONFIGS: Record<string, DomainConfig> = {
   // ── Kohinoor Domain ───────────────────────────────────────────
   'kohinoorthearena.in': {
     brand: 'Kohinoor Group',
+    coDevName: 'Mahalaxmi Group',
     projectName: 'Kohinoor The Arena',
-    tagline: 'Life in Motion | Pimpri Chinchwad',
+    arenaName: 'Kohinoor The Arena',
+    tagline: 'Life in Motion | Pimpri Chinchwad, Pune',
     canonical: 'https://kohinoorthearena.in',
     sitemapUrl: 'https://kohinoorthearena.in/sitemap.xml',
     ogImage: 'https://kohinoorthearena.in/assets/images/hero.jpg',
-    title: 'Kohinoor The Arena | Life in Motion | 2, 3 & 4 BHK in Pimpri Chinchwad',
-    description: 'Kohinoor The Arena — PCMC\'s premier sports township. Premium 2, 3 & 4 BHK luxury residences across 11 towers with an 80,000 Sq. Ft. sports ecosystem managed by ILESEUM in Pimpri Chinchwad, Pune.',
-    keywords: ['Kohinoor The Arena', 'Kohinoor Pimpri', 'Kohinoor PCMC', ...SHARED_KEYWORDS],
+    title: 'Kohinoor The Arena by Kohinoor Group | Life in Motion | 2, 3 & 4 BHK in Pimpri Chinchwad, Pune',
+    description: 'Kohinoor The Arena by Kohinoor Group — PCMC\'s premier sports township in Pimpri Chinchwad, Pune. Premium 2, 3 & 4 BHK luxury residences across 11 towers with an 80,000 Sq. Ft. sports ecosystem managed by ILESEUM. MahaRERA registered.',
+    keywords: [
+      'Kohinoor The Arena',
+      'Kohinoor Group Pimpri',
+      'Kohinoor Group Pimpri Chinchwad',
+      'Kohinoor Arena PCMC',
+      'Kohinoor Arena Pune',
+      'Kohinoor Group real estate Pune',
+      'Kohinoor Arena 2 BHK Pimpri',
+      'Kohinoor Arena 3 BHK Pimpri Chinchwad',
+      'Kohinoor Arena 4 BHK PCMC',
+      'Life in Motion Pimpri Chinchwad',
+      ...SHARED_KEYWORDS,
+    ],
     primarySlug: '/kohinoor-the-arena-pimpri-chinchwad-pune',
     mahaRera: 'P5210005XXXX',
     contactPhone: '+91-XXXXXXXXXX',
+    address: {
+      street: 'The Arena, Sports Township, Pimpri',
+      locality: 'Pimpri-Chinchwad',
+      city: 'Pune',
+      region: 'Maharashtra',
+      postalCode: '411018',
+      country: 'IN',
+      landmark: '2.4 km from PCMC Metro Station',
+    },
+    projectConfig: {
+      towers: 11,
+      units: 2500,
+      floors: 30,
+      sportsSqFt: '80,000',
+      startingPrice: '₹88.5 L',
+      topPrice: '₹2.15 Cr',
+      bhkOptions: '2, 3 & 4 BHK',
+      possessionYear: '2027',
+      managedBy: 'ILESEUM Sports Management',
+    },
     schemaOrg: {
       websiteUrl: 'https://kohinoorthearena.in',
       orgName: 'Kohinoor Group',
@@ -61,17 +117,50 @@ export const DOMAIN_CONFIGS: Record<string, DomainConfig> = {
   // ── Mahalaxmi Domain ──────────────────────────────────────────
   'mahalaxmithearena.in': {
     brand: 'Mahalaxmi Group',
+    coDevName: 'Kohinoor Group',
     projectName: 'Mahalaxmi The Arena',
+    arenaName: 'Mahalaxmi The Arena',
     tagline: 'Life in Motion | Pimpri, Pune',
     canonical: 'https://mahalaxmithearena.in',
     sitemapUrl: 'https://mahalaxmithearena.in/sitemap.xml',
     ogImage: 'https://mahalaxmithearena.in/assets/images/hero.jpg',
-    title: 'Mahalaxmi The Arena | Life in Motion | 2, 3 & 4 BHK in Pimpri, Pune',
-    description: 'Mahalaxmi The Arena — Pimpri\'s ultra-modern sports township. Premium 2, 3 & 4 BHK luxury apartments across 11 towers with an 80,000 Sq. Ft. active sports ecosystem managed by ILESEUM in Pimpri, Pune.',
-    keywords: ['Mahalaxmi The Arena', 'Mahalaxmi Pimpri', 'Mahalaxmi real estate Pune', ...SHARED_KEYWORDS],
+    title: 'Mahalaxmi The Arena by Mahalaxmi Group | Life in Motion | 2, 3 & 4 BHK in Pimpri, Pune',
+    description: 'Mahalaxmi The Arena by Mahalaxmi Group — Pimpri\'s ultra-modern sports township in Pune. Premium 2, 3 & 4 BHK luxury apartments across 11 towers with an 80,000 Sq. Ft. active sports ecosystem managed by ILESEUM. MahaRERA registered.',
+    keywords: [
+      'Mahalaxmi The Arena',
+      'Mahalaxmi Group Pimpri',
+      'Mahalaxmi Group Pune',
+      'Mahalaxmi Arena PCMC',
+      'Mahalaxmi Group real estate Pune',
+      'Mahalaxmi Arena 2 BHK Pimpri',
+      'Mahalaxmi Arena 3 BHK Pune',
+      'Mahalaxmi Arena 4 BHK PCMC',
+      'Life in Motion Pimpri Pune',
+      ...SHARED_KEYWORDS,
+    ],
     primarySlug: '/mahalaxmi-the-arena-luxury-flats-in-pimpri',
     mahaRera: 'P5210005XXXX',
     contactPhone: '+91-XXXXXXXXXX',
+    address: {
+      street: 'The Arena, Sports Township, Pimpri',
+      locality: 'Pimpri',
+      city: 'Pune',
+      region: 'Maharashtra',
+      postalCode: '411018',
+      country: 'IN',
+      landmark: '2.4 km from PCMC Metro Station',
+    },
+    projectConfig: {
+      towers: 11,
+      units: 2500,
+      floors: 30,
+      sportsSqFt: '80,000',
+      startingPrice: '₹88.5 L',
+      topPrice: '₹2.15 Cr',
+      bhkOptions: '2, 3 & 4 BHK',
+      possessionYear: '2027',
+      managedBy: 'ILESEUM Sports Management',
+    },
     schemaOrg: {
       websiteUrl: 'https://mahalaxmithearena.in',
       orgName: 'Mahalaxmi Group',

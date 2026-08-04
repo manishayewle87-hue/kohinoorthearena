@@ -535,6 +535,57 @@ button {
   width: 100%;
 }
 
+/* ── Scroll-to-section buttons (replaces bare # anchors) ────────── */
+.nav-anchor-btn {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  position: relative;
+  padding: 6px 0;
+  white-space: nowrap;
+  transition: var(--transition);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-anchor-btn:hover {
+  color: var(--text-white);
+}
+
+.nav-anchor-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--neon-lime);
+  transition: var(--transition);
+  box-shadow: 0 0 10px var(--neon-lime);
+}
+
+.nav-anchor-btn:hover::after {
+  width: 100%;
+}
+
+.drawer-nav-link.footer-anchor-btn,
+button.drawer-nav-link,
+.footer-anchor-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  padding: 0;
+}
+
 .nav-actions {
   display: flex;
   align-items: center;

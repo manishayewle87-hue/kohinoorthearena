@@ -35,9 +35,9 @@ export function generatePSEOMatrix(): PSEOPageData[] {
         const slug1 = `${bhk.val}-${intent}-flats-in-${loc.val}`;
         pages.push({
           slug: slug1,
-          title: `${bhk.display} ${capitalize(intent)} Flats in ${loc.display} | Mahalaxmi The Arena`,
-          h1: `${bhk.display} ${capitalize(intent)} Flats in ${loc.display}`,
-          description: `Looking for ${bhk.display} ${intent} flats in ${loc.display}? Discover Mahalaxmi The Arena. Premium residences starting from ₹ ${bhk.price}.`,
+          title: `${bhk.display} ${capitalize(intent)} Flats in ${loc.display} | Mahalaxmi The Arena by Mahalaxmi Group`,
+          h1: `${bhk.display} ${capitalize(intent)} Flats in ${loc.display} | The Arena`,
+          description: `Looking for ${bhk.display} ${intent} flats in ${loc.display}? Discover Mahalaxmi The Arena by Mahalaxmi Group & Kohinoor Group — ${bhk.display} luxury residences across 11 towers with an 80,000 Sq. Ft. sports ecosystem in ${loc.display}, Pune. Starting from ₹${bhk.price}.`,
           keyword: `${bhk.val} ${intent} flats in ${loc.val}`,
           price: bhk.price,
           bhk: bhk.display,
@@ -48,9 +48,9 @@ export function generatePSEOMatrix(): PSEOPageData[] {
         const slug2 = `${bhk.val}-apartments-in-${loc.val}`;
         pages.push({
           slug: slug2,
-          title: `Buy ${bhk.display} Apartments in ${loc.display} | Kohinoor Group`,
-          h1: `${bhk.display} Apartments in ${loc.display}`,
-          description: `Explore premium ${bhk.display} apartments in ${loc.display}. Life in Motion sports township by Mahalaxmi Group and Kohinoor Group.`,
+          title: `Buy ${bhk.display} Apartments in ${loc.display} | Kohinoor The Arena by Kohinoor Group`,
+          h1: `${bhk.display} Apartments in ${loc.display} | The Arena`,
+          description: `Explore premium ${bhk.display} apartments in ${loc.display} by Kohinoor Group & Mahalaxmi Group. Kohinoor The Arena — Life in Motion sports township with ${bhk.display} configurations across 11 towers in ${loc.display}, Pune. Starting from ₹${bhk.price}.`,
           keyword: `${bhk.val} apartments in ${loc.val}`,
           price: bhk.price,
           bhk: bhk.display,

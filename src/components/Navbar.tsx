@@ -20,11 +20,22 @@ export default function Navbar() {
   const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
   const closeDrawer = () => setIsDrawerOpen(false);
 
+  // Smooth-scroll helper — avoids bare # href fragments in the URL
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const scrollToAndClose = (id: string) => {
+    scrollTo(id);
+    closeDrawer();
+  };
+
   return (
     <>
       <header className={`navbar ${isScrolled ? "scrolled" : ""}`} id="navbar">
         <div className="container navbar-container">
-          <a href="#hero" className="brand-cluster">
+          <a href="/" className="brand-cluster" aria-label="The Arena Home">
             <div className="jv-partners">
               <Image
                 src="/assets/images/mahalaxmi-logo.svg"
@@ -58,31 +69,31 @@ export default function Navbar() {
           <nav className="nav-links" id="navLinks">
             <ul>
               <li className="nav-item">
-                <a href="#philosophy">Vision</a>
+                <button className="nav-anchor-btn" onClick={() => scrollTo('philosophy')}>Vision</button>
               </li>
               <li className="nav-item">
-                <a href="#operating-system">Ecosystem</a>
+                <button className="nav-anchor-btn" onClick={() => scrollTo('operating-system')}>Ecosystem</button>
               </li>
               <li className="nav-item">
-                <a href="#masterplan">Masterplan</a>
+                <button className="nav-anchor-btn" onClick={() => scrollTo('masterplan')}>Masterplan</button>
               </li>
               <li className="nav-item">
-                <a href="#gallery">Sanctuaries</a>
+                <button className="nav-anchor-btn" onClick={() => scrollTo('gallery')}>Sanctuaries</button>
               </li>
               <li className="nav-item">
-                <a href="#residences">Residences</a>
+                <button className="nav-anchor-btn" onClick={() => scrollTo('residences')}>Residences</button>
               </li>
               <li className="nav-item">
-                <a href="#rhythms">Rhythms</a>
+                <button className="nav-anchor-btn" onClick={() => scrollTo('rhythms')}>Rhythms</button>
               </li>
               <li className="nav-item">
-                <a href="#connectivity">Connectivity</a>
+                <button className="nav-anchor-btn" onClick={() => scrollTo('connectivity')}>Connectivity</button>
               </li>
               <li className="nav-item">
-                <a href="#specifications">Specs</a>
+                <button className="nav-anchor-btn" onClick={() => scrollTo('specifications')}>Specs</button>
               </li>
               <li className="nav-item">
-                <a href="#calculator">Investment</a>
+                <button className="nav-anchor-btn" onClick={() => scrollTo('calculator')}>Investment</button>
               </li>
             </ul>
           </nav>
@@ -159,33 +170,33 @@ export default function Navbar() {
             MAHALAXMI <span>THE ARENA</span>
           </div>
         </div>
-        <a href="#philosophy" className="drawer-nav-link" onClick={closeDrawer}>
+        <button className="drawer-nav-link" onClick={() => scrollToAndClose('philosophy')}>
           <i className="ri-lightbulb-flash-line"></i> Philosophy
-        </a>
-        <a href="#operating-system" className="drawer-nav-link" onClick={closeDrawer}>
+        </button>
+        <button className="drawer-nav-link" onClick={() => scrollToAndClose('operating-system')}>
           <i className="ri-run-line"></i> 80k Sq.Ft. OS
-        </a>
-        <a href="#masterplan" className="drawer-nav-link" onClick={closeDrawer}>
+        </button>
+        <button className="drawer-nav-link" onClick={() => scrollToAndClose('masterplan')}>
           <i className="ri-building-4-line"></i> 11 Towers &amp; Map
-        </a>
-        <a href="#gallery" className="drawer-nav-link" onClick={closeDrawer}>
+        </button>
+        <button className="drawer-nav-link" onClick={() => scrollToAndClose('gallery')}>
           <i className="ri-image-2-line"></i> Sanctuaries
-        </a>
-        <a href="#residences" className="drawer-nav-link" onClick={closeDrawer}>
+        </button>
+        <button className="drawer-nav-link" onClick={() => scrollToAndClose('residences')}>
           <i className="ri-home-4-line"></i> Residences
-        </a>
-        <a href="#rhythms" className="drawer-nav-link" onClick={closeDrawer}>
+        </button>
+        <button className="drawer-nav-link" onClick={() => scrollToAndClose('rhythms')}>
           <i className="ri-user-heart-line"></i> 4 Rhythms
-        </a>
-        <a href="#connectivity" className="drawer-nav-link" onClick={closeDrawer}>
+        </button>
+        <button className="drawer-nav-link" onClick={() => scrollToAndClose('connectivity')}>
           <i className="ri-map-pin-line"></i> Pimpri Map
-        </a>
-        <a href="#specifications" className="drawer-nav-link" onClick={closeDrawer}>
+        </button>
+        <button className="drawer-nav-link" onClick={() => scrollToAndClose('specifications')}>
           <i className="ri-list-check-2"></i> Specs
-        </a>
-        <a href="#calculator" className="drawer-nav-link" onClick={closeDrawer}>
+        </button>
+        <button className="drawer-nav-link" onClick={() => scrollToAndClose('calculator')}>
           <i className="ri-calculator-line"></i> ROI Calc
-        </a>
+        </button>
         <div className="drawer-footer">
           <button
             className="btn btn-neon trigger-schedule"

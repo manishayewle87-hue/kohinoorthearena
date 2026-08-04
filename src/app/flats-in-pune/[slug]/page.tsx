@@ -40,7 +40,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: data.title,
     description: data.description,
-    keywords: [data.keyword, `Buy ${data.bhk} in ${data.location}`, `Mahalaxmi The Arena ${data.location}`],
+    keywords: [
+      data.keyword,
+      `Buy ${data.bhk} in ${data.location}`,
+      `${cfg.arenaName} ${data.location}`,
+      `${cfg.brand} ${data.location}`,
+      `${cfg.arenaName} ${data.bhk}`,
+      `${cfg.brand} ${cfg.arenaName}`,
+    ],
+    authors: [{ name: cfg.brand }, { name: cfg.coDevName }],
+    creator: cfg.brand,
     alternates: {
       canonical: pageUrl,
     },
@@ -49,7 +58,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: data.description,
       url: pageUrl,
       type: "website",
-      images: [{ url: `${cfg.canonical}/assets/images/hero.jpg`, width: 1200, height: 630, alt: data.h1 }],
+      siteName: `${cfg.arenaName} by ${cfg.brand}`,
+      images: [{ url: `${cfg.canonical}/assets/images/hero.jpg`, width: 1200, height: 630, alt: `${data.h1} — ${cfg.arenaName} by ${cfg.brand}, ${cfg.address.locality}, ${cfg.address.city}` }],
     }
   };
 }
@@ -67,24 +77,51 @@ export default async function PSEOPage({ params }: Props) {
   const cfg = getDomainConfig(host);
   const pageUrl = `${cfg.canonical}/flats-in-pune/${p.slug}`;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": data.h1,
-    "description": data.description,
-    "image": `${cfg.canonical}/assets/images/hero.jpg`,
-    "brand": {
-      "@type": "Brand",
-      "name": cfg.projectName
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": data.h1,
+      "description": data.description,
+      "image": `${cfg.canonical}/assets/images/hero.jpg`,
+      "brand": {
+        "@type": "Brand",
+        "name": cfg.brand
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": pageUrl,
+        "priceCurrency": "INR",
+        "price": data.price.includes('Cr') ? parseFloat(data.price) * 10000000 : parseFloat(data.price) * 100000,
+        "availability": "https://schema.org/PreOrder"
+      }
     },
-    "offers": {
-      "@type": "Offer",
-      "url": pageUrl,
-      "priceCurrency": "INR",
-      "price": data.price.includes('Cr') ? parseFloat(data.price) * 10000000 : parseFloat(data.price) * 100000,
-      "availability": "https://schema.org/PreOrder"
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": cfg.canonical },
+        { "@type": "ListItem", "position": 2, "name": cfg.arenaName, "item": `${cfg.canonical}${cfg.primarySlug}` },
+        { "@type": "ListItem", "position": 3, "name": "Flats in Pune", "item": `${cfg.canonical}/flats-in-pune` },
+        { "@type": "ListItem", "position": 4, "name": data.h1, "item": pageUrl },
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "name": cfg.brand,
+      "url": cfg.canonical,
+      "description": `${cfg.brand} — Developer of ${cfg.arenaName}. ${data.bhk} luxury residences in ${data.location}, Pune.`,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": cfg.address.street,
+        "addressLocality": cfg.address.locality,
+        "addressRegion": cfg.address.region,
+        "postalCode": cfg.address.postalCode,
+        "addressCountry": cfg.address.country
+      }
     }
-  };
+  ];
 
   return (
     <>

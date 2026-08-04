@@ -3,13 +3,18 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+function scrollTo(id: string) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 export default function Footer() {
   return (
     <footer className="footer">
     <div className="container">
       <div className="footer-grid">
         <div className="footer-brand">
-          <a href="#hero" className="brand-cluster footer-brand-cluster">
+          <a href="/" className="brand-cluster footer-brand-cluster" aria-label="The Arena Home">
             <div className="jv-partners">
               <Image src="/assets/images/mahalaxmi-logo.svg" alt="Mahalaxmi Group Developer Pimpri" width={150} height={40} className="partner-img"/>
               <div className="jv-divider"></div>
@@ -31,11 +36,11 @@ export default function Footer() {
         <div className="footer-col">
           <h5>The 5 Pillars</h5>
           <div className="footer-links">
-            <a href="#operating-system">1. Space (80,000 Sq.Ft.)</a>
-            <a href="#operating-system">2. Management (Ileseum)</a>
-            <a href="#operating-system">3. Programs (Coaching)</a>
-            <a href="#operating-system">4. Partnerships (Global)</a>
-            <a href="#operating-system">5. Progression (Tracking)</a>
+            <button className="footer-anchor-btn" onClick={() => scrollTo('operating-system')}>1. Space (80,000 Sq.Ft.)</button>
+            <button className="footer-anchor-btn" onClick={() => scrollTo('operating-system')}>2. Management (Ileseum)</button>
+            <button className="footer-anchor-btn" onClick={() => scrollTo('operating-system')}>3. Programs (Coaching)</button>
+            <button className="footer-anchor-btn" onClick={() => scrollTo('operating-system')}>4. Partnerships (Global)</button>
+            <button className="footer-anchor-btn" onClick={() => scrollTo('operating-system')}>5. Progression (Tracking)</button>
           </div>
         </div>
 
@@ -46,19 +51,19 @@ export default function Footer() {
             <li><Link href="/kohinoor-the-arena-pimpri-chinchwad-pune">Kohinoor The Arena</Link></li>
             <li><Link href="/mahalaxmi-the-arena-luxury-flats-in-pimpri">Mahalaxmi The Arena</Link></li>
             <li><Link href="/life-in-motion-pimpri-sports-township-pcmc">Life in Motion</Link></li>
-            <li><Link href="#residences">Residences</Link></li>
-            <li><a href="#specifications">Salient Specifications</a></li>
+            <li><button className="footer-anchor-btn" onClick={() => scrollTo('residences')}>Residences</button></li>
+            <li><button className="footer-anchor-btn" onClick={() => scrollTo('specifications')}>Salient Specifications</button></li>
           </ul>
         </div>
 
         <div className="footer-col">
           <h5>Pimpri Connectivity</h5>
           <div className="footer-links">
-            <a href="#connectivity">Kohinoor World Towers (2 km)</a>
-            <a href="#connectivity">PCMC Metro Station (2.4 km)</a>
-            <a href="#connectivity">Podar Int. School (3.8 km)</a>
-            <a href="#connectivity">Aditya Birla Hospital (4.1 km)</a>
-            <a href="#connectivity">Hinjewadi IT Park (9.9 km)</a>
+            <button className="footer-anchor-btn" onClick={() => scrollTo('connectivity')}>Kohinoor World Towers (2 km)</button>
+            <button className="footer-anchor-btn" onClick={() => scrollTo('connectivity')}>PCMC Metro Station (2.4 km)</button>
+            <button className="footer-anchor-btn" onClick={() => scrollTo('connectivity')}>Podar Int. School (3.8 km)</button>
+            <button className="footer-anchor-btn" onClick={() => scrollTo('connectivity')}>Aditya Birla Hospital (4.1 km)</button>
+            <button className="footer-anchor-btn" onClick={() => scrollTo('connectivity')}>Hinjewadi IT Park (9.9 km)</button>
           </div>
         </div>
       </div>

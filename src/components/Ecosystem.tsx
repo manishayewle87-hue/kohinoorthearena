@@ -94,9 +94,9 @@ export default function Ecosystem() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: "16px" }}>
-                <a href="#masterplan" className="btn btn-neon">
+                <button className="btn btn-neon" onClick={() => { const el = document.getElementById('masterplan'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}>
                   <i className="ri-map-pin-line"></i> View All 30+ Amenities
-                </a>
+                </button>
                 <button className="btn btn-glass trigger-brochure">
                   <i className="ri-file-download-line"></i> Download Brochure
                 </button>
@@ -214,9 +214,9 @@ export default function Ecosystem() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: "16px" }}>
-                <a href="#rhythms" className="btn btn-neon">
+                <button className="btn btn-neon" onClick={() => { const el = document.getElementById('rhythms'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}>
                   <i className="ri-user-heart-line"></i> Discover Your Rhythm of Life
-                </a>
+                </button>
               </div>
             </div>
             <div
@@ -331,9 +331,9 @@ export default function Ecosystem() {
                 </div>
               </div>
               <div style={{ display: "flex", gap: "16px" }}>
-                <a href="#calculator" className="btn btn-neon">
+                <button className="btn btn-neon" onClick={() => { const el = document.getElementById('calculator'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}>
                   <i className="ri-calculator-line"></i> Calculate ROI &amp; Yield
-                </a>
+                </button>
               </div>
             </div>
             <div
