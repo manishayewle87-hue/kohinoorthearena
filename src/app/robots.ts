@@ -7,38 +7,66 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
   const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
   const cfg = getDomainConfig(host);
 
-  // If this is a Vercel preview URL — block everything
   if (host.includes('vercel.app')) {
-    return {
-      rules: { userAgent: '*', disallow: '/' },
-    };
+    return { rules: { userAgent: '*', disallow: '/' } };
   }
 
   return {
     rules: [
+      // ── Googlebot: Full access + JS/CSS for rendering ──
       {
-        // Allow all bots to crawl main content
+        userAgent: 'Googlebot',
+        allow: ['/', '/_next/static/', '/_next/image/', '/assets/'],
+        disallow: ['/api/'],
+      },
+      // ── Googlebot-Image: Full image access ──
+      {
+        userAgent: 'Googlebot-Image',
+        allow: ['/assets/', '/_next/image/'],
+      },
+      // ── Googlebot-Video: Full access ──
+      {
+        userAgent: 'Googlebot-Video',
+        allow: ['/'],
+        disallow: ['/api/'],
+      },
+      // ── Googlebot-News: Full access ──
+      {
+        userAgent: 'Googlebot-News',
+        allow: ['/blog/'],
+        disallow: ['/api/'],
+      },
+      // ── Bingbot: Allow with crawl awareness ──
+      {
+        userAgent: 'bingbot',
+        allow: '/',
+        disallow: ['/api/', '/_next/'],
+      },
+      // ── Block AI scrapers ──
+      { userAgent: 'GPTBot', disallow: '/' },
+      { userAgent: 'ChatGPT-User', disallow: '/' },
+      { userAgent: 'CCBot', disallow: '/' },
+      { userAgent: 'anthropic-ai', disallow: '/' },
+      { userAgent: 'Claude-Web', disallow: '/' },
+      { userAgent: 'Bytespider', disallow: '/' },
+      { userAgent: 'PetalBot', disallow: '/' },
+      // ── Block aggressive SEO crawlers ──
+      { userAgent: 'AhrefsBot', disallow: '/' },
+      { userAgent: 'SemrushBot', disallow: '/' },
+      { userAgent: 'DotBot', disallow: '/' },
+      { userAgent: 'MJ12bot', disallow: '/' },
+      { userAgent: 'DataForSeoBot', disallow: '/' },
+      // ── Generic bots: Allow main content, block internals ──
+      {
         userAgent: '*',
         allow: '/',
         disallow: [
-          '/api/',           // Block API routes
-          '/_next/',         // Block Next.js internals
-          '/api/lead',       // Explicitly block lead capture endpoint
-          '/api/cron',       // Block cron handler
-          '/api/test-email', // Block test endpoint
-          '/api/google-index', // Block indexing trigger
-        ],
-      },
-      {
-        // Give Googlebot full access to crawl JS/CSS for rendering
-        userAgent: 'Googlebot',
-        allow: [
-          '/_next/static/',
-          '/_next/image/',
-          '/assets/',
-        ],
-        disallow: [
           '/api/',
+          '/_next/',
+          '/api/lead',
+          '/api/cron',
+          '/api/test-email',
+          '/api/google-index',
         ],
       },
     ],
@@ -46,4 +74,3 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
     host: cfg.canonical,
   };
 }
-

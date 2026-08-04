@@ -47,6 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,
+      images: [`${baseUrl}/assets/images/hero.jpg`],
     },
     {
       url: `${baseUrl}/privacy-policy`,
@@ -69,7 +70,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(post.date),
     changeFrequency: 'monthly',
     priority: 0.7,
-
+    images: [`${baseUrl}/assets/images/hero.jpg`],
   }));
 
   // Programmatic SEO Matrix Pages

@@ -37,6 +37,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: cfg.description,
     keywords: cfg.keywords,
+    applicationName: cfg.projectName,
+    category: 'Real Estate',
     authors: [{ name: cfg.brand }, { name: cfg.coDevName }],
     creator: cfg.brand,
     publisher: cfg.projectName,
@@ -184,6 +186,99 @@ export default async function RootLayout({
         { '@type': 'ListItem', position: 3, name: `${cfg.projectConfig.bhkOptions} Flats in ${cfg.address.locality}`, item: `${siteUrl}/flats-in-pune` },
       ],
     },
+    {
+      '@context': 'https://schema.org',
+      '@type': ['LocalBusiness', 'RealEstateAgent'],
+      '@id': `${siteUrl}/#business`,
+      name: `${cfg.arenaName} by ${cfg.brand}`,
+      description: cfg.description,
+      url: siteUrl,
+      telephone: cfg.contactPhone,
+      email: 'info@kohinoorthearena.in',
+      priceRange: `${cfg.projectConfig.startingPrice} - ${cfg.projectConfig.topPrice}`,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: cfg.address.street,
+        addressLocality: cfg.address.locality,
+        addressRegion: cfg.address.region,
+        postalCode: cfg.address.postalCode,
+        addressCountry: cfg.address.country,
+      },
+      geo: { '@type': 'GeoCoordinates', latitude: '18.6278', longitude: '73.7997' },
+      hasMap: 'https://maps.google.com/?q=18.6278,73.7997',
+      image: cfg.ogImage,
+      logo: cfg.schemaOrg.logoUrl,
+      sameAs: cfg.sameAs,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: cfg.aggregateRating.ratingValue,
+        reviewCount: cfg.aggregateRating.reviewCount,
+        bestRating: cfg.aggregateRating.bestRating,
+      },
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+          opens: '10:00',
+          closes: '19:00',
+        },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Event',
+      name: `VIP Site Visit — ${cfg.arenaName}`,
+      description: `Book a VIP site visit to ${cfg.arenaName} by ${cfg.brand} in ${cfg.address.locality}, ${cfg.address.city}.`,
+      startDate: new Date().toISOString().split('T')[0],
+      endDate: cfg.projectConfig.possessionYear + '-12-31',
+      eventStatus: 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+      location: {
+        '@type': 'Place',
+        name: cfg.arenaName,
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: cfg.address.street,
+          addressLocality: cfg.address.locality,
+          addressRegion: cfg.address.region,
+          postalCode: cfg.address.postalCode,
+          addressCountry: cfg.address.country,
+        },
+        geo: { '@type': 'GeoCoordinates', latitude: '18.6278', longitude: '73.7997' },
+      },
+      organizer: {
+        '@type': 'Organization',
+        name: cfg.brand,
+        url: siteUrl,
+      },
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'INR',
+        availability: 'https://schema.org/InStock',
+        url: siteUrl,
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/#webpage`,
+      url: siteUrl,
+      name: cfg.title,
+      description: cfg.description,
+      dateModified: new Date().toISOString(),
+      inLanguage: 'en-IN',
+      isPartOf: { '@id': `${siteUrl}/#website` },
+      about: {
+        '@type': 'ApartmentComplex',
+        name: cfg.arenaName,
+        '@id': `${siteUrl}/#apartment`,
+      },
+      speakable: {
+        '@type': 'SpeakableSpecification',
+        cssSelector: ['.hero-title', '.hero-subtitle', '.section-title'],
+      },
+    },
   ];
 
   return (
@@ -204,7 +299,12 @@ export default async function RootLayout({
         <link rel="canonical" href={siteUrl} />
 
         {/* Core Web Vitals (LCP) Hardening — preload domain-specific hero */}
-        <link rel="preload" href={`${siteUrl}/assets/images/hero.jpg`} as="image" />
+        <link rel="preload" href={`${siteUrl}/assets/images/hero.jpg`} as="image" fetchPriority="high" />
+        
+        {/* Organization Schema sameAs links */}
+        {cfg.sameAs && cfg.sameAs.map((link, index) => (
+          <link key={index} rel="alternate" href={link} />
+        ))}
 
         {/* Performance Hardening: Preconnect to Analytics Domains */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
@@ -212,9 +312,9 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://connect.facebook.net" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
         
-        {/* Google Analytics 4 Stub */}
+        {/* Google Analytics 4 */}
         <Script 
-          src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`} 
+          src={`https://www.googletagmanager.com/gtag/js?id=${cfg.ga4Id}`} 
           strategy="afterInteractive" 
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -222,11 +322,11 @@ export default async function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-XXXXXXXXXX');
+            gtag('config', '${cfg.ga4Id}');
           `}
         </Script>
 
-        {/* Meta Pixel Stub */}
+        {/* Meta Pixel */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
@@ -237,7 +337,7 @@ export default async function RootLayout({
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', 'XXXXXXXXXXXXXXX');
+            fbq('init', '${cfg.metaPixelId}');
             fbq('track', 'PageView');
           `}
         </Script>

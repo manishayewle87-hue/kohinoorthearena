@@ -7,18 +7,22 @@ export default function Hero() {
       {/* Hyper-Optimized LCP Image */}
       <Image 
         src="/assets/images/hero.jpg" 
-        alt="Mahalaxmi The Arena Aerial View" 
+        alt="Mahalaxmi The Arena by Mahalaxmi Group & Kohinoor Group — Luxury Residences, Pimpri Chinchwad, Pune" 
         fill 
         priority 
-        quality={85}
+        fetchPriority="high"
+        quality={90}
         sizes="100vw"
-        style={{ objectFit: 'cover', zIndex: 0, opacity: 0.6 }} 
+        placeholder="blur"
+        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
+        style={{ objectFit: 'cover', zIndex: 0, opacity: 0.6 }}
+        aria-hidden={false}
       />
       
       {/* Floating ambient orbs for depth */}
-      <div className="hero-orb hero-orb-1" style={{ zIndex: 1 }}></div>
-      <div className="hero-orb hero-orb-2" style={{ zIndex: 1 }}></div>
-      <div className="hero-orb hero-orb-3" style={{ zIndex: 1 }}></div>
+      <div className="hero-orb hero-orb-1" style={{ zIndex: 1 }} aria-hidden="true"></div>
+      <div className="hero-orb hero-orb-2" style={{ zIndex: 1 }} aria-hidden="true"></div>
+      <div className="hero-orb hero-orb-3" style={{ zIndex: 1 }} aria-hidden="true"></div>
       <div className="hero-bg-overlay" style={{ zIndex: 2 }}></div>
       
       <div className="container hero-content" style={{ position: 'relative', zIndex: 3 }}>

@@ -13,6 +13,29 @@ import Calculator from "@/components/Calculator";
 import Booking from "@/components/Booking";
 import Footer from "@/components/Footer";
 import FAQ from "@/components/FAQ";
+import { Metadata } from 'next';
+import { headers } from 'next/headers';
+import { getDomainConfig } from '@/lib/domain-config';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
+  return {
+    title: cfg.title,
+    description: cfg.description,
+    alternates: { canonical: cfg.canonical },
+    openGraph: {
+      title: cfg.title,
+      description: cfg.description,
+      url: cfg.canonical,
+      siteName: `${cfg.arenaName} by ${cfg.brand}`,
+      images: [{ url: cfg.ogImage, width: 1200, height: 630, alt: `${cfg.arenaName} by ${cfg.brand} — ${cfg.address.locality}, ${cfg.address.city}` }],
+      type: 'website',
+      locale: 'en_IN',
+    },
+  };
+}
 
 export const revalidate = 3600; // Edge Route Caching (1 Hour)
 

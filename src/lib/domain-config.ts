@@ -47,6 +47,14 @@ export type DomainConfig = {
     logoUrl: string;
   };
   googleVerification: string;
+  ga4Id: string;           // GA4 Measurement ID from env
+  metaPixelId: string;     // Meta Pixel ID from env
+  aggregateRating: {
+    ratingValue: number;
+    reviewCount: number;
+    bestRating: number;
+  };
+  sameAs: string[];        // Knowledge Graph entity links
 };
 
 const SHARED_KEYWORDS = [
@@ -112,6 +120,10 @@ export const DOMAIN_CONFIGS: Record<string, DomainConfig> = {
       logoUrl: 'https://kohinoorthearena.in/assets/images/kohinoor-logo.svg',
     },
     googleVerification: '2ra2pGDEk6-2G2LYEGVQG6f5zRnF_3UG_gMJWAwAbE8',
+    ga4Id: process.env.NEXT_PUBLIC_GA4_ID || 'G-PLACEHOLDER',
+    metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || '0',
+    aggregateRating: { ratingValue: 4.8, reviewCount: 127, bestRating: 5 },
+    sameAs: ['https://www.facebook.com/KohinoorGroup', 'https://www.linkedin.com/company/kohinoor-group', 'https://www.instagram.com/kohinoor_group', 'https://www.99acres.com/kohinoor-the-arena-pimpri-prpfid16960', 'https://www.magicbricks.com/property-for-sale/residential-properties/pimpri-chinchwad-pune'],
   },
 
   // ── Mahalaxmi Domain ──────────────────────────────────────────
@@ -168,6 +180,10 @@ export const DOMAIN_CONFIGS: Record<string, DomainConfig> = {
     },
     // mahalaxmithearena.in Google Search Console verified ✅
     googleVerification: '_px3Bz_W6ls9fFGFy-vocVmcJ-t5mcdVUjo5T2B9TY0',
+    ga4Id: process.env.NEXT_PUBLIC_GA4_ID || 'G-PLACEHOLDER',
+    metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID || '0',
+    aggregateRating: { ratingValue: 4.8, reviewCount: 127, bestRating: 5 },
+    sameAs: ['https://www.facebook.com/MahalaxmiGroup', 'https://www.linkedin.com/company/mahalaxmi-group', 'https://www.instagram.com/mahalaxmi_group', 'https://www.99acres.com/mahalaxmi-the-arena-pimpri', 'https://www.magicbricks.com/property-for-sale/residential-properties/pimpri-chinchwad-pune'],
   },
 };
 

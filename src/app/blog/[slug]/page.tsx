@@ -20,6 +20,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${post.title} | ${cfg.projectName} Insights`,
     description: post.description,
+    authors: [{ name: cfg.brand, url: cfg.canonical }],
+    creator: cfg.brand,
+    publisher: cfg.projectName,
+    category: 'Real Estate',
     alternates: {
       canonical: postUrl,
     },
@@ -55,32 +59,59 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   const cfg = getDomainConfig(host);
   const postUrl = `${cfg.canonical}/blog/${p.slug}`;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": post.title,
-    "description": post.description,
-    "datePublished": post.date,
-    "url": postUrl,
-    "image": `${cfg.canonical}/assets/images/hero.jpg`,
-    "author": {
-      "@type": "Organization",
-      "name": cfg.brand,
-      "url": cfg.canonical
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": cfg.projectName,
-      "logo": {
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "@id": `${postUrl}/#article`,
+      "headline": post.title,
+      "description": post.description,
+      "datePublished": post.date,
+      "dateModified": post.date,
+      "wordCount": post.content.split(' ').length,
+      "url": postUrl,
+      "image": {
         "@type": "ImageObject",
-        "url": cfg.schemaOrg.logoUrl
-      }
+        "url": `${cfg.canonical}/assets/images/hero.jpg`,
+        "width": 1200,
+        "height": 630,
+        "caption": `${post.title} — ${cfg.arenaName} by ${cfg.brand}`
+      },
+      "author": {
+        "@type": "Organization",
+        "name": cfg.brand,
+        "url": cfg.canonical,
+        "logo": { "@type": "ImageObject", "url": cfg.schemaOrg.logoUrl },
+        "sameAs": cfg.sameAs
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": cfg.projectName,
+        "logo": { "@type": "ImageObject", "url": cfg.schemaOrg.logoUrl }
+      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": postUrl },
+      "about": [
+        { "@type": "Thing", "name": cfg.arenaName },
+        { "@type": "Thing", "name": `Real Estate ${cfg.address.city}` },
+        { "@type": "Place", "name": cfg.address.locality }
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": ["h1", ".article-intro"]
+      },
+      "articleSection": "Real Estate Insights",
+      "inLanguage": "en-IN"
     },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": postUrl
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": cfg.canonical },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${cfg.canonical}/blog` },
+        { "@type": "ListItem", "position": 3, "name": post.title, "item": postUrl }
+      ]
     }
-  };
+  ];
 
   return (
     <>
