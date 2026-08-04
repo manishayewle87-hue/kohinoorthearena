@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { submitUrlToGoogle, submitBatchUrls } from '@/lib/google-indexing';
 import { generatePSEOMatrix } from '@/lib/pseo-data';
 import { getBlogPosts } from '@/lib/blog';
-import { ALL_DOMAINS, DOMAIN_CONFIGS } from '@/lib/domain-config';
+import { ALL_DOMAINS } from '@/lib/domain-config';
 
 export const runtime = 'nodejs';
 

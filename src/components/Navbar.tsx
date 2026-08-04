@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useAppContext, Currency } from "@/context/AppContext";
 
 export default function Navbar() {
@@ -35,7 +36,7 @@ export default function Navbar() {
     <>
       <header className={`navbar ${isScrolled ? "scrolled" : ""}`} id="navbar">
         <div className="container navbar-container">
-          <a href="/" className="brand-cluster" aria-label="The Arena Home">
+          <Link href="/" className="brand-cluster" aria-label="The Arena Home">
             <div className="jv-partners">
               <Image
                 src="/assets/images/mahalaxmi-logo.svg"
@@ -64,7 +65,7 @@ export default function Navbar() {
                 <div className="logo-subtitle">PIMPRI&apos;S SPORTS TOWNSHIP</div>
               </div>
             </div>
-          </a>
+          </Link>
 
           <nav className="nav-links" id="navLinks">
             <ul>

@@ -14,7 +14,7 @@ export default function Footer() {
     <div className="container">
       <div className="footer-grid">
         <div className="footer-brand">
-          <a href="/" className="brand-cluster footer-brand-cluster" aria-label="The Arena Home">
+          <Link href="/" className="brand-cluster footer-brand-cluster" aria-label="The Arena Home">
             <div className="jv-partners">
               <Image src="/assets/images/mahalaxmi-logo.svg" alt="Mahalaxmi Group Developer Pimpri" width={150} height={40} className="partner-img"/>
               <div className="jv-divider"></div>
@@ -27,8 +27,8 @@ export default function Footer() {
                 <div className="logo-subtitle">PIMPRI&apos;S SPORTS TOWNSHIP</div>
               </div>
             </div>
-          </a>
-          <p>
+          </Link>
+          <p className="footer-bio">
             A Joint Venture development by Mahalaxmi Group, Kohinoor Group (A Glorious Real Estate Enterprise), and Agarwal Sukhwani Associates. Operated by ILESEUM Sports Management across an 80,000 Sq. Ft. active ecosystem.
           </p>
         </div>
