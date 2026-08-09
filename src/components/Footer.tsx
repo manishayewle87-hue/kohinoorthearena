@@ -72,9 +72,9 @@ export default function Footer() {
         <h6 style={{ color: "rgba(255,255,255,0.7)", marginBottom: "1rem", letterSpacing: "1px", textTransform: "uppercase", fontSize: "0.8rem" }}>Explore Premium Properties Across PCMC & Pune</h6>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", lineHeight: "1.6" }}>
           {/* Brands & Projects Silos */}
-          <a href="/mahalaxmi-the-arena-luxury-flats-in-pimpri" className="seo-link">Mahalaxmi The Arena Pimpri</a> &bull;
-          <a href="/kohinoor-the-arena-pimpri-chinchwad-pune" className="seo-link">Kohinoor The Arena</a> &bull;
-          <a href="/life-in-motion-pimpri-sports-township-pcmc" className="seo-link">Life in Motion Pimpri</a> &bull;
+          <Link href="/mahalaxmi-the-arena-luxury-flats-in-pimpri" className="seo-link">Mahalaxmi The Arena Pimpri</Link> &bull;
+          <Link href="/kohinoor-the-arena-pimpri-chinchwad-pune" className="seo-link">Kohinoor The Arena</Link> &bull;
+          <Link href="/life-in-motion-pimpri-sports-township-pcmc" className="seo-link">Life in Motion Pimpri</Link> &bull;
           <span className="seo-link">Life in Motion Pune</span> &bull;
           <span className="seo-link">Kohinoor Arena Pimpri</span> &bull;
           <span className="seo-link">The Arena PCMC</span> &bull;
@@ -155,9 +155,9 @@ export default function Footer() {
       <div className="footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <div>&copy; 2026 Mahalaxmi The ARENA. All rights reserved.</div>
         <div style={{ display: 'flex', gap: '1rem' }}>
-          <a href="/privacy-policy" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.9rem' }}>Privacy Policy</a>
+          <Link href="/privacy-policy" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.9rem' }}>Privacy Policy</Link>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
-          <a href="/terms" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.9rem' }}>Terms of Service</a>
+          <Link href="/terms" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.9rem' }}>Terms of Service</Link>
         </div>
         <div>Designed with <span style={{ color: "var(--neon-lime)" }}>Life in Motion</span> • Pimpri, Pune</div>
       </div>

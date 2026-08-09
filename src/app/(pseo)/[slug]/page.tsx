@@ -1,13 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { generatePSEOMatrix, getPSEOPageData } from '@/lib/pseo-data';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import FloorPlans from '@/components/FloorPlans';
+import { getPSEOPageData } from '@/lib/pseo-data';
 import MainLayout from '@/components/MainLayout';
-import Modals from '@/components/Modals';
-import GlobalScripts from '@/components/GlobalScripts';
-import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 
 import { headers } from 'next/headers';
 import { getDomainConfig } from '@/lib/domain-config';
