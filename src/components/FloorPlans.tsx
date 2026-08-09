@@ -5,12 +5,21 @@ import { useAppContext } from '@/context/AppContext';
 
 const floorPlans = [
   {
+    id: 'master-plan',
+    title: 'Master Plan',
+    size: '80,000 Sq.Ft. Estate',
+    basePriceINR: 0,
+    description: 'Explore the 34-storey architectural marvels surrounded by 80,000 Sq.Ft. of sports and lifestyle amenities. Featuring the exclusive Ileseum Club, multi-purpose lawns, and serene gardens.',
+    image: '/assets/images/master_plan.jpg',
+    features: ['Ileseum Club & Sports Complex', 'Dedicated Residential Entry', 'Expansive Green Spaces']
+  },
+  {
     id: '2bhk',
     title: '2 BHK Luxury',
     size: '768 - 820 Sq.Ft.',
     basePriceINR: 8850000,
     description: 'Perfect for modern families, featuring smart space utilization, a private balcony, and premium fixtures throughout.',
-    image: '/assets/images/hero-bg.jpg', // Placeholder for actual floor plan
+    image: '/assets/images/floorplan_2bhk.jpg',
     features: ['Vastu Compliant', 'Zero Wastage Layout', 'Premium Finishes']
   },
   {
@@ -19,7 +28,7 @@ const floorPlans = [
     size: '980 - 1050 Sq.Ft.',
     basePriceINR: 12800000,
     description: 'Spacious living areas designed for maximum natural light and cross ventilation, offering an unparalleled living experience.',
-    image: '/assets/images/hero-bg.jpg', 
+    image: '/assets/images/floorplan_3bhk_premium.jpg', 
     features: ['East-West Entry', 'Dedicated Dining Area', 'Walk-in Wardrobe Space']
   },
   {
@@ -28,7 +37,7 @@ const floorPlans = [
     size: '1500+ Sq.Ft.',
     basePriceINR: 21500000,
     description: 'The pinnacle of luxury in Pimpri. Unobstructed city views, expansive decks, and elite craftsmanship.',
-    image: '/assets/images/hero-bg.jpg',
+    image: '/assets/images/floorplan_4bhk.jpg',
     features: ['Panoramic Views', 'Private Elevator Lobby', 'Maids Room']
   }
 ];
@@ -103,7 +112,9 @@ export default function FloorPlans() {
                 </div>
                 <div className="metric">
                   <span className="label">Starting Price</span>
-                  <span className="value" style={{ color: 'var(--neon-lime)' }}>{convertPrice(activePlan.basePriceINR)}*</span>
+                  <span className="value" style={{ color: 'var(--neon-lime)' }}>
+                    {activePlan.basePriceINR > 0 ? convertPrice(activePlan.basePriceINR) + '*' : 'On Request'}
+                  </span>
                 </div>
               </div>
               
