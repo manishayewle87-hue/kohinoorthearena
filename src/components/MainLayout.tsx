@@ -39,6 +39,17 @@ export default function MainLayout({ h1, keyword, children }: { h1?: string, key
         {children}
       </main>
       <PopularSearches />
+      
+      {/* Mobile Sticky Conversion Bar */}
+      <div className="mobile-sticky-bar">
+        <a href="https://wa.me/917711993434?text=Hi,%20I%20am%20interested%20in%20Mahalaxmi%20The%20Arena%20Pimpri." target="_blank" rel="noopener noreferrer" className="mobile-btn whatsapp-btn">
+          <i className="ri-whatsapp-line"></i> WhatsApp
+        </a>
+        <button className="mobile-btn book-btn trigger-schedule" onClick={() => { const el = document.getElementById('booking'); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}>
+          <i className="ri-calendar-check-line"></i> Book Visit
+        </button>
+      </div>
+
       <Footer />
     </>
   );

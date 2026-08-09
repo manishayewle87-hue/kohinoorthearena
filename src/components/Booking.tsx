@@ -1,7 +1,59 @@
 "use client";
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Booking() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const form = e.currentTarget;
+    
+    const formData = new FormData(form);
+    const name = formData.get('fullName') as string;
+    const phone = formData.get('mobile') as string;
+    const email = formData.get('email') as string;
+    const configuration = formData.get('configuration') as string;
+
+    let utmData = {};
+    try {
+      const savedUtm = localStorage.getItem('mta_utm_params');
+      if (savedUtm) utmData = JSON.parse(savedUtm);
+    } catch {}
+
+    // ── Advanced Lead Context Tracking (PSEO Keyword Extraction) ──
+    const pageH1 = document.querySelector('h1')?.innerText || 'Default VIP Form';
+    
+    try {
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          phone,
+          email,
+          configuration,
+          domain: window.location.hostname,
+          source: `Page Context: ${pageH1}`,
+          utm: utmData,
+        }),
+      });
+
+      const data = await response.json();
+      if (response.ok && data.success) {
+        window.dispatchEvent(new CustomEvent('arena-toast', { detail: '✅ Success! Our team will contact you shortly.' }));
+        sessionStorage.setItem('mta_lead_captured', 'true');
+        form.reset();
+      } else {
+        window.dispatchEvent(new CustomEvent('arena-toast', { detail: `⚠️ ${data.error || 'Submission failed.'}` }));
+      }
+    } catch (err) {
+      window.dispatchEvent(new CustomEvent('arena-toast', { detail: '❌ Network error. Please try again.' }));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="booking-section section-padding" id="booking">
       <div className="container">
@@ -24,7 +76,7 @@ export default function Booking() {
             <h3>Register for Priority Access</h3>
             <p>Fill out your details to receive the official floor plans, price sheet, and brochure PDF.</p>
             
-            <form id="vipBookingForm">
+            <form id="vipBookingForm" onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="vip-name">Your Full Name *</label>
                 <input type="text" id="vip-name" name="fullName" required placeholder="e.g. Rahul Sharma" />
@@ -47,8 +99,8 @@ export default function Booking() {
                   <option>Commercial Plaza Frontage Unit</option>
                 </select>
               </div>
-              <button type="submit" className="btn btn-neon" style={{ width: "100%", marginTop: "12px", fontSize: "1.05rem" }}>
-                <i className="ri-send-plane-fill"></i> Request Official Details & Brochure
+              <button type="submit" className="btn btn-neon" disabled={isSubmitting} style={{ width: "100%", marginTop: "12px", fontSize: "1.05rem", opacity: isSubmitting ? 0.7 : 1 }}>
+                {isSubmitting ? 'Submitting...' : <><i className="ri-send-plane-fill"></i> Request Official Details & Brochure</>}
               </button>
             </form>
           </div>

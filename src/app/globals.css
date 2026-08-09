@@ -3382,3 +3382,57 @@ textarea:focus {
 .popular-search-link:hover {
   color: #fff !important;
 }
+
+/* ================== MOBILE STICKY LEAD BAR ================== */
+.mobile-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateY(100%);
+  animation: slideUp 0.5s ease 1s forwards;
+}
+
+@media (min-width: 768px) {
+  .mobile-sticky-bar {
+    display: none !important;
+  }
+}
+
+.mobile-btn {
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.whatsapp-btn {
+  background: #111;
+  color: #25D366;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.book-btn {
+  background: var(--neon-lime);
+  color: #000;
+}
+
+@keyframes slideUp {
+  to { transform: translateY(0); }
+}
