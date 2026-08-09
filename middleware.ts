@@ -9,8 +9,9 @@ export function middleware(request: NextRequest) {
   // ── 1. SEO Consolidation: Strip www. and 301 Redirect ──
   if (hostname.startsWith('www.')) {
     const strippedHostname = hostname.replace(/^www\./, '');
-    url.hostname = strippedHostname;
-    return NextResponse.redirect(url, 301);
+    const protocol = request.headers.get('x-forwarded-proto') || 'https';
+    const redirectUrl = `${protocol}://${strippedHostname}${url.pathname}${url.search}`;
+    return NextResponse.redirect(redirectUrl, 301);
   }
 
   // ── 2. Domain Firewall: Prevent Spoofing ──
