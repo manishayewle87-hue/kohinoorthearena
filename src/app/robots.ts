@@ -42,6 +42,12 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
         allow: '/',
         disallow: ['/api/', '/_next/'],
       },
+      // ── Global Search Engines (Apple, Yandex, Baidu, DuckDuckGo) ──
+      {
+        userAgent: ['Applebot', 'YandexBot', 'Baiduspider', 'DuckDuckBot', 'Slurp'],
+        allow: '/',
+        disallow: ['/api/', '/_next/'],
+      },
       // ── Block AI scrapers ──
       { userAgent: 'GPTBot', disallow: '/' },
       { userAgent: 'ChatGPT-User', disallow: '/' },
