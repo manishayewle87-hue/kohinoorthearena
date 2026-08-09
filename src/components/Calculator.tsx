@@ -107,26 +107,41 @@ export default function Calculator() {
             </div>
           </div>
 
-          {/*  Right: Calculated Results  */}
-          <div className="calc-results">
-            <div className="result-card">
-              <div className="result-label">Monthly EMI Estimate</div>
-              <div className="result-amount">₹ {Math.round(emi).toLocaleString('en-IN')}</div>
-            </div>
+          {/*  Right: Calculated Results (Lead-Gated) */}
+          <div className="calc-results" style={{ position: 'relative', overflow: 'hidden' }}>
+            <div style={{ filter: 'blur(8px)', opacity: 0.6, pointerEvents: 'none', userSelect: 'none' }}>
+              <div className="result-card">
+                <div className="result-label">Monthly EMI Estimate</div>
+                <div className="result-amount">₹ {Math.round(emi).toLocaleString('en-IN')}</div>
+              </div>
 
-            <div className="result-card">
-              <div className="result-label">Expected 5-Year Capital Appreciation</div>
-              <div className="result-amount">₹ {(appreciationValue / 100000).toFixed(1)} L</div>
-            </div>
+              <div className="result-card">
+                <div className="result-label">Expected 5-Year Capital Appreciation</div>
+                <div className="result-amount">₹ {(appreciationValue / 100000).toFixed(1)} L</div>
+              </div>
 
-            <div className="result-card">
-              <div className="result-label">Estimated Monthly Rental Yield</div>
-              <div className="result-amount">₹ {Math.round(monthlyRent).toLocaleString('en-IN')} / mo</div>
+              <div className="result-card">
+                <div className="result-label">Estimated Monthly Rental Yield</div>
+                <div className="result-amount">₹ {Math.round(monthlyRent).toLocaleString('en-IN')} / mo</div>
+              </div>
             </div>
-
-            <button className="btn btn-neon trigger-schedule" style={{ width: "100%", marginTop: "24px" }}>
-              <i className="ri-vip-crown-line"></i> Lock In Launch Pricing Now
-            </button>
+            
+            {/* Overlay for Lead Capture */}
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'rgba(13, 8, 24, 0.4)', backdropFilter: 'blur(4px)', padding: '2rem', textAlign: 'center', zIndex: 2 }}>
+              <i className="ri-lock-2-fill" style={{ fontSize: '2.5rem', color: 'var(--neon-lime)', marginBottom: '1rem' }}></i>
+              <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem' }}>ROI Report Locked</h3>
+              <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)', marginBottom: '1.5rem' }}>Get your personalized EMI, Appreciation, and Rental Yield breakdown based on a ₹{(priceVal / 10000000).toFixed(2)} Cr property.</p>
+              
+              <a 
+                href={`https://wa.me/910000000000?text=${encodeURIComponent(`Hi, I just used the ROI Calculator for a property worth ₹${(priceVal / 10000000).toFixed(2)} Cr with a ${downPercent}% down payment. Can you share the detailed ROI report?`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-neon"
+                style={{ width: "100%" }}
+              >
+                <i className="ri-whatsapp-line"></i> Unlock Detailed Report
+              </a>
+            </div>
           </div>
         </div>
       </div>

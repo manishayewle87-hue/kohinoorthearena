@@ -1,10 +1,18 @@
 "use client";
-import React from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function FloatingWhatsApp() {
+  const pathname = usePathname();
+  
+  let message = "Hi, I am interested in Mahalaxmi The Arena. Could you please share more details?";
+  if (pathname && pathname !== '/') {
+    const formattedPath = pathname.replace(/\//g, ' ').replace(/-/g, ' ').trim();
+    const context = formattedPath.replace(/\b\w/g, l => l.toUpperCase());
+    message = `Hi, I am looking for details on the ${context} at The Arena. Can you share the price sheet?`;
+  }
+
   const phoneNumber = "910000000000"; // Placeholder, can be updated later
-  const message = encodeURIComponent("Hi, I am interested in Mahalaxmi The Arena. Could you please share more details?");
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
     <a 
