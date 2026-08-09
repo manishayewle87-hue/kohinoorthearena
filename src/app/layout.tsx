@@ -121,6 +121,13 @@ export default async function RootLayout({
         addressCountry: cfg.address.country,
       },
       geo: { '@type': 'GeoCoordinates', latitude: '18.6278', longitude: '73.7997' },
+      containsPlace: [
+        { '@type': 'City', name: 'Pimpri Chinchwad', sameAs: 'https://en.wikipedia.org/wiki/Pimpri-Chinchwad' },
+        { '@type': 'City', name: 'Pune', sameAs: 'https://en.wikipedia.org/wiki/Pune' },
+        { '@type': 'City', name: 'Wakad' },
+        { '@type': 'City', name: 'Hinjewadi' },
+        { '@type': 'City', name: 'Ravet' }
+      ],
       url: siteUrl,
       telephone: cfg.contactPhone,
       priceRange: `${cfg.projectConfig.startingPrice} - ${cfg.projectConfig.topPrice}`,
@@ -311,6 +318,10 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://connect.facebook.net" />
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://maps.googleapis.com" />
+        <link rel="dns-prefetch" href="https://maps.googleapis.com" />
         
         {/* Google Analytics 4 */}
         <Script 

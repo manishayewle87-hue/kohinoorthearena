@@ -30,7 +30,7 @@ function buildAllUrls(): string[] {
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json() as { url?: string; secret?: string; batch?: boolean; type?: 'URL_UPDATED' | 'URL_DELETED' };
+    const body = await request.json() as { url?: string; secret?: string; batch?: boolean; type?: 'URL_UPDATED' | 'URL_DELETED' | 'PING_SITEMAP' };
     const INDEXING_SECRET = process.env.INDEXING_SECRET;
     if (!INDEXING_SECRET || body.secret !== INDEXING_SECRET) {
       return NextResponse.json({ error: 'Forbidden.' }, { status: 403 });
@@ -43,6 +43,26 @@ export async function POST(request: Request) {
       const submitted = results.filter(r => r.status === 'submitted').length;
       const failed = results.filter(r => r.status === 'failed').length;
       return NextResponse.json({ total: allUrls.length, submitted, failed, results }, { status: 200 });
+    }
+
+    // ── Phase 4 Indexation Velocity Engine (Multi-Engine Pinging) ──
+    if (body.type === 'PING_SITEMAP') {
+      const sitemapUrls = [
+        'https://kohinoorthearena.in/sitemap.xml',
+        'https://mahalaxmithearena.in/sitemap.xml'
+      ];
+      
+      const pingResults = [];
+      for (const sUrl of sitemapUrls) {
+        try {
+          const googlePing = await fetch(`https://www.google.com/ping?sitemap=${encodeURIComponent(sUrl)}`);
+          const bingPing = await fetch(`https://www.bing.com/ping?sitemap=${encodeURIComponent(sUrl)}`);
+          pingResults.push({ sitemap: sUrl, google: googlePing.status, bing: bingPing.status });
+        } catch (e) {
+          pingResults.push({ sitemap: sUrl, error: String(e) });
+        }
+      }
+      return NextResponse.json({ success: true, message: 'Mass ping executed.', results: pingResults }, { status: 200 });
     }
 
     if (!body.url) {

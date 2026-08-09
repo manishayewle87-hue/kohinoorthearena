@@ -115,6 +115,36 @@ export default async function PSEOPage({ params }: Props) {
         "postalCode": cfg.address.postalCode,
         "addressCountry": cfg.address.country
       }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": `What is the starting price for ${data.bhk} in ${data.location}?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `The starting price for premium ${data.bhk} luxury residences in ${data.location} at The Arena is ₹${data.price}.`
+          }
+        },
+        {
+          "@type": "Question",
+          "name": `What are the key amenities at ${cfg.arenaName}?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `The Arena features a massive 80,000 Sq.Ft. sports and wellness ecosystem managed by ILESEUM, including olympic-length swimming pools, professional indoor courts, and dedicated health club facilities.`
+          }
+        },
+        {
+          "@type": "Question",
+          "name": `Is the project in ${data.location} MahaRERA registered?`,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": `Yes, ${cfg.arenaName} is fully MahaRERA registered, developed as a joint venture between Mahalaxmi Group and Kohinoor Group.`
+          }
+        }
+      ]
     }
   ];
 
