@@ -22,21 +22,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       images: [`${baseUrl}/assets/images/hero.jpg`],
     },
     {
-      url: `${baseUrl}/kohinoor-the-arena-pimpri-chinchwad-pune`,
+      url: `${baseUrl}/life-in-motion-pimpri`,
       lastModified: now,
       changeFrequency: 'daily',
       priority: 0.95,
       images: [`${baseUrl}/assets/images/hero.jpg`],
     },
     {
-      url: `${baseUrl}/mahalaxmi-the-arena-luxury-flats-in-pimpri`,
+      url: `${baseUrl}/kohinoor-the-arena-pimpri`,
       lastModified: now,
       changeFrequency: 'daily',
       priority: 0.95,
       images: [`${baseUrl}/assets/images/hero.jpg`],
     },
     {
-      url: `${baseUrl}/life-in-motion-pimpri-sports-township-pcmc`,
+      url: `${baseUrl}/mahalaxmi-the-arena-pimpri`,
+      lastModified: now,
+      changeFrequency: 'daily',
+      priority: 0.95,
+      images: [`${baseUrl}/assets/images/hero.jpg`],
+    },
+    {
+      url: `${baseUrl}/pcmc-premium-real-estate`,
       lastModified: now,
       changeFrequency: 'daily',
       priority: 0.95,
@@ -76,7 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Programmatic SEO Matrix Pages
   const matrix = generatePSEOMatrix();
   const matrixRoutes: MetadataRoute.Sitemap = matrix.map((page) => ({
-    url: `${baseUrl}/flats-in-pune/${page.slug}`,
+    url: `${baseUrl}/${page.slug}`,
     lastModified: now,
     changeFrequency: 'weekly',
     priority: 0.9,

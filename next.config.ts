@@ -2,6 +2,25 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ['nodemailer'],
+  async redirects() {
+    return [
+      {
+        source: '/life-in-motion-pimpri-sports-township-pcmc',
+        destination: '/life-in-motion-pimpri',
+        permanent: true,
+      },
+      {
+        source: '/kohinoor-the-arena-pimpri-chinchwad-pune',
+        destination: '/kohinoor-the-arena-pimpri',
+        permanent: true,
+      },
+      {
+        source: '/mahalaxmi-the-arena-luxury-flats-in-pimpri',
+        destination: '/mahalaxmi-the-arena-pimpri',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       // ── RULE 1: Block Vercel preview URLs from Google indexing ──

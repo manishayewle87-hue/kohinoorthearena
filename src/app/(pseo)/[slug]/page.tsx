@@ -18,10 +18,10 @@ type Props = {
 export const revalidate = 3600; // Edge Route Caching (1 Hour)
 
 export async function generateStaticParams() {
-  const matrix = generatePSEOMatrix();
-  return matrix.map((page) => ({
-    slug: page.slug,
-  }));
+  // We have 1700+ permutations. Generating them all at build time takes too long on Vercel.
+  // Returning an empty array combined with default dynamicParams = true means 
+  // these pages will be statically generated ON-DEMAND when first requested (ISR).
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const headersList = await headers();
   const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
   const cfg = getDomainConfig(host);
-  const pageUrl = `${cfg.canonical}/flats-in-pune/${p.slug}`;
+  const pageUrl = `${cfg.canonical}/${p.slug}`;
 
   return {
     title: data.title,
@@ -75,7 +75,7 @@ export default async function PSEOPage({ params }: Props) {
   const headersList = await headers();
   const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
   const cfg = getDomainConfig(host);
-  const pageUrl = `${cfg.canonical}/flats-in-pune/${p.slug}`;
+  const pageUrl = `${cfg.canonical}/${p.slug}`;
 
   const jsonLd = [
     {
@@ -102,8 +102,7 @@ export default async function PSEOPage({ params }: Props) {
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Home", "item": cfg.canonical },
         { "@type": "ListItem", "position": 2, "name": cfg.arenaName, "item": `${cfg.canonical}${cfg.primarySlug}` },
-        { "@type": "ListItem", "position": 3, "name": "Flats in Pune", "item": `${cfg.canonical}/flats-in-pune` },
-        { "@type": "ListItem", "position": 4, "name": data.h1, "item": pageUrl },
+        { "@type": "ListItem", "position": 3, "name": data.h1, "item": pageUrl },
       ]
     },
     {
