@@ -20,9 +20,8 @@ export default function PopularSearches() {
             <Link 
               key={i} 
               href={`/${page.slug}`} 
+              className="popular-search-link"
               style={{ fontSize: '0.8rem', color: '#a0a0a0', textDecoration: 'none', transition: 'color 0.2s' }}
-              onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
-              onMouseOut={(e) => e.currentTarget.style.color = '#a0a0a0'}
             >
               {page.h1}
             </Link>

@@ -3378,3 +3378,7 @@ textarea:focus {
   color: rgba(255,255,255,0.45);
   font-weight: 600;
 }
+
+.popular-search-link:hover {
+  color: #fff !important;
+}
