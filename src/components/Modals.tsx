@@ -31,6 +31,7 @@ export default function Modals() {
       const name = formData.get('name') as string;
       const phone = formData.get('phone') as string;
       const email = formData.get('email') as string;
+      const configuration = formData.get('configuration') as string;
 
       // Extract saved UTM parameters from localStorage
       let utmData = {};
@@ -49,6 +50,8 @@ export default function Modals() {
             name,
             phone,
             email,
+            configuration,
+            domain: window.location.hostname,
             source: title,
             utm: utmData,
           }),
@@ -63,7 +66,7 @@ export default function Modals() {
 
           const win = window as Window & { dataLayer?: Record<string, unknown>[] };
           if (typeof window !== 'undefined' && win.dataLayer) {
-            win.dataLayer.push({ event: 'lead_captured', lead_type: title, lead_source: window.location.href });
+            win.dataLayer.push({ event: 'lead_captured', lead_type: title, configuration, lead_source: window.location.href });
           }
         } else {
           const errMsg = data.error || 'Submission failed. Please try again.';
@@ -92,6 +95,14 @@ export default function Modals() {
           </div>
           <div className="form-group">
             <input type="tel" name="phone" placeholder="Phone Number *" required pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" className="form-input" />
+          </div>
+          <div className="form-group">
+            <select name="configuration" className="form-input" required defaultValue="" style={{ appearance: 'none', background: 'var(--bg-dark) url("data:image/svg+xml;utf8,<svg fill=%27white%27 height=%2724%27 viewBox=%270 0 24 24%27 width=%2724%27 xmlns=%27http://www.w3.org/2000/svg%27><path d=%27M7 10l5 5 5-5z%27/><path d=%27M0 0h24v24H0z%27 fill=%27none%27/></svg>") no-repeat right 10px center' }}>
+              <option value="" disabled>Select Configuration *</option>
+              <option value="2 BHK">2 BHK Premium Residence</option>
+              <option value="3 BHK">3 BHK Luxury Residence</option>
+              <option value="4 BHK">4 BHK Ultra-Luxury Residence</option>
+            </select>
           </div>
           <div className="form-group">
             <input type="email" name="email" placeholder="Email Address (Optional)" className="form-input" />

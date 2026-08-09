@@ -105,6 +105,8 @@ export async function POST(request: Request) {
     const name = sanitize(body.name);
     const phone = sanitize(body.phone);
     const email = sanitize(body.email);
+    const configuration = sanitize(body.configuration);
+    const domain = sanitize(body.domain) || 'Unknown Domain';
     const source = sanitize(body.source);
 
     // ── F. Server-side Validation ─────────────
@@ -140,11 +142,12 @@ export async function POST(request: Request) {
           from: `"Arena Leads 🏠" <${EMAIL_USER}>`,
           to: 'propsmartrealty@gmail.com',
           replyTo: email || EMAIL_USER,
-          subject: `🏠 New Lead: ${name} — Mahalaxmi The Arena`,
+          subject: `🏠 New Lead: ${name} — ${domain}`,
           html: `
             <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;">
               <div style="background:#0D0818;padding:24px;text-align:center;">
-                <h1 style="color:#DFFE00;margin:0;font-size:22px;">🏠 New Lead — Mahalaxmi The Arena</h1>
+                <h1 style="color:#DFFE00;margin:0;font-size:22px;">🏠 New Lead — The Arena</h1>
+                <p style="color:#fff;margin:8px 0 0 0;font-size:14px;">Origin: <strong>${domain}</strong></p>
               </div>
               <div style="padding:24px;background:#fff;">
                 <table cellpadding="10" width="100%" style="border-collapse:collapse;">
@@ -157,11 +160,15 @@ export async function POST(request: Request) {
                     <td style="border:1px solid #eee;"><a href="tel:${phone}">${phone}</a></td>
                   </tr>
                   <tr style="background:#f9f9f9;">
+                    <td style="font-weight:bold;border:1px solid #eee;">Configuration</td>
+                    <td style="border:1px solid #eee;color:#000;font-weight:bold;font-size:16px;">${configuration || '—'}</td>
+                  </tr>
+                  <tr>
                     <td style="font-weight:bold;border:1px solid #eee;">Email</td>
                     <td style="border:1px solid #eee;">${email || '—'}</td>
                   </tr>
-                  <tr>
-                    <td style="font-weight:bold;border:1px solid #eee;">Source</td>
+                  <tr style="background:#f9f9f9;">
+                    <td style="font-weight:bold;border:1px solid #eee;">Source Context</td>
                     <td style="border:1px solid #eee;font-size:12px;">${source || 'Direct'}</td>
                   </tr>
                   <tr style="background:#f9f9f9;">
