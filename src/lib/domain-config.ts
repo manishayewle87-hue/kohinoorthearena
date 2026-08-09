@@ -91,7 +91,7 @@ export const DOMAIN_CONFIGS: Record<string, DomainConfig> = {
       'Life in Motion Pimpri Chinchwad',
       ...SHARED_KEYWORDS,
     ],
-    primarySlug: '/kohinoor-the-arena-pimpri-chinchwad-pune',
+    primarySlug: '/kohinoor-the-arena-pimpri',
     mahaRera: 'P5210005XXXX',
     contactPhone: '+91-XXXXXXXXXX',
     address: {
@@ -150,7 +150,7 @@ export const DOMAIN_CONFIGS: Record<string, DomainConfig> = {
       'Life in Motion Pimpri Pune',
       ...SHARED_KEYWORDS,
     ],
-    primarySlug: '/mahalaxmi-the-arena-luxury-flats-in-pimpri',
+    primarySlug: '/mahalaxmi-the-arena-pimpri',
     mahaRera: 'P5210005XXXX',
     contactPhone: '+91-XXXXXXXXXX',
     address: {
