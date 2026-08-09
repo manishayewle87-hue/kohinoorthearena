@@ -2,13 +2,13 @@
 import React from "react";
 import Image from "next/image";
 
-export default function Hero() {
+export default function Hero({ h1, keyword }: { h1?: string, keyword?: string }) {
   return (
     <section className="hero-section" id="hero" style={{ position: 'relative', overflow: 'hidden' }}>
       {/* Hyper-Optimized LCP Image */}
       <Image 
         src="/assets/images/hero.jpg" 
-        alt="Mahalaxmi The Arena by Mahalaxmi Group & Kohinoor Group — Luxury Residences, Pimpri Chinchwad, Pune" 
+        alt={h1 ? `${h1} — Mahalaxmi The Arena by Mahalaxmi Group & Kohinoor Group` : "Mahalaxmi The Arena by Mahalaxmi Group & Kohinoor Group — Luxury Residences, Pimpri Chinchwad, Pune"} 
         fill 
         priority 
         fetchPriority="high"
@@ -27,12 +27,23 @@ export default function Hero() {
       <div className="hero-bg-overlay" style={{ zIndex: 2 }}></div>
       
       <div className="container hero-content" style={{ position: 'relative', zIndex: 3 }}>
-        <span className="badge-neon">MAHALAXMI THE ARENA &bull; LIFE IN MOTION PIMPRI</span>
+        <span className="badge-neon">{keyword ? keyword.toUpperCase() : "MAHALAXMI THE ARENA • LIFE IN MOTION PIMPRI"}</span>
 
-        <h1 className="hero-title">
-          LIVE WHERE<br />
-          <span className="highlight-neon">CHAMPIONS TRAIN.</span>
-        </h1>
+        {h1 ? (
+          <>
+            <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+              {h1}
+            </h1>
+            <h2 style={{ color: '#fff', fontSize: 'clamp(1.2rem, 2vw, 1.5rem)', marginTop: '1rem', opacity: 0.8, textTransform: 'uppercase', letterSpacing: '2px', fontWeight: 600 }}>
+              Live Where <span className="highlight-neon">Champions Train.</span>
+            </h2>
+          </>
+        ) : (
+          <h1 className="hero-title">
+            LIVE WHERE<br />
+            <span className="highlight-neon">CHAMPIONS TRAIN.</span>
+          </h1>
+        )}
 
         <p className="hero-subtitle">
           Discover premium 2, 3 & 4 BHK luxury apartments in Pimpri. Featuring an 80,000 Sq. Ft. Sports Ecosystem, 11 Towers, and managed by Ileseum.

@@ -13,23 +13,16 @@ import Connectivity from "@/components/Connectivity";
 import Specifications from "@/components/Specifications";
 import Calculator from "@/components/Calculator";
 import Booking from "@/components/Booking";
+import PopularSearches from "@/components/PopularSearches";
 import Footer from "@/components/Footer";
 import FAQ from "@/components/FAQ";
 
-export default function MainLayout({ h1, keyword }: { h1: string, keyword?: string }) {
+export default function MainLayout({ h1, keyword }: { h1?: string, keyword?: string }) {
   return (
     <>
       <Navbar />
       <main>
-        <h1 style={{ position: "absolute", width: "1px", height: "1px", padding: 0, margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", border: 0 }}>
-          {h1}
-        </h1>
-        {keyword && (
-          <div style={{ position: "absolute", width: "1px", height: "1px", padding: 0, margin: "-1px", overflow: "hidden", clip: "rect(0, 0, 0, 0)", whiteSpace: "nowrap", border: 0 }}>
-            {keyword}
-          </div>
-        )}
-        <Hero />
+        <Hero h1={h1} keyword={keyword} />
         <PromoVideo />
         <Philosophy />
         <FloorPlans />
@@ -44,6 +37,7 @@ export default function MainLayout({ h1, keyword }: { h1: string, keyword?: stri
         <Booking />
         <FAQ />
       </main>
+      <PopularSearches />
       <Footer />
     </>
   );

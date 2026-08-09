@@ -4,6 +4,7 @@ import { generatePSEOMatrix, getPSEOPageData } from '@/lib/pseo-data';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FloorPlans from '@/components/FloorPlans';
+import MainLayout from '@/components/MainLayout';
 import Modals from '@/components/Modals';
 import GlobalScripts from '@/components/GlobalScripts';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
@@ -124,39 +125,11 @@ export default async function PSEOPage({ params }: Props) {
 
   return (
     <>
-      <Navbar />
-      <GlobalScripts />
-      <Modals />
-      <FloatingWhatsApp />
-      <main>
-        {/* Dynamic Schema Injection */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        
-        <section style={{ paddingTop: '120px', paddingBottom: '4rem', background: '#0D0818', minHeight: '40vh', display: 'flex', alignItems: 'center' }}>
-          <div className="container text-center">
-            <span className="badge-neon" style={{ marginBottom: '1rem', display: 'inline-block' }}>
-              • Premium Real Estate in {data.location} •
-            </span>
-            <h1 className="section-title" style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem' }}>
-              {data.h1}
-            </h1>
-            <p className="section-subtitle" style={{ maxWidth: '800px', margin: '0 auto 2rem auto' }}>
-              {data.description} Experience the ultimate 80,000 sq. ft. Life in Motion sports ecosystem managed by ILESEUM.
-            </p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-              <button className="btn btn-neon trigger-schedule">Schedule VIP Site Visit</button>
-              <button className="btn btn-glass trigger-brochure">Download Brochure</button>
-            </div>
-          </div>
-        </section>
-
-        {/* Leverage the existing FloorPlans component, it will automatically pull prices via Context */}
-        <FloorPlans />
-      </main>
-      <Footer />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <MainLayout h1={data.h1} keyword={data.keyword} />
     </>
   );
 }
