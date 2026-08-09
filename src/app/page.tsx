@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import PromoVideo from "@/components/PromoVideo";
 import Philosophy from "@/components/Philosophy";
 import FloorPlans from "@/components/FloorPlans";
 import Ecosystem from "@/components/Ecosystem";
@@ -48,6 +49,7 @@ export default function Home() {
           Mahalaxmi The Arena - Kohinoor The Arena - Life in Motion Pimpri | Premium Real Estate PCMC, Pune. Buy flats in Pimpri Chinchwad. Kohinoor Pimpri real estate, Mahalaxmi real estate Pimpri, entire Pune real estate market dominance.
         </h1>
         <Hero />
+        <PromoVideo />
         <Philosophy />
         <FloorPlans />
         <Ecosystem />
