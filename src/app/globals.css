@@ -422,9 +422,8 @@ button {
   flex-shrink: 0;
 }
 
-/* Kohinoor SVG uses white fills — invert only inside the white navbar pill */
+/* Kohinoor SVG now uses black fills natively, no filter needed */
 .jv-partners .partner-img[alt="Kohinoor Group"] {
-  filter: invert(1) brightness(0.85);
   height: 20px;
 }
 

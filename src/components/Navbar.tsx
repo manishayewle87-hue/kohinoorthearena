@@ -126,7 +126,7 @@ export default function Navbar() {
             </button>
 
             <button 
-              className="btn btn-neon trigger-schedule hidden-mobile" 
+              className="btn btn-neon trigger-schedule" 
               title="Schedule a VIP Site Visit in Pimpri" 
               aria-label="Book a VIP Site Visit to Mahalaxmi The Arena"
             >
