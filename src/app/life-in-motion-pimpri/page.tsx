@@ -54,7 +54,7 @@ export default async function Page() {
                 Experience <span style={{ color: 'var(--neon-lime)' }}>Life in Motion Pimpri</span>
               </h2>
               <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.1rem', lineHeight: '1.8' }}>
-                <strong>Life in Motion Pimpri</strong> is not just a residential address; it is a philosophy of active, luxury living in the heart of Pune's PCMC district. 
+                <strong>Life in Motion Pimpri</strong> is not just a residential address; it is a philosophy of active, luxury living in the heart of Pune&apos;s PCMC district. 
                 Developed as a joint venture between the prestigious Mahalaxmi Group and Kohinoor Group, this unique sports township redefines urban living.
               </p>
             </div>

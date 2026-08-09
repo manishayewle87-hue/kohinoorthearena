@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPSEOPageData } from '@/lib/pseo-data';
 import MainLayout from '@/components/MainLayout';
+import Link from 'next/link';
 
 import { headers } from 'next/headers';
 import { getDomainConfig } from '@/lib/domain-config';
@@ -117,13 +118,33 @@ export default async function PSEOPage({ params }: Props) {
     }
   ];
 
+  const locSlug = p.slug.split('-').pop() || 'pimpri';
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <MainLayout h1={data.h1} keyword={data.keyword} />
+      <MainLayout h1={data.h1} keyword={data.keyword}>
+        <section style={{ padding: '4rem 0', background: '#0a0a0a', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          <div className="container" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+            <h3 style={{ fontSize: '1.25rem', marginBottom: '1.5rem', color: 'var(--neon-lime)' }}>Explore More in {data.location}</h3>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+              <a href={`/premium-2-bhk-flats-${locSlug}`} className="btn btn-glass" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}>Premium 2 BHK in {data.location}</a>
+              <a href={`/luxury-3-bhk-flats-${locSlug}`} className="btn btn-glass" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}>Luxury 3 BHK in {data.location}</a>
+              <a href={`/best-real-estate-${locSlug}`} className="btn btn-glass" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}>Best Real Estate in {data.location}</a>
+              <a href={`/new-projects-${locSlug}`} className="btn btn-glass" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}>New Projects in {data.location}</a>
+              <a href={`/investment-property-${locSlug}`} className="btn btn-glass" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}>Investment Property in {data.location}</a>
+            </div>
+            
+            {/* SEO Breadcrumbs */}
+            <div style={{ marginTop: '3rem', fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)' }}>
+               <Link href="/" style={{ color: 'rgba(255,255,255,0.6)' }}>Home</Link> &gt; <Link href={cfg.primarySlug} style={{ color: 'rgba(255,255,255,0.6)' }}>{cfg.arenaName}</Link> &gt; <span>{data.h1}</span>
+            </div>
+          </div>
+        </section>
+      </MainLayout>
     </>
   );
 }
