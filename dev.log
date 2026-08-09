@@ -1,0 +1,22 @@
+
+> temp-app@0.1.0 dev
+> next dev -p 3005
+
+▲ Next.js 16.2.12 (Turbopack)
+- Local:         http://localhost:3005
+- Network:       http://192.168.1.7:3005
+- Environments: .env.local
+✓ Ready in 323ms
+
+⨯ Error: Event handlers cannot be passed to Client Component props.
+  <button className=... onClick={function onClick} children=...>
+                                ^^^^^^^^^^^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+    at stringify (<anonymous>)
+    at stringify (<anonymous>) {
+  digest: '298115456'
+}
+Image with src "/assets/images/hero.jpg" is using quality "90" which is not configured in images.qualities [75]. Please update your config to [75, 90].
+Read more: https://nextjs.org/docs/messages/next-image-unconfigured-qualities
+ GET / 500 in 2.7s (next.js: 2.1s, application-code: 547ms)
+✓ Compiled in 208ms
