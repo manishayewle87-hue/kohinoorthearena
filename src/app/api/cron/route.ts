@@ -72,8 +72,17 @@ export async function GET(request: Request) {
 
   // ── Step 2: Build URL list & submit to Indexing API ──────
   const allUrls = buildUrlList();
-  // Cap at 180/day to stay safely under Google's 200/day free tier limit
-  const urlsToSubmit = allUrls.slice(0, 180);
+  
+  // Cycle through all 15,000+ URLs using the current day of the year
+  const now = new Date();
+  const start = new Date(now.getFullYear(), 0, 0);
+  const diff = now.getTime() - start.getTime();
+  const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+  
+  const batchSize = 180;
+  const startIndex = (dayOfYear * batchSize) % allUrls.length;
+  const urlsToSubmit = allUrls.slice(startIndex, startIndex + batchSize);
+  
   report.totalUrls = allUrls.length;
 
   const GOOGLE_INDEXING_CLIENT_EMAIL = process.env.GOOGLE_INDEXING_CLIENT_EMAIL;
