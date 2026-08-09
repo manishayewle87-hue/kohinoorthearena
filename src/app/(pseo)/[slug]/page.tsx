@@ -149,6 +149,8 @@ export default async function PSEOPage({ params }: Props) {
   ];
 
   const locSlug = p.slug.split('-').pop() || 'pimpri';
+  const currentDate = new Date();
+  const formattedDate = currentDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
     <>
@@ -159,13 +161,32 @@ export default async function PSEOPage({ params }: Props) {
       <MainLayout h1={data.h1} keyword={data.keyword}>
         <section style={{ padding: '4rem 0', background: '#0a0a0a', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
           <div className="container" style={{ maxWidth: '1000px', margin: '0 auto' }}>
+            
+            {/* ── Phase 7: LSI Content Saturation ── */}
+            <div className="seo-content-block" style={{ marginBottom: '3rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.8, fontSize: '0.95rem' }}>
+              <p style={{ marginBottom: '1rem' }}>
+                Discover premium living with <strong style={{ color: '#fff' }}>{cfg.arenaName} by {cfg.brand}</strong>. Our exclusive offering of {data.bhk} luxury residences in {data.location} provides unparalleled access to world-class sports and wellness amenities. 
+                Whether you are looking for ready-to-move-in flats near PCMC Metro Station or seeking the ultimate investment property near Hinjewadi IT Park, this MahaRERA registered project delivers the pinnacle of luxury.
+              </p>
+              <p>
+                Experience <em>&quot;Life in Motion&quot;</em> in {data.location} with an expansive 80,000 Sq.Ft. sports ecosystem managed by ILESEUM. Starting at just {data.price}, these smart homes are meticulously designed for maximum natural light and cross ventilation.
+              </p>
+              <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', marginTop: '1rem' }}>
+                <i className="ri-time-line"></i> Last updated: <time dateTime={currentDate.toISOString()}>{formattedDate}</time> — Pricing and availability are subject to change.
+              </p>
+            </div>
+
             <h3 style={{ fontSize: '1.25rem', marginBottom: '1.5rem', color: 'var(--neon-lime)' }}>Explore More in {data.location}</h3>
+            
+            {/* ── Phase 7: Semantic Silo Mesh Networking ── */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
               <a href={`/premium-2-bhk-flats-${locSlug}`} className="btn btn-glass" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}>Premium 2 BHK in {data.location}</a>
               <a href={`/luxury-3-bhk-flats-${locSlug}`} className="btn btn-glass" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}>Luxury 3 BHK in {data.location}</a>
               <a href={`/best-real-estate-${locSlug}`} className="btn btn-glass" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}>Best Real Estate in {data.location}</a>
               <a href={`/new-projects-${locSlug}`} className="btn btn-glass" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}>New Projects in {data.location}</a>
               <a href={`/investment-property-${locSlug}`} className="btn btn-glass" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}>Investment Property in {data.location}</a>
+              {/* Deep Cross-Silo Link */}
+              <a href={`/2-bhk-flats-in-pimpri-chinchwad`} className="btn btn-glass" style={{ fontSize: '0.8rem', padding: '0.5rem 1rem', border: '1px dashed rgba(223, 254, 0, 0.3)' }}>Compare with Pimpri Chinchwad</a>
             </div>
             
             {/* SEO Breadcrumbs */}
