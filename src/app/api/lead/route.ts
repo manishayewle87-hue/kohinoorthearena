@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import crypto from 'crypto';
 
 export const runtime = 'nodejs';
 
@@ -239,6 +240,47 @@ export async function POST(request: Request) {
         },
         8000
       ).catch(err => console.error('[LEAD][WHATSAPP] API failed:', err));
+    }
+
+    // ─────────────────────────────────────────
+    // STEP 4: Meta CAPI (Server-Side Events)
+    // ─────────────────────────────────────────
+    const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
+    const META_PIXEL_ID = process.env.META_PIXEL_ID;
+    if (META_ACCESS_TOKEN && META_PIXEL_ID) {
+      const hash = (str: string) => crypto.createHash('sha256').update(str.toLowerCase().trim()).digest('hex');
+      
+      const cleanPhoneForHash = phone.replace(/[^0-9]/g, '');
+      const hashedEmail = email ? hash(email) : undefined;
+      const hashedPhone = cleanPhoneForHash ? hash(cleanPhoneForHash) : undefined;
+
+      const capiPayload = {
+        data: [{
+          event_name: 'Lead',
+          event_time: Math.floor(Date.now() / 1000),
+          action_source: 'website',
+          event_source_url: `https://${domain}`,
+          user_data: {
+            em: hashedEmail ? [hashedEmail] : undefined,
+            ph: hashedPhone ? [hashedPhone] : undefined,
+            client_ip_address: ip,
+          },
+          custom_data: {
+            lead_source: source,
+            configuration: configuration,
+          }
+        }]
+      };
+
+      fetchWithTimeout(
+        `https://graph.facebook.com/v19.0/${META_PIXEL_ID}/events?access_token=${META_ACCESS_TOKEN}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(capiPayload),
+        },
+        8000
+      ).catch(err => console.error('[LEAD][META_CAPI] API failed:', err));
     }
 
     // Return success. Email status logged.

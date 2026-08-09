@@ -49,6 +49,23 @@ export default function FloorPlans() {
   
   const isShortlisted = shortlist.includes(activePlan.id);
 
+  // ── Phase 5: Behavioral Datalayer Injection (GTM Retargeting) ──
+  React.useEffect(() => {
+    const win = window as Window & { dataLayer?: Record<string, unknown>[] };
+    if (typeof window !== 'undefined' && win.dataLayer) {
+      win.dataLayer.push({
+        event: 'view_item',
+        ecommerce: {
+          items: [{
+            item_name: activePlan.title,
+            item_category: 'Floor Plan',
+            price: activePlan.basePriceINR
+          }]
+        }
+      });
+    }
+  }, [activeTab, activePlan]);
+
   return (
     <section className="floor-plans-section" id="residences" style={{ padding: '6rem 0', background: '#08050e' }}>
       <div className="container">

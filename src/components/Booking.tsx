@@ -47,7 +47,7 @@ export default function Booking() {
       } else {
         window.dispatchEvent(new CustomEvent('arena-toast', { detail: `⚠️ ${data.error || 'Submission failed.'}` }));
       }
-    } catch (err) {
+    } catch (_err) {
       window.dispatchEvent(new CustomEvent('arena-toast', { detail: '❌ Network error. Please try again.' }));
     } finally {
       setIsSubmitting(false);

@@ -22,10 +22,19 @@ export default function UTMTracker() {
     });
 
     if (captured) {
-      // Store in a cookie for 30 days
-      const d = new Date();
-      d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
-      document.cookie = `arena_utm_data=${JSON.stringify(utmData)};expires=${d.toUTCString()};path=/;SameSite=Lax`;
+      // ── Phase 5 UTM Healing: Save to localStorage for Booking component extraction ──
+      try {
+        localStorage.setItem('mta_utm_params', JSON.stringify(utmData));
+        sessionStorage.setItem('mta_utm_params', JSON.stringify(utmData));
+        
+        // Also fire a dataLayer event that UTMs were captured for GTM tracking
+        const win = window as Window & { dataLayer?: Record<string, unknown>[] };
+        if (typeof window !== 'undefined' && win.dataLayer) {
+          win.dataLayer.push({ event: 'utm_captured', ...utmData });
+        }
+      } catch (_e) {
+        console.warn('UTM storage blocked by browser settings');
+      }
     }
   }, [searchParams]);
 
