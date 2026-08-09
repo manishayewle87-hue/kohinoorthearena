@@ -6,6 +6,29 @@ export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const hostname = request.headers.get('host') || '';
 
+  // ── 1. SEO Consolidation: Strip www. and 301 Redirect ──
+  if (hostname.startsWith('www.')) {
+    const strippedHostname = hostname.replace(/^www\./, '');
+    url.hostname = strippedHostname;
+    return NextResponse.redirect(url, 301);
+  }
+
+  // ── 2. Domain Firewall: Prevent Spoofing ──
+  // Strip port for localhost development
+  const cleanHost = hostname.split(':')[0];
+  const isVercelPreview = cleanHost.endsWith('.vercel.app');
+  const isLocalhost = cleanHost === 'localhost' || cleanHost === '127.0.0.1';
+  
+  // Acceptable primary domains
+  const ALLOWED_DOMAINS = ['kohinoorthearena.in', 'mahalaxmithearena.in'];
+  
+  // If traffic hits an unauthorized domain (not allowed, not Vercel, not local)
+  if (!ALLOWED_DOMAINS.includes(cleanHost) && !isVercelPreview && !isLocalhost) {
+    // 301 redirect rogue domains back to the primary brand to capture SEO equity
+    url.hostname = 'kohinoorthearena.in';
+    return NextResponse.redirect(url, 301);
+  }
+
   // ── Get domain config for this host ──
   const cfg = getDomainConfig(hostname);
 
