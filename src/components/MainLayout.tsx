@@ -17,7 +17,7 @@ import PopularSearches from "@/components/PopularSearches";
 import Footer from "@/components/Footer";
 import FAQ from "@/components/FAQ";
 
-export default function MainLayout({ h1, keyword }: { h1?: string, keyword?: string }) {
+export default function MainLayout({ h1, keyword, children }: { h1?: string, keyword?: string, children?: React.ReactNode }) {
   return (
     <>
       <Navbar />
@@ -36,6 +36,7 @@ export default function MainLayout({ h1, keyword }: { h1?: string, keyword?: str
         <Calculator />
         <Booking />
         <FAQ />
+        {children}
       </main>
       <PopularSearches />
       <Footer />
