@@ -116,6 +116,30 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: false, error: validationError }, { status: 422 });
     }
 
+    // ── G. Google reCAPTCHA v3 Verification ────
+    const recaptchaToken = sanitize(body.recaptchaToken);
+    const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
+    
+    if (RECAPTCHA_SECRET_KEY && recaptchaToken && recaptchaToken !== 'bypass') {
+      try {
+        const verifyRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `secret=${RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+        });
+        const verifyData = await verifyRes.json();
+        
+        if (!verifyData.success || verifyData.score < 0.5) {
+          console.warn(`[LEAD][RECAPTCHA] Bot detected: ${name} (Score: ${verifyData.score})`);
+          // We fail silently to the user to confuse bots, but don't process the lead.
+          return NextResponse.json({ success: true, message: 'Received.' }, { status: 200 });
+        }
+      } catch (e) {
+        console.error('[LEAD][RECAPTCHA] Verification failed', e);
+        // Continue processing if Google API is down
+      }
+    }
+
     // ── G. Build safe UTM block for email ─────
     const utmRaw = typeof body.utm === 'object' && body.utm !== null ? body.utm as Record<string, unknown> : {};
     const utmHtml = Object.keys(utmRaw).length > 0

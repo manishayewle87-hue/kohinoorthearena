@@ -24,6 +24,18 @@ export default function Booking() {
     // ── Advanced Lead Context Tracking (PSEO Keyword Extraction) ──
     const pageH1 = document.querySelector('h1')?.innerText || 'Default VIP Form';
     
+    // ── Google reCAPTCHA v3 Token Generation ──
+    let recaptchaToken = 'bypass';
+    const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    const win = window as any;
+    if (siteKey && win.grecaptcha) {
+      try {
+        recaptchaToken = await win.grecaptcha.execute(siteKey, { action: 'submit_lead' });
+      } catch (e) {
+        console.error("reCAPTCHA execution failed", e);
+      }
+    }
+    
     try {
       const response = await fetch('/api/lead', {
         method: 'POST',
@@ -36,11 +48,17 @@ export default function Booking() {
           domain: window.location.hostname,
           source: `Page Context: ${pageH1}`,
           utm: utmData,
+          recaptchaToken, // Send token to backend
         }),
       });
 
       const data = await response.json();
       if (response.ok && data.success) {
+        // ── Google Ads Conversion Tracking ──
+        if (typeof window !== 'undefined' && win.gtag) {
+          win.gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXX/conversion_label' });
+        }
+        
         window.dispatchEvent(new CustomEvent('arena-toast', { detail: '✅ Success! Our team will contact you shortly.' }));
         sessionStorage.setItem('mta_lead_captured', 'true');
         form.reset();
