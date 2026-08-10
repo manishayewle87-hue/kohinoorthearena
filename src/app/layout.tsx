@@ -201,7 +201,7 @@ export default async function RootLayout({
       description: cfg.description,
       url: siteUrl,
       telephone: cfg.contactPhone,
-      email: 'info@kohinoorthearena.in',
+      email: `info@${cfg.canonical.replace('https://www.', '')}`,
       priceRange: `${cfg.projectConfig.startingPrice} - ${cfg.projectConfig.topPrice}`,
       address: {
         '@type': 'PostalAddress',
