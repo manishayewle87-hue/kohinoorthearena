@@ -23,12 +23,20 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const revalidate = 3600; // Edge Route Caching (1 Hour)
+export default async function Home() {
+  const headersList = await headers();
+  const intent = headersList.get('x-arena-intent');
+  
+  let h1 = "Mahalaxmi The Arena - Kohinoor The Arena - Life in Motion Pimpri | Premium Real Estate PCMC, Pune.";
+  let keyword = "MAHALAXMI THE ARENA • LIFE IN MOTION PIMPRI";
+  
+  if (intent) {
+    const formattedIntent = intent.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+    h1 = `${formattedIntent} at Mahalaxmi The Arena Pimpri`;
+    keyword = `CUSTOMIZED RESULTS FOR: ${formattedIntent.toUpperCase()}`;
+  }
 
-export default function Home() {
   return (
-    <MainLayout 
-      h1="Mahalaxmi The Arena - Kohinoor The Arena - Life in Motion Pimpri | Premium Real Estate PCMC, Pune. Buy flats in Pimpri Chinchwad. Kohinoor Pimpri real estate, Mahalaxmi real estate Pimpri, entire Pune real estate market dominance."
-    />
+    <MainLayout h1={h1} keyword={keyword} />
   );
 }

@@ -12,11 +12,17 @@ export function middleware(request: NextRequest) {
   // ── Get domain config for this host ──
   const cfg = getDomainConfig(finalHost);
 
-  // ── Inject x-domain header so Server Components can read domain without calling headers() ──
+  // ── Inject headers so Server Components can read them ──
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-arena-domain', finalHost);
   requestHeaders.set('x-arena-brand', cfg.brand);
   requestHeaders.set('x-arena-canonical', cfg.canonical);
+
+  // ── Edge Personalization (Intent Extraction) ──
+  const utmTerm = request.nextUrl.searchParams.get('utm_term');
+  const utmCampaign = request.nextUrl.searchParams.get('utm_campaign');
+  const intent = utmTerm || utmCampaign || '';
+  requestHeaders.set('x-arena-intent', intent);
 
   // ── Domain-based root routing ──
   if (request.nextUrl.pathname === '/') {

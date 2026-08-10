@@ -232,10 +232,29 @@ export async function POST(request: Request) {
     // ─────────────────────────────────────────
     const CRM_WEBHOOK_URL = process.env.CRM_WEBHOOK_URL;
     if (CRM_WEBHOOK_URL) {
+      // Flat payload for Zapier/HubSpot/Salesforce mapping
+      const crmPayload = {
+        name,
+        phone,
+        email: email || '',
+        configuration: configuration || '',
+        source_context: source,
+        domain: domain,
+        utm_source: sanitize(String(utmRaw.utm_source || '')),
+        utm_medium: sanitize(String(utmRaw.utm_medium || '')),
+        utm_campaign: sanitize(String(utmRaw.utm_campaign || '')),
+        utm_term: sanitize(String(utmRaw.utm_term || '')),
+        utm_content: sanitize(String(utmRaw.utm_content || '')),
+        gclid: sanitize(String(utmRaw.gclid || '')),
+        lead_score: configuration.includes('4 BHK') ? 100 : configuration.includes('3 BHK') ? 80 : 50,
+        ip_address: ip,
+        timestamp: new Date().toISOString()
+      };
+
       fetchWithTimeout(CRM_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, email, source, utm: utmRaw, timestamp: new Date().toISOString(), ip }),
+        body: JSON.stringify(crmPayload),
       }).catch(err => console.error('[LEAD][CRM] Webhook failed:', err));
     }
 
