@@ -41,14 +41,16 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
         userAgent: 'bingbot',
         allow: '/',
         disallow: ['/api/', '/_next/'],
+        crawlDelay: 2,
       },
       // ── Global Search Engines (Apple, Yandex, Baidu, DuckDuckGo) ──
       {
         userAgent: ['Applebot', 'YandexBot', 'Baiduspider', 'DuckDuckBot', 'Slurp'],
         allow: '/',
         disallow: ['/api/', '/_next/'],
+        crawlDelay: 2,
       },
-      // ── Block AI scrapers ──
+      // ── Block AI scrapers & Rogue Bots ──
       { userAgent: 'GPTBot', disallow: '/' },
       { userAgent: 'ChatGPT-User', disallow: '/' },
       { userAgent: 'CCBot', disallow: '/' },
@@ -56,6 +58,8 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       { userAgent: 'Claude-Web', disallow: '/' },
       { userAgent: 'Bytespider', disallow: '/' },
       { userAgent: 'PetalBot', disallow: '/' },
+      { userAgent: 'omgili', disallow: '/' },
+      { userAgent: 'bot/1.0', disallow: '/' },
       // ── Block aggressive SEO crawlers ──
       { userAgent: 'AhrefsBot', disallow: '/' },
       { userAgent: 'SemrushBot', disallow: '/' },
