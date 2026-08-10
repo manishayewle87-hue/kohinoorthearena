@@ -302,6 +302,12 @@ export default async function RootLayout({
         {/* Tells Google these two domains are related, not duplicates */}
         <link rel="alternate" hrefLang="en-IN" href="https://kohinoorthearena.in" />
         <link rel="alternate" hrefLang="en-IN" href="https://mahalaxmithearena.in" />
+        
+        {/* ── Global NRI Targeting (USA, UK, UAE) ── */}
+        <link rel="alternate" hrefLang="en-US" href={siteUrl} />
+        <link rel="alternate" hrefLang="en-GB" href={siteUrl} />
+        <link rel="alternate" hrefLang="en-AE" href={siteUrl} />
+        
         <link rel="alternate" hrefLang="x-default" href={siteUrl} />
         <link rel="canonical" href={siteUrl} />
 
