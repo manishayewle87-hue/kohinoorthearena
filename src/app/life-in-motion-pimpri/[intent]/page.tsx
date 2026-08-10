@@ -24,5 +24,25 @@ export const revalidate = 3600;
 export default async function Page({ params }: Props) {
   const p = await params;
   const intentStr = p.intent.replace(/-/g, ' ');
-  return <MainLayout h1={`Life in Motion Pimpri ${intentStr}`} keyword={`life in motion pimpri ${intentStr}`} />;
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
+  const pageUrl = `${cfg.canonical}/life-in-motion-pimpri/${p.intent}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": cfg.canonical },
+      { "@type": "ListItem", "position": 2, "name": "Life in Motion", "item": `${cfg.canonical}/life-in-motion-pimpri` },
+      { "@type": "ListItem", "position": 3, "name": intentStr.replace(/\b\w/g, c => c.toUpperCase()), "item": pageUrl }
+    ]
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <MainLayout h1={`Life In Motion Pimpri ${intentStr}`} keyword={`life in motion pimpri ${intentStr}`} />
+    </>
+  );
 }
