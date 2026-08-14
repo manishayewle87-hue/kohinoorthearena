@@ -1,11 +1,8 @@
 name: Google Indexing API — Nightly Submission
 
 on:
-  # ── Runs every night at 01:30 IST (20:00 UTC) ──
   schedule:
     - cron: '0 20 * * *'
-
-  # ── Manual trigger from GitHub Actions tab ──
   workflow_dispatch:
     inputs:
       dry_run:
@@ -27,28 +24,32 @@ jobs:
       - name: Trigger Google Indexing API via Cron Endpoint
         env:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
-          VERCEL_URL: ${{ secrets.VERCEL_PRODUCTION_URL }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: |
           if [ "$DRY_RUN" = "true" ]; then
-            echo "⚠️  DRY RUN mode — skipping API submission"
-            echo "Would have called: https://$VERCEL_URL/api/cron"
+            echo "⚠️  DRY RUN — would call: https://www.kohinoorthearena.in/api/cron"
+            echo "⚠️  DRY RUN — would call: https://www.mahalaxmithearena.in/api/cron"
             exit 0
           fi
 
-          echo "🚀 Triggering Google Indexing API at: https://$VERCEL_URL/api/cron"
+          # Submit for both domains
+          for DOMAIN in "www.kohinoorthearena.in" "www.mahalaxmithearena.in"; do
+            echo ""
+            echo "🚀 Submitting URLs for: $DOMAIN"
 
-          HTTP_STATUS=$(curl -s -L -o /tmp/cron_response.json -w "%{http_code}" \
-            -H "Authorization: Bearer $CRON_SECRET" \
-            "https://$VERCEL_URL/api/cron")
+            HTTP_STATUS=$(curl -s -o /tmp/cron_response.json -w "%{http_code}" \
+              -H "Authorization: Bearer $CRON_SECRET" \
+              -H "Host: $DOMAIN" \
+              "https://$DOMAIN/api/cron")
 
-          echo "HTTP Status: $HTTP_STATUS"
-          echo "Response:"
-          cat /tmp/cron_response.json
+            echo "HTTP Status: $HTTP_STATUS"
+            cat /tmp/cron_response.json
+            echo ""
 
-          if [ "$HTTP_STATUS" -ne 200 ]; then
-            echo "❌ Indexing API call failed with status $HTTP_STATUS"
-            exit 1
-          fi
-
-          echo "✅ Google Indexing API submission complete"
+            if [ "$HTTP_STATUS" = "200" ]; then
+              echo "✅ $DOMAIN — Indexing submission complete"
+            else
+              echo "❌ $DOMAIN — Failed with status $HTTP_STATUS"
+              exit 1
+            fi
+          done
