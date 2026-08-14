@@ -133,7 +133,7 @@ export default function Calculator() {
               <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)', marginBottom: '1.5rem' }}>Get your personalized EMI, Appreciation, and Rental Yield breakdown based on a ₹{(priceVal / 10000000).toFixed(2)} Cr property.</p>
               
               <a 
-                href={`https://wa.me/910000000000?text=${encodeURIComponent(`Hi, I just used the ROI Calculator for a property worth ₹${(priceVal / 10000000).toFixed(2)} Cr with a ${downPercent}% down payment. Can you share the detailed ROI report?`)}`}
+                href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '917711993434'}?text=${encodeURIComponent(`Hi, I just used the ROI Calculator for a property worth ₹${(priceVal / 10000000).toFixed(2)} Cr with a ${downPercent}% down payment. Can you share the detailed ROI report?`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-neon"

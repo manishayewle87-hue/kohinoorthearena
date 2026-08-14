@@ -11,7 +11,7 @@ export default function FloatingWhatsApp() {
     message = `Hi, I am looking for details on the ${context} at The Arena. Can you share the price sheet?`;
   }
 
-  const phoneNumber = "910000000000"; // Placeholder, can be updated later
+  const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "917711993434";
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (

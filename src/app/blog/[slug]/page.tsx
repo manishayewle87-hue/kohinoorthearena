@@ -133,8 +133,9 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
               if (paragraph.startsWith('# ')) {
                 return <h1 key={idx} style={{ color: '#fff', margin: '2rem 0 1rem 0' }}>{paragraph.replace('# ', '')}</h1>;
               }
-              // Bold parsing `**text**`
-              const parsedHtml = paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+              // Sanitize: strip any raw HTML tags before re-applying bold markdown
+              const sanitized = paragraph.replace(/<[^>]*>/g, '');
+              const parsedHtml = sanitized.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
               return <p key={idx} style={{ marginBottom: '1.5rem' }} dangerouslySetInnerHTML={{ __html: parsedHtml }} />;
             })}
           </div>

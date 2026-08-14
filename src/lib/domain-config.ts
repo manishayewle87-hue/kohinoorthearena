@@ -93,7 +93,7 @@ export const DOMAIN_CONFIGS: Record<string, DomainConfig> = {
     ],
     primarySlug: '/kohinoor-the-arena-pimpri',
     mahaRera: 'P5210005XXXX',
-    contactPhone: '+91-XXXXXXXXXX',
+    contactPhone: process.env.NEXT_PUBLIC_CONTACT_PHONE || '+91-7711993434',
     address: {
       street: 'The Arena, Sports Township, Pimpri',
       locality: 'Pimpri-Chinchwad',
@@ -152,7 +152,7 @@ export const DOMAIN_CONFIGS: Record<string, DomainConfig> = {
     ],
     primarySlug: '/mahalaxmi-the-arena-pimpri',
     mahaRera: 'P5210005XXXX',
-    contactPhone: '+91-XXXXXXXXXX',
+    contactPhone: process.env.NEXT_PUBLIC_CONTACT_PHONE || '+91-7711993434',
     address: {
       street: 'The Arena, Sports Township, Pimpri',
       locality: 'Pimpri',
