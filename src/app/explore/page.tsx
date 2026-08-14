@@ -92,7 +92,7 @@ export default async function ExploreSitemap() {
           <div style={{ marginTop: '3rem', textAlign: 'center', padding: '2rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)' }}>
             <h4 style={{ color: '#fff', marginBottom: '1rem' }}>Global & NRI Investors</h4>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', maxWidth: '600px', margin: '0 auto' }}>
-              We assist Non-Resident Indians (NRIs) from the USA, UK, UAE, and across the globe in securing premium high-yield real estate assets in Pune's fastest-growing IT corridors.
+              We assist Non-Resident Indians (NRIs) from the USA, UK, UAE, and across the globe in securing premium high-yield real estate assets in Pune&apos;s fastest-growing IT corridors.
             </p>
           </div>
         </div>

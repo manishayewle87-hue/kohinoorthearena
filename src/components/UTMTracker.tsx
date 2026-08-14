@@ -32,7 +32,7 @@ export default function UTMTracker() {
         if (typeof window !== 'undefined' && win.dataLayer) {
           win.dataLayer.push({ event: 'utm_captured', ...utmData });
         }
-      } catch (_e) {
+      } catch {
         console.warn('UTM storage blocked by browser settings');
       }
     }

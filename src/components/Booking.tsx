@@ -1,6 +1,11 @@
 "use client";
 import React, { useState } from 'react';
 
+interface BrowserWindow extends Window {
+  grecaptcha?: { execute: (key: string, opts: { action: string }) => Promise<string> };
+  gtag?: (...args: unknown[]) => void;
+}
+
 export default function Booking() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -27,7 +32,7 @@ export default function Booking() {
     // ── Google reCAPTCHA v3 Token Generation ──
     let recaptchaToken = 'bypass';
     const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-    const win = window as any;
+    const win = window as BrowserWindow;
     if (siteKey && win.grecaptcha) {
       try {
         recaptchaToken = await win.grecaptcha.execute(siteKey, { action: 'submit_lead' });
@@ -55,8 +60,8 @@ export default function Booking() {
       const data = await response.json();
       if (response.ok && data.success) {
         // ── Google Ads Conversion Tracking ──
-        if (typeof window !== 'undefined' && win.gtag) {
-          win.gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXXX/conversion_label' });
+        if (win.gtag) {
+          win.gtag('event', 'conversion', { 'send_to': process.env.NEXT_PUBLIC_GADS_CONVERSION_LABEL || 'AW-CONVERSION/label' });
         }
         
         window.dispatchEvent(new CustomEvent('arena-toast', { detail: '✅ Success! Our team will contact you shortly.' }));
@@ -65,7 +70,7 @@ export default function Booking() {
       } else {
         window.dispatchEvent(new CustomEvent('arena-toast', { detail: `⚠️ ${data.error || 'Submission failed.'}` }));
       }
-    } catch (_err) {
+    } catch {
       window.dispatchEvent(new CustomEvent('arena-toast', { detail: '❌ Network error. Please try again.' }));
     } finally {
       setIsSubmitting(false);
