@@ -13,10 +13,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const headersList = await headers();
   const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
   const cfg = getDomainConfig(host);
+  const ogTitle = encodeURIComponent(`Kohinoor The Arena Pimpri — ${intentStr}`);
+  const ogSub   = encodeURIComponent('Luxury 2, 3 & 4 BHK | Pimpri Chinchwad, Pune');
+  const ogUrl   = `${cfg.canonical}/api/og?title=${ogTitle}&sub=${ogSub}&brand=${encodeURIComponent(cfg.brand)}`;
   return {
     title: `Kohinoor The Arena Pimpri ${intentStr}`,
     description: `Kohinoor The Arena Pimpri ${intentStr}. Discover luxury living in PCMC.`,
     alternates: { canonical: `${cfg.canonical}/kohinoor-the-arena-pimpri/${p.intent}` },
+    openGraph: {
+      title: `Kohinoor The Arena Pimpri — ${intentStr}`,
+      description: `Kohinoor The Arena Pimpri ${intentStr}. Discover luxury living in PCMC.`,
+      images: [{ url: ogUrl, width: 1200, height: 630, alt: `Kohinoor The Arena Pimpri ${intentStr}` }],
+      type: 'website',
+      locale: 'en_IN',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Kohinoor The Arena Pimpri — ${intentStr}`,
+      images: [ogUrl],
+    },
   };
 }
 export const revalidate = 3600;
