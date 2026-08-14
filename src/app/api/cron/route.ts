@@ -7,13 +7,16 @@ import { ALL_DOMAINS } from '@/lib/domain-config';
 export const runtime = 'nodejs';
 
 const CORE_PATHS = [
-  '',
+  '',                              // Homepage
   '/blog',
+  '/explore',
+  '/market-trends',
   '/privacy-policy',
   '/terms',
-  '/kohinoor-the-arena-pimpri-chinchwad-pune',
-  '/mahalaxmi-the-arena-luxury-flats-in-pimpri',
-  '/life-in-motion-pimpri-sports-township-pcmc',
+  '/kohinoor-the-arena-pimpri',
+  '/mahalaxmi-the-arena-pimpri',
+  '/life-in-motion-pimpri',
+  '/pcmc-premium-real-estate',
 ];
 
 function buildUrlList(): string[] {

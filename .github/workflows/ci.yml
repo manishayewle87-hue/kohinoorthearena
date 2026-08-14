@@ -9,7 +9,6 @@ on:
 jobs:
   # ─────────────────────────────────────────
   # JOB 1: TypeScript strict type check
-  # Catches import errors, missing types, etc.
   # ─────────────────────────────────────────
   type-check:
     name: TypeScript Check
@@ -31,8 +30,7 @@ jobs:
         run: npx tsc --noEmit
 
   # ─────────────────────────────────────────
-  # JOB 2: ESLint check
-  # Catches unused variables, bad patterns
+  # JOB 2: ESLint — zero warnings policy
   # ─────────────────────────────────────────
   lint:
     name: ESLint Check
@@ -49,17 +47,12 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
-        - name: Generate sitemap and check broken links
-          run: |
-            npm run generate:sitemap
-            npx broken-link-checker "public/**/*.html"
+
       - name: Run ESLint
-        run: npx next lint --max-warnings 0
-        continue-on-error: true # Warnings don't block deploy, only errors do
+        run: npx eslint src --ext .ts,.tsx --max-warnings 0
 
   # ─────────────────────────────────────────
   # JOB 3: Security Audit
-  # Flags high-severity dependency vulnerabilities
   # ─────────────────────────────────────────
   security-audit:
     name: Security Audit
@@ -79,4 +72,4 @@ jobs:
 
       - name: Run npm audit (high severity only)
         run: npm audit --audit-level=high
-        continue-on-error: true # Audit findings are reported but don't block deploy
+        continue-on-error: true
