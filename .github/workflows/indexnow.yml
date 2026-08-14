@@ -1,11 +1,8 @@
 name: Bing IndexNow — Instant URL Submission on Deploy
 
 on:
-  # ── Fires on every push to main (i.e., after every deploy) ──
   push:
     branches: [main]
-
-  # ── Manual trigger ──
   workflow_dispatch:
 
 jobs:
@@ -17,20 +14,15 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Submit Changed URLs to IndexNow (Bing + Yandex)
-        env:
-          INDEXNOW_KEY: '6c140dda23d44ec68ddd52bd2f1d01e6'
         run: |
-          echo "🔔 Submitting recently changed URLs to Bing IndexNow..."
+          INDEXNOW_KEY="6c140dda23d44ec68ddd52bd2f1d01e6"
 
-          # Detect files changed in this push
-          CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "")
-
-          # Build URL list from changed content files
+          # Build core URL list
           URLS=()
-
-          # Always submit core pages on any deploy
           URLS+=("https://www.kohinoorthearena.in")
           URLS+=("https://www.mahalaxmithearena.in")
           URLS+=("https://www.kohinoorthearena.in/kohinoor-the-arena-pimpri")
@@ -40,58 +32,44 @@ jobs:
           URLS+=("https://www.kohinoorthearena.in/explore")
           URLS+=("https://www.mahalaxmithearena.in/market-trends")
 
-          # If blog content changed, add blog URLs
-          if echo "$CHANGED_FILES" | grep -q "src/content/blog"; then
-            while IFS= read -r file; do
-              if [[ "$file" == src/content/blog/*.md ]]; then
-                slug=$(basename "$file" .md)
-                URLS+=("https://www.kohinoorthearena.in/blog/$slug")
-                URLS+=("https://www.mahalaxmithearena.in/blog/$slug")
-              fi
-            done <<< "$CHANGED_FILES"
-          fi
+          # Add any changed blog posts
+          CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || echo "")
+          while IFS= read -r file; do
+            if [[ "$file" == src/content/blog/*.md ]]; then
+              slug=$(basename "$file" .md)
+              URLS+=("https://www.kohinoorthearena.in/blog/$slug")
+              URLS+=("https://www.mahalaxmithearena.in/blog/$slug")
+            fi
+          done <<< "$CHANGED"
 
-          # Build JSON payload for IndexNow bulk submission
-          URL_JSON=$(printf '%s\n' "${URLS[@]}" | python3 -c "
-          import sys, json
-          urls = [u.strip() for u in sys.stdin if u.strip()]
-          payload = {
-            'host': 'www.kohinoorthearena.in',
-            'key': '$INDEXNOW_KEY',
-            'keyLocation': 'https://www.kohinoorthearena.in/$INDEXNOW_KEY.txt',
-            'urlList': urls
+          # Build JSON array of URLs
+          URL_ARRAY=$(printf '"%s",' "${URLS[@]}" | sed 's/,$//')
+
+          PAYLOAD=$(cat <<EOF
+          {
+            "host": "www.kohinoorthearena.in",
+            "key": "$INDEXNOW_KEY",
+            "keyLocation": "https://www.kohinoorthearena.in/$INDEXNOW_KEY.txt",
+            "urlList": [$URL_ARRAY]
           }
-          print(json.dumps(payload, indent=2))
-          ")
+          EOF
+          )
 
-          echo "📋 Submitting URLs:"
-          echo "$URL_JSON" | python3 -c "import sys,json; d=json.load(sys.stdin); [print(' -', u) for u in d['urlList']]"
+          echo "📋 Submitting ${#URLS[@]} URLs to IndexNow..."
 
-          # Submit to Bing IndexNow
-          BING_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+          # Submit to Bing
+          BING=$(curl -s -o /dev/null -w "%{http_code}" \
             -X POST "https://api.indexnow.org/indexnow" \
             -H "Content-Type: application/json; charset=utf-8" \
-            -d "$URL_JSON")
+            -d "$PAYLOAD")
+          echo "Bing: $BING"
 
-          echo ""
-          echo "Bing IndexNow Status: $BING_STATUS"
-
-          # Submit to Yandex IndexNow
-          YANDEX_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+          # Submit to Yandex
+          YANDEX=$(curl -s -o /dev/null -w "%{http_code}" \
             -X POST "https://yandex.com/indexnow" \
             -H "Content-Type: application/json; charset=utf-8" \
-            -d "$URL_JSON")
+            -d "$PAYLOAD")
+          echo "Yandex: $YANDEX"
 
-          echo "Yandex IndexNow Status: $YANDEX_STATUS"
-
-          if [ "$BING_STATUS" = "200" ] || [ "$BING_STATUS" = "202" ]; then
-            echo "✅ Bing accepted the submission"
-          else
-            echo "⚠️  Bing returned status $BING_STATUS"
-          fi
-
-          if [ "$YANDEX_STATUS" = "200" ] || [ "$YANDEX_STATUS" = "202" ]; then
-            echo "✅ Yandex accepted the submission"
-          else
-            echo "⚠️  Yandex returned status $YANDEX_STATUS"
-          fi
+          [ "$BING" = "200" ] || [ "$BING" = "202" ] && echo "✅ Bing accepted" || echo "⚠️ Bing: $BING"
+          [ "$YANDEX" = "200" ] || [ "$YANDEX" = "202" ] && echo "✅ Yandex accepted" || echo "⚠️ Yandex: $YANDEX"
