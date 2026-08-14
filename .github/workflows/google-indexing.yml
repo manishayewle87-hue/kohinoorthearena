@@ -38,7 +38,7 @@ jobs:
 
           echo "🚀 Triggering Google Indexing API at: https://$VERCEL_URL/api/cron"
 
-          HTTP_STATUS=$(curl -s -o /tmp/cron_response.json -w "%{http_code}" \
+          HTTP_STATUS=$(curl -s -L -o /tmp/cron_response.json -w "%{http_code}" \
             -H "Authorization: Bearer $CRON_SECRET" \
             "https://$VERCEL_URL/api/cron")
 
