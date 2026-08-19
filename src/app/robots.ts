@@ -49,16 +49,21 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
         allow: ['/blog/'],
         disallow: ['/api/'],
       },
-      // Google AdsBot — needed for Google Ads Quality Score
+      // Google AdsBot & Mediapartners — needed for Google Ads Quality Score & Safe Browsing
       {
         userAgent: 'AdsBot-Google',
         allow: ['/'],
-        disallow: ['/api/'],
+        disallow: ['/api/lead', '/api/cron'],
       },
       {
         userAgent: 'AdsBot-Google-Mobile',
         allow: ['/'],
-        disallow: ['/api/'],
+        disallow: ['/api/lead', '/api/cron'],
+      },
+      {
+        userAgent: 'Mediapartners-Google',
+        allow: ['/'],
+        disallow: ['/api/lead', '/api/cron'],
       },
 
       // ════════════════════════════════════════════════════

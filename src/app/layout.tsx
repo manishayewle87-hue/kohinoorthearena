@@ -364,6 +364,12 @@ export default async function RootLayout({
     <html lang="en" className={`${outfit.variable} ${plusJakartaSans.variable}`}>
       <head>
         <meta name="google-site-verification" content={cfg.googleVerification} />
+        {/* ── Resource Hints for Google Core Web Vitals (INP / LCP) ── */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" />
         <link rel="icon" href="/api/favicon" type="image/svg+xml" sizes="any" />
         <link rel="apple-touch-icon" href="/api/favicon" />
