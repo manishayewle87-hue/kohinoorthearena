@@ -8,7 +8,19 @@ function scrollTo(id: string) {
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-export default function Footer() {
+type FooterProps = {
+  mahaRera?: string;
+  primarySlug?: string;
+  coDevSlug?: string;
+  projectName?: string;
+};
+
+export default function Footer({
+  mahaRera = 'P5210005XXXX',
+  primarySlug = '/kohinoor-the-arena-pimpri',
+  coDevSlug = '/mahalaxmi-the-arena-pimpri',
+  projectName = 'The Arena',
+}: FooterProps) {
   return (
     <footer className="footer">
     <div className="container">
@@ -48,9 +60,9 @@ export default function Footer() {
           <h5>Residences</h5>
           <ul className="footer-links">
             <li><Link href="/">Home</Link></li>
-            <li><Link href="/kohinoor-the-arena-pimpri-chinchwad-pune">Kohinoor The Arena</Link></li>
-            <li><Link href="/mahalaxmi-the-arena-luxury-flats-in-pimpri">Mahalaxmi The Arena</Link></li>
-            <li><Link href="/life-in-motion-pimpri-sports-township-pcmc">Life in Motion</Link></li>
+            <li><Link href={primarySlug}>Kohinoor The Arena</Link></li>
+            <li><Link href={coDevSlug}>Mahalaxmi The Arena</Link></li>
+            <li><Link href="/life-in-motion-pimpri">Life in Motion</Link></li>
             <li><button className="footer-anchor-btn" onClick={() => scrollTo('residences')}>Residences</button></li>
             <li><button className="footer-anchor-btn" onClick={() => scrollTo('specifications')}>Salient Specifications</button></li>
           </ul>
@@ -69,12 +81,12 @@ export default function Footer() {
       </div>
 
       <div className="footer-seo-block" style={{ marginTop: "3rem", paddingTop: "2rem", borderTop: "1px solid rgba(255,255,255,0.1)", fontSize: "0.75rem", color: "rgba(255,255,255,0.4)" }}>
-        <h6 style={{ color: "rgba(255,255,255,0.7)", marginBottom: "1rem", letterSpacing: "1px", textTransform: "uppercase", fontSize: "0.8rem" }}>Explore Premium Properties Across PCMC & Pune</h6>
+        <h6 style={{ color: "rgba(255,255,255,0.7)", marginBottom: "1rem", letterSpacing: "1px", textTransform: "uppercase", fontSize: "0.8rem" }}>Explore Premium Properties Across PCMC &amp; Pune</h6>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", lineHeight: "1.6" }}>
           {/* Brands & Projects Silos */}
-          <Link href="/mahalaxmi-the-arena-luxury-flats-in-pimpri" className="seo-link">Mahalaxmi The Arena Pimpri</Link> &bull;
-          <Link href="/kohinoor-the-arena-pimpri-chinchwad-pune" className="seo-link">Kohinoor The Arena</Link> &bull;
-          <Link href="/life-in-motion-pimpri-sports-township-pcmc" className="seo-link">Life in Motion Pimpri</Link> &bull;
+          <Link href={coDevSlug} className="seo-link">Mahalaxmi The Arena Pimpri</Link> &bull;
+          <Link href={primarySlug} className="seo-link">Kohinoor The Arena</Link> &bull;
+          <Link href="/life-in-motion-pimpri" className="seo-link">Life in Motion Pimpri</Link> &bull;
           <span className="seo-link">Life in Motion Pune</span> &bull;
           <span className="seo-link">Kohinoor Arena Pimpri</span> &bull;
           <span className="seo-link">The Arena PCMC</span> &bull;
@@ -139,7 +151,7 @@ export default function Footer() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', textAlign: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Image src="/assets/images/maharera-logo.png" alt="MahaRERA Logo" width={40} height={40} style={{ filter: 'grayscale(1) brightness(1.5)' }} />
-            <span style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--neon-lime)' }}>MahaRERA No: P5210005XXXX</span>
+            <span style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--neon-lime)' }}>MahaRERA No: {mahaRera}</span>
           </div>
           <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', margin: 0 }}>
             The project has been registered via MahaRERA registration number and is available on the website <a href="https://maharera.mahaonline.gov.in" target="_blank" rel="noopener noreferrer" style={{ color: '#fff', textDecoration: 'underline' }}>maharera.mahaonline.gov.in</a> under registered projects.
@@ -149,11 +161,11 @@ export default function Footer() {
 
       {/*  Disclaimer from Brochure  */}
       <div className="footer-disclaimer">
-        <strong>Disclaimer:</strong> This website and brochure content is a draft prepared solely for internal circulation and reference, and does not constitute a sales offer, commitment, or contract of any kind. All information, images, plans, and specifications shown are indicative and subject to change without notice. Any decisions or actions taken based on the contents of this website are at the sole discretion and risk of the reader, and The Arena Pimpri, Mahalaxmi Group, Kohinoor Group, and Agarwal Sukhwani Associates accept no liability for any errors, omissions, or reliance placed on this material. For accurate and binding details, please refer to the official sale agreement and RERA approved project documents.
+        <strong>Disclaimer:</strong> This website and brochure content is a draft prepared solely for internal circulation and reference, and does not constitute a sales offer, commitment, or contract of any kind. All information, images, plans, and specifications shown are indicative and subject to change without notice. Any decisions or actions taken based on the contents of this website are at the sole discretion and risk of the reader, and {projectName}, Mahalaxmi Group, Kohinoor Group, and Agarwal Sukhwani Associates accept no liability for any errors, omissions, or reliance placed on this material. For accurate and binding details, please refer to the official sale agreement and RERA approved project documents.
       </div>
 
       <div className="footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-        <div>&copy; 2026 Mahalaxmi The ARENA. All rights reserved.</div>
+        <div>&copy; 2026 {projectName}. All rights reserved.</div>
         <div style={{ display: 'flex', gap: '1rem' }}>
           <Link href="/privacy-policy" style={{ color: 'rgba(255,255,255,0.5)', textDecoration: 'none', fontSize: '0.9rem' }}>Privacy Policy</Link>
           <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>

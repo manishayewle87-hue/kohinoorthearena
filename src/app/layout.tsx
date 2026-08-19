@@ -87,7 +87,10 @@ export default async function RootLayout({
       url: siteUrl,
       potentialAction: {
         '@type': 'SearchAction',
-        target: `${siteUrl}/search?q={search_term_string}`,
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${siteUrl}/blog?q={search_term_string}`,
+        },
         'query-input': 'required name=search_term_string',
       },
     },
@@ -236,7 +239,7 @@ export default async function RootLayout({
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
         { '@type': 'ListItem', position: 2, name: cfg.arenaName, item: `${siteUrl}${cfg.primarySlug}` },
-        { '@type': 'ListItem', position: 3, name: `${cfg.projectConfig.bhkOptions} Flats in ${cfg.address.locality}`, item: `${siteUrl}/flats-in-pune` },
+        { '@type': 'ListItem', position: 3, name: `${cfg.projectConfig.bhkOptions} Flats in ${cfg.address.locality}`, item: `${siteUrl}/pcmc-premium-real-estate` },
       ],
     },
     {

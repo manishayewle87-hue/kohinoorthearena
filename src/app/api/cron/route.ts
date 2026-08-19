@@ -27,7 +27,7 @@ function buildUrlList(): string[] {
   // Submit all paths across ALL custom domains
   for (const baseUrl of ALL_DOMAINS) {
     CORE_PATHS.forEach(p => urls.push(`${baseUrl}${p}`));
-    pseoPages.forEach(p => urls.push(`${baseUrl}/flats-in-pune/${p.slug}`));
+    pseoPages.forEach(p => urls.push(`${baseUrl}/${p.slug}`));
     posts.forEach(p => urls.push(`${baseUrl}/blog/${p.slug}`));
   }
 

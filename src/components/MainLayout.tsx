@@ -1,4 +1,6 @@
 import React from 'react';
+import { headers } from 'next/headers';
+import { getDomainConfig } from '@/lib/domain-config';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import PromoVideo from "@/components/PromoVideo";
@@ -17,7 +19,11 @@ import PopularSearches from "@/components/PopularSearches";
 import Footer from "@/components/Footer";
 import FAQ from "@/components/FAQ";
 
-export default function MainLayout({ h1, keyword, children }: { h1?: string, keyword?: string, children?: React.ReactNode }) {
+export default async function MainLayout({ h1, keyword, children }: { h1?: string, keyword?: string, children?: React.ReactNode }) {
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
+
   return (
     <>
       <Navbar />
@@ -39,10 +45,10 @@ export default function MainLayout({ h1, keyword, children }: { h1?: string, key
         {children}
       </main>
       <PopularSearches />
-      
+
       {/* Mobile Sticky Conversion Bar */}
       <div className="mobile-sticky-bar">
-        <a href="https://wa.me/917711993434?text=Hi,%20I%20am%20interested%20in%20Mahalaxmi%20The%20Arena%20Pimpri." target="_blank" rel="noopener noreferrer" className="mobile-btn whatsapp-btn">
+        <a href={`https://wa.me/${cfg.contactPhone.replace(/\D/g, '')}?text=Hi,%20I%20am%20interested%20in%20${encodeURIComponent(cfg.arenaName)}%20Pimpri.`} target="_blank" rel="noopener noreferrer" className="mobile-btn whatsapp-btn">
           <i className="ri-whatsapp-line"></i> WhatsApp
         </a>
         <a href="#booking" className="mobile-btn book-btn trigger-schedule">
@@ -50,7 +56,14 @@ export default function MainLayout({ h1, keyword, children }: { h1?: string, key
         </a>
       </div>
 
-      <Footer />
+      <Footer
+        mahaRera={cfg.mahaRera}
+        primarySlug={cfg.primarySlug}
+        coDevSlug={cfg.primarySlug === '/kohinoor-the-arena-pimpri'
+          ? '/mahalaxmi-the-arena-pimpri'
+          : '/kohinoor-the-arena-pimpri'}
+        projectName={cfg.projectName}
+      />
     </>
   );
 }
