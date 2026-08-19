@@ -34,21 +34,31 @@ export default async function MarketTrends() {
   const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
   const cfg = getDomainConfig(host);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Dataset",
-    "name": "Pimpri Chinchwad Real Estate Price Index",
-    "description": "Comprehensive tracking of property appreciation, rental yields, and IT corridor growth metrics in Pimpri Chinchwad (PCMC), Pune.",
-    "url": `${cfg.canonical}/market-trends`,
-    "keywords": ["Real Estate", "Pune", "PCMC", "Property Rates", "Appreciation", "Market Trends"],
-    "creator": {
-      "@type": "Organization",
-      "name": cfg.brand,
-      "url": cfg.canonical
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Dataset",
+      "name": "Pimpri Chinchwad Real Estate Price Index",
+      "description": "Comprehensive tracking of property appreciation, rental yields, and IT corridor growth metrics in Pimpri Chinchwad (PCMC), Pune.",
+      "url": `${cfg.canonical}/market-trends`,
+      "keywords": ["Real Estate", "Pune", "PCMC", "Property Rates", "Appreciation", "Market Trends"],
+      "creator": {
+        "@type": "Organization",
+        "name": cfg.brand,
+        "url": cfg.canonical
+      },
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "isAccessibleForFree": true
     },
-    "license": "https://creativecommons.org/licenses/by/4.0/",
-    "isAccessibleForFree": true
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": cfg.canonical },
+        { "@type": "ListItem", "position": 2, "name": "Market Trends & Price Index", "item": `${cfg.canonical}/market-trends` },
+      ]
+    }
+  ];
 
   return (
     <>

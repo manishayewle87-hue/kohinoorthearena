@@ -38,8 +38,30 @@ export default async function BlogList() {
   const cfg = getDomainConfig(host);
   const posts = getBlogPosts();
 
+  const jsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: `Real Estate Market Insights | ${cfg.arenaName}`,
+      description: `Latest insights, MahaRERA buying guides, and property market analyses for Pimpri Chinchwad and Pune by ${cfg.brand}.`,
+      url: `${cfg.canonical}/blog`,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: cfg.canonical },
+        { '@type': 'ListItem', position: 2, name: 'Market Insights', item: `${cfg.canonical}/blog` },
+      ],
+    },
+  ];
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
       <main style={{ padding: '8rem 0 4rem 0', minHeight: '80vh' }}>
         <div className="container">

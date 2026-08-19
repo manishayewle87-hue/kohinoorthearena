@@ -73,3 +73,25 @@ jobs:
       - name: Run npm audit (high severity only)
         run: npm audit --audit-level=high
         continue-on-error: true
+
+  # ─────────────────────────────────────────
+  # JOB 4: Automated SEO Assertion Suite
+  # ─────────────────────────────────────────
+  seo-audit:
+    name: SEO & Matrix Integrity Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Automated SEO Verification Suite
+        run: node scripts/verify-seo.mjs
