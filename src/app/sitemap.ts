@@ -16,7 +16,8 @@ export async function generateSitemaps() {
   return sitemaps;
 }
 
-export default async function sitemap({ id }: { id: number }): Promise<MetadataRoute.Sitemap> {
+export default async function sitemap(props?: { id?: number | string }): Promise<MetadataRoute.Sitemap> {
+  const sitemapId = Number(props?.id ?? 0);
   const headersList = await headers();
   const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
   const cfg = getDomainConfig(host);
@@ -25,7 +26,7 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
   const buildDate = now.toISOString();
 
   // ── ID 0: Core Pillar Pages + Blog ──────────────────────────────────
-  if (id === 0) {
+  if (sitemapId === 0) {
     const posts = getBlogPosts();
 
     const corePillarPages: MetadataRoute.Sitemap = [
@@ -114,7 +115,7 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
 
   // ── ID 1+: PSEO Matrix chunks (15,000+ pages) ────────────────────────
   const matrix = generatePSEOMatrix();
-  const chunkIndex = id - 1;
+  const chunkIndex = sitemapId - 1;
   const chunk = matrix.slice(chunkIndex * CHUNK_SIZE, (chunkIndex + 1) * CHUNK_SIZE);
 
   return chunk.map((page) => ({
