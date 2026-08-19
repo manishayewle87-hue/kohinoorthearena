@@ -216,7 +216,7 @@ export default async function RootLayout({
         {
           '@type': 'Question',
           name: `पिंपरी मध्ये २ व ३ बीएचके फ्लॅट कसा बुक करावा? (Pimpri madhe flat booking)`,
-          acceptedAnswer: { '@type': 'Answer', text: `पिंपरी मधील The Arena (Mahalaxmi Kohinoor) मध्ये २ आणि ३ बीएचके फ्लॅट बुकिंगसाठी आपण अधिकृत वेबसाईटवरून VIP साईट व्हिजिट बुक करू शकता किंवा +91-7711993434 वर संपर्क साधू शकता. ईओआय (EOI) द्वारे प्राधान्य युनिट निवडता येते.` },
+          acceptedAnswer: { '@type': 'Answer', text: `पिंपरी मधील The Arena (Mahalaxmi Kohinoor) मध्ये २ आणि ३ बीएचके फ्लॅट बुकिंगसाठी आपण अधिकृत वेबसाईटवरून VIP साईट व्हिजिट फॉर्म सबमिट करू शकता. ईओआय (EOI) द्वारे प्राधान्य युनिट निवडता येते.` },
         },
         {
           '@type': 'Question',
