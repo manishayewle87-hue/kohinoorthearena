@@ -1,73 +1,54 @@
 import { MetadataRoute } from 'next';
-import { headers } from 'next/headers';
 import { getBlogPosts } from '@/lib/blog';
 import { generatePSEOMatrix } from '@/lib/pseo-data';
-import { getDomainConfig } from '@/lib/domain-config';
+import { DOMAIN_CONFIGS } from '@/lib/domain-config';
 
-const CHUNK_SIZE = 5000;
+export const dynamic = 'force-static';
+export const revalidate = 86400; // 24 hours
 
-export async function generateSitemaps() {
+export default function sitemap(): MetadataRoute.Sitemap {
+  const buildDate = new Date().toISOString();
+  const allRoutes: MetadataRoute.Sitemap = [];
+
   const matrix = generatePSEOMatrix();
-  const chunks = Math.ceil(matrix.length / CHUNK_SIZE);
-  const sitemaps = [{ id: 0 }]; // id 0: Core pages + Blog
-  for (let i = 0; i < chunks; i++) {
-    sitemaps.push({ id: i + 1 }); // id 1+: PSEO matrix chunks
-  }
-  return sitemaps;
-}
+  const posts = getBlogPosts();
 
-export default async function sitemap(props?: { id?: number | string }): Promise<MetadataRoute.Sitemap> {
-  const sitemapId = Number(props?.id ?? 0);
-  const headersList = await headers();
-  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
-  const cfg = getDomainConfig(host);
-  const baseUrl = cfg.canonical;
-  const now = new Date();
-  const buildDate = now.toISOString();
+  // Generate sitemap entries for all registered production domains
+  for (const [, cfg] of Object.entries(DOMAIN_CONFIGS)) {
+    const baseUrl = cfg.canonical;
 
-  // ── ID 0: Core Pillar Pages + Blog ──────────────────────────────────
-  if (sitemapId === 0) {
-    const posts = getBlogPosts();
-
+    // ── 1. Core Pillar Pages ──
     const corePillarPages: MetadataRoute.Sitemap = [
-      // ── Homepage ── priority 1.0
       {
         url: baseUrl,
         lastModified: buildDate,
         changeFrequency: 'daily',
         priority: 1.0,
-        images: [`${baseUrl}/assets/images/hero.jpg`],
       },
-      // ── Primary silo pages ── priority 0.95
       {
         url: `${baseUrl}/life-in-motion-pimpri`,
         lastModified: buildDate,
         changeFrequency: 'daily',
         priority: 0.95,
-        images: [`${baseUrl}/assets/images/hero.jpg`],
       },
       {
         url: `${baseUrl}/kohinoor-the-arena-pimpri`,
         lastModified: buildDate,
         changeFrequency: 'daily',
         priority: 0.95,
-        images: [`${baseUrl}/assets/images/hero.jpg`],
       },
       {
         url: `${baseUrl}/mahalaxmi-the-arena-pimpri`,
         lastModified: buildDate,
         changeFrequency: 'daily',
         priority: 0.95,
-        images: [`${baseUrl}/assets/images/hero.jpg`],
       },
       {
         url: `${baseUrl}/pcmc-premium-real-estate`,
         lastModified: buildDate,
         changeFrequency: 'daily',
         priority: 0.95,
-        images: [`${baseUrl}/assets/images/hero.jpg`],
       },
-      // ── Secondary pages ── priority 0.85
       {
         url: `${baseUrl}/explore`,
         lastModified: buildDate,
@@ -85,46 +66,40 @@ export default async function sitemap(props?: { id?: number | string }): Promise
         lastModified: buildDate,
         changeFrequency: 'weekly',
         priority: 0.75,
-        images: [`${baseUrl}/assets/images/hero.jpg`],
       },
-      // ── Legal — low priority ──
       {
         url: `${baseUrl}/privacy-policy`,
         lastModified: buildDate,
         changeFrequency: 'yearly',
-        priority: 0.2,
+        priority: 0.20,
       },
       {
         url: `${baseUrl}/terms`,
         lastModified: buildDate,
         changeFrequency: 'yearly',
-        priority: 0.2,
+        priority: 0.20,
       },
     ];
 
+    // ── 2. Blog Posts ──
     const blogPostRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
       url: `${baseUrl}/blog/${post.slug}`,
       lastModified: post.date ? new Date(post.date).toISOString() : buildDate,
       changeFrequency: 'monthly' as const,
-      priority: 0.7,
-      images: [`${baseUrl}/assets/images/hero.jpg`],
+      priority: 0.70,
     }));
 
-    return [...corePillarPages, ...blogPostRoutes];
+    // ── 3. High-Intent Master Keyword Hub Pages ──
+    // Include top high-priority hubs (under 50,000 total URLs to stay 100% compliant with standard XML sitemap)
+    const pseoRoutes: MetadataRoute.Sitemap = matrix.slice(0, 1000).map((page) => ({
+      url: `${baseUrl}/${page.slug}`,
+      lastModified: buildDate,
+      changeFrequency: (page.category === 'Master Real Estate Hub' ? 'daily' : 'weekly') as 'daily' | 'weekly',
+      priority: page.category === 'Master Real Estate Hub' ? 0.90 : 0.80,
+    }));
+
+    allRoutes.push(...corePillarPages, ...blogPostRoutes, ...pseoRoutes);
   }
 
-  // ── ID 1+: PSEO Matrix chunks (15,000+ pages) ────────────────────────
-  const matrix = generatePSEOMatrix();
-  const chunkIndex = sitemapId - 1;
-  const chunk = matrix.slice(chunkIndex * CHUNK_SIZE, (chunkIndex + 1) * CHUNK_SIZE);
-
-  return chunk.map((page) => ({
-    url: `${baseUrl}/${page.slug}`,
-    lastModified: buildDate,
-    changeFrequency: (page.category === 'Master Real Estate Hub' ? 'daily' : 'weekly') as 'daily' | 'weekly',
-    priority: page.category === 'Master Real Estate Hub' ? 0.90 : 0.80,
-    images: [
-      `${baseUrl}/api/og?title=${encodeURIComponent(page.title)}&sub=${encodeURIComponent(`${page.bhk} Flats in ${page.location}`)}&brand=${encodeURIComponent(cfg.brand)}`,
-    ],
-  }));
+  return allRoutes;
 }
