@@ -120,8 +120,8 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
   return chunk.map((page) => ({
     url: `${baseUrl}/${page.slug}`,
     lastModified: buildDate,
-    changeFrequency: 'weekly' as const,
-    priority: 0.85,
+    changeFrequency: (page.category === 'Master Real Estate Hub' ? 'daily' : 'weekly') as 'daily' | 'weekly',
+    priority: page.category === 'Master Real Estate Hub' ? 0.90 : 0.80,
     images: [
       `${baseUrl}/api/og?title=${encodeURIComponent(page.title)}&sub=${encodeURIComponent(`${page.bhk} Flats in ${page.location}`)}&brand=${encodeURIComponent(cfg.brand)}`,
     ],
