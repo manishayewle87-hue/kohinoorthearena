@@ -215,12 +215,19 @@ export function generatePSEOMatrix(): PSEOPageData[] {
   }
 
   // Deduplicate by slug
-  return Array.from(new Map(pages.map(item => [item.slug, item])).values());
+  _cachedMatrix = Array.from(new Map(pages.map(item => [item.slug, item])).values());
+  _cachedMap = new Map(_cachedMatrix.map(p => [p.slug, p]));
+  return _cachedMatrix;
 }
 
+let _cachedMatrix: PSEOPageData[] | null = null;
+let _cachedMap: Map<string, PSEOPageData> | null = null;
+
 export function getPSEOPageData(slug: string): PSEOPageData | undefined {
-  const matrix = generatePSEOMatrix();
-  return matrix.find(p => p.slug === slug);
+  if (!_cachedMap) {
+    generatePSEOMatrix();
+  }
+  return _cachedMap?.get(slug);
 }
 
 function capitalize(s: string) {

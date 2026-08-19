@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getPSEOPageData } from '@/lib/pseo-data';
+import { getPSEOPageData, generatePSEOMatrix } from '@/lib/pseo-data';
 import MainLayout from '@/components/MainLayout';
 import Link from 'next/link';
 
@@ -12,12 +12,13 @@ type Props = {
 };
 
 export const revalidate = 3600; // Edge Route Caching (1 Hour)
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  // We have 1700+ permutations. Generating them all at build time takes too long on Vercel.
-  // Returning an empty array combined with default dynamicParams = true means 
-  // these pages will be statically generated ON-DEMAND when first requested (ISR).
-  return [];
+  const matrix = generatePSEOMatrix();
+  return matrix
+    .filter(p => p.category === 'Master Real Estate Hub' || p.slug.includes('pcmc-metro') || p.slug.includes('kohinoor-world-towers'))
+    .map(p => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
