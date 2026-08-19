@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Outer Shield Badge -->
+  <path d="M50 5 L88 20 V52 C88 74 50 95 50 95 C50 95 12 74 12 52 V20 L50 5 Z" fill="#DFFE00" fill-opacity="0.12" stroke="#DFFE00" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Inner Shield -->
+  <path d="M50 14 L80 26 V50 C80 68 50 85 50 85 C50 85 20 68 20 50 V26 L50 14 Z" fill="#0D0818" stroke="#DFFE00" stroke-width="1.5" stroke-opacity="0.6"/>
+  <!-- Government / Pillar Emblem -->
+  <g transform="matrix(0.8 0 0 0.8 10 10)">
+    <!-- Base -->
+    <rect x="30" y="66" width="40" height="4" rx="1" fill="#DFFE00"/>
+    <rect x="25" y="70" width="50" height="4" rx="1" fill="#DFFE00"/>
+    <!-- Pillars -->
+    <rect x="33" y="42" width="6" height="24" rx="1" fill="#DFFE00"/>
+    <rect x="47" y="42" width="6" height="24" rx="1" fill="#DFFE00"/>
+    <rect x="61" y="42" width="6" height="24" rx="1" fill="#DFFE00"/>
+    <!-- Architrave -->
+    <rect x="28" y="38" width="44" height="4" rx="1" fill="#DFFE00"/>
+    <!-- Pediment (Triangle Roof) -->
+    <polygon points="50,24 24,38 76,38" fill="#DFFE00"/>
+    <!-- Verification Checkmark -->
+    <circle cx="50" cy="53" r="5" fill="#0D0818" stroke="#DFFE00" stroke-width="1.5"/>
+    <path d="M48 53 L49.5 55 L52.5 51" stroke="#DFFE00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

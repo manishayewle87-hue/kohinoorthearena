@@ -150,7 +150,7 @@ export default function Footer({
       <div className="footer-legal" style={{ marginTop: '2rem', padding: '1.5rem', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.05)' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', textAlign: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <Image src="/assets/images/maharera-logo.png" alt="MahaRERA Logo" width={40} height={40} style={{ filter: 'grayscale(1) brightness(1.5)' }} />
+            <Image src="/assets/images/maharera-logo.svg" alt="MahaRERA Logo" width={40} height={40} />
             <span style={{ fontSize: '1.1rem', fontWeight: '600', color: 'var(--neon-lime)' }}>MahaRERA No: {mahaRera}</span>
           </div>
           <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', margin: 0 }}>
