@@ -153,6 +153,7 @@ export async function POST(request: Request) {
     // ─────────────────────────────────────────
     const EMAIL_USER = process.env.EMAIL_USER;
     const EMAIL_PASS = process.env.EMAIL_PASS;
+    const LEAD_RECIPIENT_EMAIL = process.env.LEAD_RECIPIENT_EMAIL || 'propsmartrealty@gmail.com';
     let emailStatus = 'skipped';
 
     if (EMAIL_USER && EMAIL_PASS) {
@@ -164,10 +165,10 @@ export async function POST(request: Request) {
         });
 
         await transporter.sendMail({
-          from: `"Arena Leads 🏠" <${EMAIL_USER}>`,
-          to: 'propsmartrealty@gmail.com',
+          from: `"The Arena Leads" <${EMAIL_USER}>`,
+          to: LEAD_RECIPIENT_EMAIL,
           replyTo: email || EMAIL_USER,
-          subject: `🏠 New Lead: ${name} — ${domain}`,
+          subject: `🏠 New Property Enquiry: ${name} — ${configuration || 'The Arena'} (${domain})`,
           html: `
             <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden;">
               <div style="background:#0D0818;padding:24px;text-align:center;">

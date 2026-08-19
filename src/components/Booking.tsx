@@ -110,7 +110,7 @@ export default function Booking() {
               </div>
               <div className="form-group">
                 <label htmlFor="vip-email">Email Address</label>
-                <input type="email" id="vip-email" name="email" placeholder="e.g. rahul@example.com" />
+                <input type="email" id="vip-email" name="email" placeholder="e.g. rahul@gmail.com" />
               </div>
               <div className="form-group">
                 <label htmlFor="vip-config">Interested Configuration</label>
