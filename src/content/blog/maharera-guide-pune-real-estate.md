@@ -1,27 +1,54 @@
 ---
-title: MahaRERA Demystified - A Guide for Buying Property in Pune
-date: 2026-08-05
-description: Everything you need to know about MahaRERA guidelines and how they protect your luxury real estate investments in Pune and PCMC.
+title: MahaRERA Guide — How to Verify Real Estate Projects in Pune 2026
+date: 2026-08-12
+description: Complete guide to MahaRERA verification for homebuyers in Pune and PCMC. Learn how to check project status, developer credentials, and escrow compliance before buying.
 ---
 
-Buying a home is one of the most significant financial decisions you will ever make. In Maharashtra, the introduction of the Real Estate (Regulation and Development) Act, implemented via **MahaRERA**, has completely revolutionized the home-buying experience, bringing unprecedented transparency and security to buyers.
+Buying a flat in Pune or Pimpri Chinchwad without verifying MahaRERA registration is one of the most costly mistakes a homebuyer can make. This comprehensive guide walks you through the entire MahaRERA verification process — and explains exactly what to look for before signing any agreement.
 
 ## What is MahaRERA?
 
-MahaRERA is the state's regulatory body tasked with promoting the real estate sector and ensuring that transactions between buyers and developers are conducted in a fair and transparent manner. Before MahaRERA, buyers often faced delayed possessions, hidden costs, and opaque project plans. Today, MahaRERA mandates strict compliance.
+The **Maharashtra Real Estate Regulatory Authority (MahaRERA)** was established under the Real Estate (Regulation and Development) Act, 2016. Its mandate is simple: protect homebuyers by enforcing transparency, accountability, and timely delivery from real estate developers.
 
-## Why You Should Only Buy MahaRERA Registered Properties
+Every new residential project above 500 sq. meters or with more than 8 apartments launched after May 1, 2017 **must** be registered with MahaRERA before any marketing or sales activity.
 
-1. **Financial Security**: Developers are mandated to deposit 70% of the funds collected from buyers into a separate escrow account. This ensures that your money is strictly utilized for the construction of your project and not diverted elsewhere.
-2. **Transparency in Carpet Area**: The days of confusing "built-up" and "super built-up" areas are over. MahaRERA strictly defines "Carpet Area," ensuring you pay exactly for the usable space within your walls.
-3. **Timely Delivery**: Developers face severe penalties for missing possession deadlines. This has drastically improved the delivery rates of residential projects across Pune and PCMC.
-4. **Defect Liability Period**: Under MahaRERA, the developer is liable to rectify any structural defects for up to 5 years after possession, at no extra cost to the buyer.
+## How to Verify a Project on MahaRERA — Step by Step
 
-## Case Study: The Arena, Pimpri
+**Step 1:** Go to [maharera.mahaonline.gov.in](https://maharera.mahaonline.gov.in)
 
-When evaluating a premium project like *The Arena* in Pimpri, verifying its MahaRERA registration (e.g., MahaRERA No: P5210005XXXX) is your first step. This certification guarantees that the sprawling 80,000 Sq.Ft. sports township, the luxurious 2, 3, & 4 BHK layouts, and the promised possession timelines are all legally binding and monitored by the government.
+**Step 2:** Click "Projects" → "Search Projects"
 
-### How to Verify a Project
-Always visit the official MahaRERA website (`maharera.mahaonline.gov.in`) and enter the registration number provided by the developer. You can instantly access the project's layout approvals, financial encumbrances, and litigation history (if any).
+**Step 3:** Enter the project name, promoter name, or MahaRERA registration number. For example: Search *"The Arena"* or *"Kohinoor"* to find verified registrations.
 
-Investing in a MahaRERA-approved project gives you the absolute peace of mind needed to enjoy your new luxury lifestyle.
+**Step 4:** Verify these 6 critical data points on the project page:
+- **Registration Status:** Must say "Active" — not "Lapsed" or "Revoked"
+- **Completion Date:** The date promised by the developer
+- **Promoter Details:** Verify the developer's legal entity name
+- **Approved Plans:** Download and compare with the brochure
+- **Escrow Account:** Confirm 70% of your payments go into a dedicated escrow
+- **Litigations:** Check if any consumer complaints are filed against the project
+
+## The Escrow Rule — Your Most Important Protection
+
+Under MahaRERA Section 4(2)(l)(D), developers are legally required to deposit **70% of all collected amounts** into a dedicated project escrow account. This money can only be used for:
+- Construction costs of that specific project
+- Land costs related to that project
+
+This rule is what separates MahaRERA-registered projects from illegal or unregistered ones. It virtually eliminates the risk of a developer diverting funds to other projects.
+
+## Red Flags to Watch Before Booking
+
+**Never book a property if you see:**
+- No MahaRERA number visible in brochures and advertisements
+- Developer unable to provide Form 2 (Declaration)
+- Promised amenities not mentioned in the MahaRERA filing
+- Completion date already lapsed without extension approval
+- Multiple consumer complaints in MahaRERA's public grievance portal
+
+## Mahalaxmi The Arena & Kohinoor The Arena — MahaRERA Status
+
+Both **Mahalaxmi The Arena** (developed by Mahalaxmi Group in JV with Kohinoor Group) and **Kohinoor The Arena** are MahaRERA registered projects. Verify using registration number **P5210005XXXX** at the official portal. All documents, approved plans, and financial statements are publicly accessible as mandated by law.
+
+## Bottom Line
+
+In 2026, buying an unregistered property in Maharashtra is not just risky — it's avoidable. MahaRERA has created a system where every homebuyer can conduct full due diligence from their phone. Always verify before you book.

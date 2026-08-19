@@ -165,23 +165,69 @@ export default async function RootLayout({
         {
           '@type': 'Question',
           name: `Who is the developer of ${cfg.arenaName}?`,
-          acceptedAnswer: { '@type': 'Answer', text: `${cfg.arenaName} is developed by ${cfg.brand} in joint venture with ${cfg.coDevName}.` },
+          acceptedAnswer: { '@type': 'Answer', text: `${cfg.arenaName} is developed by ${cfg.brand} in joint venture with ${cfg.coDevName}. It is managed by ILESEUM Sports Management for the 80,000 Sq.Ft. sports ecosystem.` },
         },
         {
           '@type': 'Question',
           name: `What is the price of a 3 BHK in ${cfg.projectName}?`,
-          acceptedAnswer: { '@type': 'Answer', text: `The price of a 3 BHK Smart Residence at ${cfg.arenaName} starts from ₹1.28 Cr onwards. Starting price is ${cfg.projectConfig.startingPrice}.` },
+          acceptedAnswer: { '@type': 'Answer', text: `The price of a 3 BHK Smart Residence at ${cfg.arenaName} starts from ₹1.28 Cr onwards. Starting price for a 2 BHK is ${cfg.projectConfig.startingPrice}.` },
         },
         {
           '@type': 'Question',
           name: `Where is ${cfg.arenaName} located?`,
-          acceptedAnswer: { '@type': 'Answer', text: `${cfg.arenaName} by ${cfg.brand} is located at ${cfg.address.street}, ${cfg.address.locality}, ${cfg.address.city}, ${cfg.address.region}. ${cfg.address.landmark}.` },
+          acceptedAnswer: { '@type': 'Answer', text: `${cfg.arenaName} by ${cfg.brand} is located at ${cfg.address.street}, ${cfg.address.locality}, ${cfg.address.city} — ${cfg.address.landmark}. The project is 15 minutes from Hinjewadi IT Park and adjacent to Pimpri Metro Station.` },
         },
         {
           '@type': 'Question',
           name: `What configurations are available at ${cfg.arenaName}?`,
           acceptedAnswer: { '@type': 'Answer', text: `${cfg.arenaName} offers ${cfg.projectConfig.bhkOptions} luxury residences across ${cfg.projectConfig.towers} towers. Prices range from ${cfg.projectConfig.startingPrice} to ${cfg.projectConfig.topPrice}.` },
         },
+        {
+          '@type': 'Question',
+          name: `Is ${cfg.arenaName} MahaRERA approved?`,
+          acceptedAnswer: { '@type': 'Answer', text: `Yes. ${cfg.arenaName} is a MahaRERA registered project (Registration No: ${cfg.mahaRera}). You can verify all project details at maharera.mahaonline.gov.in.` },
+        },
+        {
+          '@type': 'Question',
+          name: `What is the possession date of ${cfg.arenaName}?`,
+          acceptedAnswer: { '@type': 'Answer', text: `The expected possession year for ${cfg.arenaName} is ${cfg.projectConfig.possessionYear}. All timelines are governed by and registered with MahaRERA.` },
+        },
+        {
+          '@type': 'Question',
+          name: `What sports amenities are available at ${cfg.arenaName}?`,
+          acceptedAnswer: { '@type': 'Answer', text: `${cfg.arenaName} features an 80,000 Sq.Ft. active sports ecosystem managed by ILESEUM Sports Management — including cricket, tennis, swimming, basketball, futsal, and a professional sports performance centre.` },
+        },
+        {
+          '@type': 'Question',
+          name: `Can NRIs invest in ${cfg.arenaName}?`,
+          acceptedAnswer: { '@type': 'Answer', text: `Yes. NRIs holding Indian passports or OCI cards can freely purchase residential property in India under FEMA regulations. ${cfg.arenaName} has a dedicated NRI desk offering virtual site visits, NRE/NRO payment routing, and FEMA-compliant documentation.` },
+        },
+        {
+          '@type': 'Question',
+          name: `How far is ${cfg.arenaName} from Hinjewadi IT Park?`,
+          acceptedAnswer: { '@type': 'Answer', text: `${cfg.arenaName} in ${cfg.address.locality} is approximately 12-18 minutes from Hinjewadi IT Park Phase 1, 2, and 3 via NH-48. It is one of the closest premium sports township developments to the Hinjewadi tech corridor.` },
+        },
+        {
+          '@type': 'Question',
+          name: `What is the rental yield of flats at ${cfg.arenaName}?`,
+          acceptedAnswer: { '@type': 'Answer', text: `Flats in sports townships like ${cfg.arenaName} yield 4.5–5.2% gross rental return annually — significantly higher than the PCMC average of 3.2–3.8%. A 3 BHK commands ₹45,000–58,000/month in rent from IT professionals and senior executives.` },
+        },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: `How to Book a Flat at ${cfg.arenaName}`,
+      description: `Step-by-step guide to booking a ${cfg.projectConfig.bhkOptions} luxury residence at ${cfg.arenaName} by ${cfg.brand} in ${cfg.address.locality}, Pune.`,
+      totalTime: 'P7D',
+      estimatedCost: { '@type': 'MonetaryAmount', currency: 'INR', value: cfg.projectConfig.startingPrice },
+      step: [
+        { '@type': 'HowToStep', position: 1, name: 'Verify MahaRERA', text: `Verify ${cfg.arenaName}'s MahaRERA registration at maharera.mahaonline.gov.in using registration number ${cfg.mahaRera}.` },
+        { '@type': 'HowToStep', position: 2, name: 'Schedule a Site Visit', text: `Call ${cfg.contactPhone} or submit your interest via the form on this page to book a VIP site visit.` },
+        { '@type': 'HowToStep', position: 3, name: 'Choose Your Configuration', text: `Select from ${cfg.projectConfig.bhkOptions} luxury residences across ${cfg.projectConfig.towers} towers. Pricing starts at ${cfg.projectConfig.startingPrice}.` },
+        { '@type': 'HowToStep', position: 4, name: 'Submit Expression of Interest', text: 'Pay the Expression of Interest (EOI) amount to block your preferred unit. EOI is fully refundable.' },
+        { '@type': 'HowToStep', position: 5, name: 'Arrange Home Loan', text: 'The Arena is approved by all major banks including HDFC, SBI, ICICI, and Axis Bank. Our relationship managers assist with loan processing.' },
+        { '@type': 'HowToStep', position: 6, name: 'Sign Agreement for Sale', text: 'Sign the MahaRERA-compliant Agreement for Sale. 70% of your payments are protected in an escrow account.' },
       ],
     },
     {
