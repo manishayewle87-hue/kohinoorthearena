@@ -76,20 +76,54 @@ export default async function PSEOPage({ params }: Props) {
   const jsonLd = [
     {
       "@context": "https://schema.org",
-      "@type": "Product",
+      "@type": "RealEstateListing",
       "name": data.h1,
       "description": data.description,
+      "url": pageUrl,
+      "datePosted": "2026-01-01",
       "image": `${cfg.canonical}/assets/images/hero.jpg`,
-      "brand": {
-        "@type": "Brand",
-        "name": cfg.brand
+      "about": {
+        "@type": "Apartment",
+        "name": `${data.bhk} Luxury Residence — ${cfg.arenaName}`,
+        "numberOfBedrooms": data.bhk.includes('2') ? 2 : data.bhk.includes('3') ? 3 : 4,
+        "numberOfRooms": data.bhk.includes('2') ? 3 : data.bhk.includes('3') ? 4 : 5,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": cfg.address.street,
+          "addressLocality": cfg.address.locality,
+          "addressRegion": cfg.address.region,
+          "postalCode": cfg.address.postalCode,
+          "addressCountry": cfg.address.country
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "18.6278",
+          "longitude": "73.7997"
+        },
+        "amenityFeature": [
+          { "@type": "LocationFeatureSpecification", "name": "Sports Ecosystem", "value": "80,000 Sq.Ft." },
+          { "@type": "LocationFeatureSpecification", "name": "Metro Proximity", "value": "2.4 km from PCMC Metro" },
+          { "@type": "LocationFeatureSpecification", "name": "MahaRERA", "value": cfg.mahaRera }
+        ]
       },
       "offers": {
         "@type": "Offer",
         "url": pageUrl,
         "priceCurrency": "INR",
         "price": data.price.includes('Cr') ? parseFloat(data.price) * 10000000 : parseFloat(data.price) * 100000,
-        "availability": "https://schema.org/PreOrder"
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "price": data.price.includes('Cr') ? parseFloat(data.price) * 10000000 : parseFloat(data.price) * 100000,
+          "priceCurrency": "INR",
+          "valueAddedTaxIncluded": true
+        },
+        "availability": "https://schema.org/PreOrder",
+        "seller": {
+          "@type": "RealEstateAgent",
+          "name": `${cfg.brand} & ${cfg.coDevName}`,
+          "telephone": cfg.contactPhone,
+          "url": cfg.canonical
+        }
       }
     },
     {

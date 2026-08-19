@@ -367,6 +367,10 @@ export default async function RootLayout({
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" />
         <link rel="icon" href="/api/favicon" type="image/svg+xml" sizes="any" />
         <link rel="apple-touch-icon" href="/api/favicon" />
+        <link rel="search" type="application/opensearchdescription+xml" title={`${cfg.projectName} Search`} href="/opensearch.xml" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-title" content={cfg.arenaName} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
