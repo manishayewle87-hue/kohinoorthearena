@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
@@ -9,6 +9,14 @@ import { AppProvider } from "@/context/AppContext";
 import { Suspense } from "react";
 import UTMTracker from "@/components/UTMTracker";
 import { getDomainConfig } from "@/lib/domain-config";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0D0818",
+  colorScheme: "dark",
+};
 
 const outfit = Outfit({
   subsets: ["latin"],

@@ -3383,19 +3383,21 @@ textarea:focus {
   color: #fff !important;
 }
 
-/* ================== MOBILE STICKY LEAD BAR ================== */
+/* ================== 100% PERFECT MOBILE RESPONSIVE SUITE ================== */
 .mobile-sticky-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   display: flex;
-  background: rgba(10, 10, 10, 0.95);
-  backdrop-filter: blur(10px);
+  background: rgba(10, 10, 10, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   z-index: 9999;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   transform: translateY(100%);
-  animation: slideUp 0.5s ease 1s forwards;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+  padding-bottom: max(0px, env(safe-area-inset-bottom));
 }
 
 @media (min-width: 768px) {
@@ -3406,26 +3408,28 @@ textarea:focus {
 
 .mobile-btn {
   flex: 1;
-  padding: 1rem;
+  padding: 0.85rem 1rem;
   text-align: center;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  min-height: 48px; /* Google 48px touch target standard */
   border: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   text-decoration: none;
   font-family: 'Plus Jakarta Sans', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .whatsapp-btn {
-  background: #111;
+  background: #121212;
   color: #25D366;
-  border-right: 1px solid rgba(255,255,255,0.05);
+  border-right: 1px solid rgba(255,255,255,0.08);
 }
 
 .book-btn {
@@ -3436,3 +3440,81 @@ textarea:focus {
 @keyframes slideUp {
   to { transform: translateY(0); }
 }
+
+/* ── Mobile Global Enhancements & Touch Targets ── */
+@media (max-width: 768px) {
+  /* Prevent sticky bar from covering bottom content */
+  body {
+    padding-bottom: calc(65px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Prevent iOS Safari input auto-zoom on focus */
+  input, select, textarea, .form-input, .form-group input, .form-group select {
+    font-size: 16px !important;
+  }
+
+  /* Reposition floating WhatsApp above sticky bar */
+  .floating-whatsapp {
+    bottom: calc(70px + env(safe-area-inset-bottom, 0px)) !important;
+    left: 16px !important;
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  /* Horizontal swipeable tabs with touch inertia */
+  .residence-tabs,
+  .location-cat-tabs,
+  .fp-tabs,
+  .masterplan-controls {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    padding-bottom: 8px !important;
+    gap: 0.5rem !important;
+    justify-content: flex-start !important;
+  }
+
+  .residence-tabs::-webkit-scrollbar,
+  .location-cat-tabs::-webkit-scrollbar,
+  .fp-tabs::-webkit-scrollbar,
+  .masterplan-controls::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .residence-tab-btn,
+  .loc-tab-btn,
+  .fp-tab-btn,
+  .filter-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    min-height: 44px !important; /* 44px Google touch standard */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Ensure modal dialogs fit on small mobile screens */
+  .glass-card {
+    max-height: 88vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hero adjustments for small mobile viewports */
+  .section-title {
+    font-size: 1.85rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem !important;
+    margin-bottom: 30px !important;
+  }
+
+  .section-padding {
+    padding: 60px 0 !important;
+  }
+}
+

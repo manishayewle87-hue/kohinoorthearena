@@ -182,11 +182,12 @@ export default function Modals() {
     <>
       {/* Dynamic Modal Overlay */}
       {modalContent && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.85)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(10px)' }}>
-          <div className="glass-card" style={{ position: 'relative', width: '90%', maxWidth: '500px', padding: '3rem 2rem', animation: 'fade-in 0.3s ease-out' }}>
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.85)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', padding: '1rem' }}>
+          <div className="glass-card" style={{ position: 'relative', width: '100%', maxWidth: '480px', maxHeight: '90vh', overflowY: 'auto', WebkitOverflowScrolling: 'touch', padding: '2.25rem 1.5rem', animation: 'fade-in 0.25s ease-out' }}>
             <button 
               onClick={() => window.dispatchEvent(new CustomEvent('arena-close-modal'))}
-              style={{ position: 'absolute', top: '15px', right: '15px', background: 'none', border: 'none', color: '#fff', fontSize: '1.5rem', cursor: 'pointer' }}
+              style={{ position: 'absolute', top: '12px', right: '12px', background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', fontSize: '1.4rem', cursor: 'pointer', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              aria-label="Close modal dialog"
             >
               <i className="ri-close-line"></i>
             </button>
