@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test:seo": "node scripts/verify-seo.mjs",
+    "index:submit": "node scripts/advanced-indexing-engine.mjs",
     "generate:sitemap": "next-sitemap",
     "audit:performance": "sh scripts/performance-audit.sh"
   },

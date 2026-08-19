@@ -1,57 +1,62 @@
-name: Google Indexing API — Nightly Submission
+name: Ultra-Advanced Google & Global Search Indexing
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/app/**'
+      - 'src/components/**'
+      - 'src/lib/**'
   schedule:
-    - cron: '0 20 * * *'
+    # Runs twice daily at 00:00 UTC and 12:00 UTC
+    - cron: '0 0,12 * * *'
   workflow_dispatch:
     inputs:
+      mode:
+        description: 'Indexing mode'
+        required: true
+        default: 'auto'
+        type: choice
+        options:
+          - 'auto'
+          - 'git-diff'
+          - 'master-hubs'
       dry_run:
-        description: 'Dry run (print URLs only, do not submit)'
+        description: 'Dry run (preview target URLs without sending)'
         required: false
         default: 'false'
         type: choice
         options:
-          - 'true'
           - 'false'
+          - 'true'
 
 jobs:
-  index-urls:
-    name: Submit URLs to Google Indexing API
+  google-and-global-indexing:
+    name: 🚀 Google Indexing & IndexNow Dispatch
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
 
     steps:
-      - name: Trigger Google Indexing API via Cron Endpoint
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Execute Ultra Indexing Engine (Google + IndexNow + Sitemaps)
         env:
+          GOOGLE_INDEXING_CLIENT_EMAIL: ${{ secrets.GOOGLE_INDEXING_CLIENT_EMAIL }}
+          GOOGLE_INDEXING_PRIVATE_KEY: ${{ secrets.GOOGLE_INDEXING_PRIVATE_KEY }}
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: |
-          if [ "$DRY_RUN" = "true" ]; then
-            echo "⚠️  DRY RUN — would call: https://www.kohinoorthearena.in/api/cron"
-            echo "⚠️  DRY RUN — would call: https://www.mahalaxmithearena.in/api/cron"
-            exit 0
-          fi
-
-          SECRET="${CRON_SECRET:-e4d531723bb826a44b40f42f431ae24bccb5211f6f34f71b7b85d4cbb0a50134}"
-
-          # Submit for both domains
-          for DOMAIN in "www.kohinoorthearena.in" "www.mahalaxmithearena.in"; do
-            echo ""
-            echo "🚀 Submitting URLs for: $DOMAIN"
-
-            HTTP_STATUS=$(curl -s -o /tmp/cron_response.json -w "%{http_code}" \
-              -H "Authorization: Bearer $SECRET" \
-              -H "x-cron-secret: $SECRET" \
-              "https://$DOMAIN/api/cron?secret=$SECRET")
-
-            echo "HTTP Status: $HTTP_STATUS"
-            cat /tmp/cron_response.json
-            echo ""
-
-            if [ "$HTTP_STATUS" = "200" ]; then
-              echo "✅ $DOMAIN — Indexing submission complete"
-            else
-              echo "❌ $DOMAIN — Failed with status $HTTP_STATUS"
-              exit 1
-            fi
-          done
+          MODE="${{ github.event.inputs.mode || (github.event_name == 'push' && 'git-diff' || 'auto') }}"
+          node scripts/advanced-indexing-engine.mjs "$MODE"
