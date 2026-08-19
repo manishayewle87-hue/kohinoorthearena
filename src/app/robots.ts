@@ -26,6 +26,7 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
           '/_next/image/',
           '/assets/',
           '/api/og',        // Dynamic OG image generation — must be crawlable
+          '/api/favicon',   // Dynamic domain-specific favicon — must be crawlable
         ],
         disallow: [
           '/api/lead',
@@ -36,7 +37,7 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       },
       {
         userAgent: 'Googlebot-Image',
-        allow: ['/', '/assets/', '/_next/image/', '/api/og'],
+        allow: ['/', '/assets/', '/_next/image/', '/api/og', '/api/favicon'],
       },
       {
         userAgent: 'Googlebot-Video',
@@ -65,7 +66,7 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       // ════════════════════════════════════════════════════
       {
         userAgent: 'bingbot',
-        allow: ['/', '/api/og'],
+        allow: ['/', '/api/og', '/api/favicon'],
         disallow: ['/api/lead', '/api/cron', '/api/test-email', '/_next/'],
       },
       {
@@ -85,7 +86,7 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       },
       {
         userAgent: 'YandexBot',      // Yandex (Russia, CIS)
-        allow: ['/', '/api/og'],
+        allow: ['/', '/api/og', '/api/favicon'],
         disallow: ['/api/lead', '/api/cron', '/_next/'],
       },
       {
@@ -110,22 +111,22 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       // ════════════════════════════════════════════════════
       {
         userAgent: 'facebookexternalhit',
-        allow: ['/', '/api/og', '/assets/'],
+        allow: ['/', '/api/og', '/api/favicon', '/assets/'],
         disallow: ['/api/lead', '/api/cron'],
       },
       {
         userAgent: 'Twitterbot',
-        allow: ['/', '/api/og', '/assets/'],
+        allow: ['/', '/api/og', '/api/favicon', '/assets/'],
         disallow: ['/api/lead', '/api/cron'],
       },
       {
         userAgent: 'LinkedInBot',
-        allow: ['/', '/api/og', '/assets/'],
+        allow: ['/', '/api/og', '/api/favicon', '/assets/'],
         disallow: ['/api/lead', '/api/cron'],
       },
       {
         userAgent: 'WhatsApp',
-        allow: ['/', '/api/og', '/assets/'],
+        allow: ['/', '/api/og', '/api/favicon', '/assets/'],
         disallow: ['/api/lead', '/api/cron'],
       },
 
@@ -164,7 +165,7 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
       // ════════════════════════════════════════════════════
       {
         userAgent: '*',
-        allow: ['/', '/api/og'],
+        allow: ['/', '/api/og', '/api/favicon'],
         disallow: [
           '/api/lead',
           '/api/cron',

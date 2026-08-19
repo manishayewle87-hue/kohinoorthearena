@@ -64,6 +64,15 @@ export async function generateMetadata(): Promise<Metadata> {
     verification: {
       google: cfg.googleVerification,
     },
+    icons: {
+      icon: [
+        { url: '/api/favicon', type: 'image/svg+xml' },
+      ],
+      shortcut: '/api/favicon',
+      apple: [
+        { url: '/api/favicon', type: 'image/svg+xml' },
+      ],
+    },
   };
 }
 
@@ -342,7 +351,8 @@ export default async function RootLayout({
       <head>
         <meta name="google-site-verification" content={cfg.googleVerification} />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" />
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%230D0818'/><text x='50%25' y='55%25' dominant-baseline='central' text-anchor='middle' font-size='50'>🏃</text></svg>" />
+        <link rel="icon" href="/api/favicon" type="image/svg+xml" sizes="any" />
+        <link rel="apple-touch-icon" href="/api/favicon" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

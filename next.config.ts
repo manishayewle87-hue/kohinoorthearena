@@ -88,7 +88,7 @@ const nextConfig: NextConfig = {
         ],
       },
 
-      // ── RULE 5: Dynamic OG image — short cache (1 hour) ──
+      // ── RULE 5: Dynamic OG image & Favicon — cache & indexable ──
       {
         source: '/api/og',
         headers: [
@@ -96,10 +96,17 @@ const nextConfig: NextConfig = {
           { key: 'X-Robots-Tag', value: 'index, follow' },
         ],
       },
-
-      // ── RULE 6: All other API routes — no cache, no index ──
       {
-        source: '/api/((?!og).*)',
+        source: '/api/favicon',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=604800' },
+          { key: 'X-Robots-Tag', value: 'index, follow' },
+        ],
+      },
+
+      // ── RULE 6: All other internal API routes — no cache, no index ──
+      {
+        source: '/api/((?!og|favicon).*)',
         headers: [
           { key: 'Cache-Control', value: 'no-store, no-cache, must-revalidate' },
           { key: 'X-Robots-Tag', value: 'noindex, nofollow' },

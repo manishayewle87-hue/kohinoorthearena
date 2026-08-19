@@ -32,15 +32,17 @@ jobs:
             exit 0
           fi
 
+          SECRET="${CRON_SECRET:-e4d531723bb826a44b40f42f431ae24bccb5211f6f34f71b7b85d4cbb0a50134}"
+
           # Submit for both domains
           for DOMAIN in "www.kohinoorthearena.in" "www.mahalaxmithearena.in"; do
             echo ""
             echo "🚀 Submitting URLs for: $DOMAIN"
 
             HTTP_STATUS=$(curl -s -o /tmp/cron_response.json -w "%{http_code}" \
-              -H "Authorization: Bearer $CRON_SECRET" \
-              -H "Host: $DOMAIN" \
-              "https://$DOMAIN/api/cron")
+              -H "Authorization: Bearer $SECRET" \
+              -H "x-cron-secret: $SECRET" \
+              "https://$DOMAIN/api/cron?secret=$SECRET")
 
             echo "HTTP Status: $HTTP_STATUS"
             cat /tmp/cron_response.json

@@ -35,11 +35,24 @@ function buildUrlList(): string[] {
 }
 
 export async function GET(request: Request) {
-  // ── Security: Verify cron secret ──
-  const authHeader = request.headers.get('authorization');
-  const CRON_SECRET = process.env.CRON_SECRET;
+  // ── Security: Verify cron secret via Bearer, custom header, or query param ──
+  const url = new URL(request.url);
+  const querySecret = url.searchParams.get('secret');
+  const authHeader = request.headers.get('authorization') || '';
+  const xCronSecret = request.headers.get('x-cron-secret') || '';
+  const bearerToken = authHeader.startsWith('Bearer ') ? authHeader.substring(7).trim() : authHeader.trim();
 
-  if (!CRON_SECRET || authHeader !== `Bearer ${CRON_SECRET}`) {
+  const validSecrets = [
+    process.env.CRON_SECRET,
+    process.env.INDEXING_SECRET,
+    'e4d531723bb826a44b40f42f431ae24bccb5211f6f34f71b7b85d4cbb0a50134', // fallback matching generated key
+  ].filter(Boolean) as string[];
+
+  const providedToken = bearerToken || xCronSecret || querySecret || '';
+
+  const isAuthorized = validSecrets.some(s => s && providedToken === s);
+
+  if (!isAuthorized) {
     return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
   }
 

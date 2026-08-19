@@ -1,30 +1,26 @@
 import { MetadataRoute } from 'next';
+import { headers } from 'next/headers';
+import { getDomainConfig } from '@/lib/domain-config';
 
-export default function manifest(): MetadataRoute.Manifest {
+export default async function manifest(): Promise<MetadataRoute.Manifest> {
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
+
   return {
-    name: 'Mahalaxmi The Arena',
-    short_name: 'The Arena',
-    description: 'Premium 2, 3 & 4 BHK Sports Township in PCMC, Pune.',
+    name: `${cfg.projectName} by ${cfg.brand}`,
+    short_name: cfg.arenaName,
+    description: cfg.description,
     start_url: '/',
     display: 'standalone',
     background_color: '#0D0818',
     theme_color: '#DFFE00',
     icons: [
       {
-        src: '/assets/images/favicon.ico',
+        src: '/api/favicon',
         sizes: 'any',
-        type: 'image/x-icon',
+        type: 'image/svg+xml',
       },
-      {
-        src: '/assets/images/icon-192x192.png',
-        sizes: '192x192',
-        type: 'image/png',
-      },
-      {
-        src: '/assets/images/icon-512x512.png',
-        sizes: '512x512',
-        type: 'image/png',
-      }
     ],
   };
 }
