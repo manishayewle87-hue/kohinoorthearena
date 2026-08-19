@@ -4,11 +4,14 @@ import { usePathname } from 'next/navigation';
 export default function FloatingWhatsApp() {
   const pathname = usePathname();
   
-  let message = "Hi, I am interested in Mahalaxmi The Arena. Could you please share more details?";
+  const isKohinoor = typeof window !== 'undefined' && window.location.hostname.includes('kohinoor');
+  const brandName = isKohinoor ? 'Kohinoor The Arena' : 'Mahalaxmi The Arena';
+
+  let message = `Hi, I am interested in ${brandName}. Could you please share more details?`;
   if (pathname && pathname !== '/') {
     const formattedPath = pathname.replace(/\//g, ' ').replace(/-/g, ' ').trim();
     const context = formattedPath.replace(/\b\w/g, l => l.toUpperCase());
-    message = `Hi, I am looking for details on the ${context} at The Arena. Can you share the price sheet?`;
+    message = `Hi, I am looking for details on ${context} at ${brandName}. Can you share the brochure and price sheet?`;
   }
 
   const phoneNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "917711993434";

@@ -141,7 +141,14 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
           </div>
         </article>
       </main>
-      <Footer />
+      <Footer
+        mahaRera={cfg.mahaRera}
+        primarySlug={cfg.primarySlug}
+        coDevSlug={cfg.primarySlug === '/kohinoor-the-arena-pimpri'
+          ? '/mahalaxmi-the-arena-pimpri'
+          : '/kohinoor-the-arena-pimpri'}
+        projectName={cfg.projectName}
+      />
     </>
   );
 }

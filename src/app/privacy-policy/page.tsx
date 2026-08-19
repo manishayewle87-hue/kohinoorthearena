@@ -1,14 +1,28 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Metadata } from 'next';
+import { headers } from 'next/headers';
+import { getDomainConfig } from '@/lib/domain-config';
 
-export const metadata = {
-  title: 'Privacy Policy | Mahalaxmi The Arena',
-  description: 'Privacy Policy and data collection guidelines for Mahalaxmi The Arena.',
-  robots: 'noindex, nofollow' // Standard practice for policy pages to save crawl budget
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
 
-export default function PrivacyPolicy() {
+  return {
+    title: `Privacy Policy | ${cfg.projectName} by ${cfg.brand}`,
+    description: `Privacy Policy and data protection guidelines for ${cfg.projectName}.`,
+    robots: { index: false, follow: false },
+  };
+}
+
+export default async function PrivacyPolicy() {
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
+  const supportEmail = `info@${cfg.canonical.replace('https://www.', '')}`;
+
   return (
     <>
       <Navbar />
@@ -17,26 +31,33 @@ export default function PrivacyPolicy() {
           <h1 className="section-title" style={{ textAlign: 'left', marginBottom: '2rem' }}>Privacy Policy</h1>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', lineHeight: '1.8' }}>
-            <p>Last updated: {new Date().toLocaleDateString()}</p>
+            <p>Last updated: {new Date().toLocaleDateString('en-IN', { month: 'long', year: 'numeric' })}</p>
             
             <h2>1. Information We Collect</h2>
-            <p>When you interact with our website, we may collect personal information that you voluntarily provide to us when expressing an interest in obtaining information about us or our products and services. This includes your name, phone number, and email address.</p>
+            <p>When you interact with our website, we may collect personal information that you voluntarily provide to us when expressing an interest in obtaining information about {cfg.projectName}. This includes your name, phone number, and email address.</p>
             
             <h2>2. How We Use Your Information</h2>
-            <p>We use the information we collect or receive to communicate with you, send you marketing and promotional communications (including via WhatsApp, SMS, and Email), and to respond to your inquiries regarding Mahalaxmi The Arena.</p>
+            <p>We use the information we collect or receive to communicate with you, send you digital brochures, schedule site visits, and provide project updates regarding {cfg.projectName} via WhatsApp, Phone, SMS, and Email.</p>
             
-            <h2>3. Third-Party Tracking & Advertising</h2>
-            <p>We use third-party tracking technologies, including Google Analytics and Meta (Facebook) Pixel, to track user interactions on our website and serve targeted advertisements. These technologies may collect information about your browser, device, and IP address.</p>
+            <h2>3. Third-Party Tracking &amp; Advertising</h2>
+            <p>We use tracking technologies, including Google Analytics 4 and Meta Pixel, to measure website engagement and optimize ad delivery. These technologies collect anonymized device and browser telemetry.</p>
             
             <h2>4. WhatsApp Communication</h2>
-            <p>By opting in to receive communications via WhatsApp, you consent to receive digital brochures, project updates, and sales inquiries directly to your provided mobile number via the Meta WhatsApp Cloud API.</p>
+            <p>By opting in to receive communications via WhatsApp, you consent to receive digital brochures, floor plans, and sales inquiries directly to your provided mobile number via verified messaging channels.</p>
             
             <h2>5. Contact Us</h2>
-            <p>If you have questions or comments about this notice, you may email us at propsmartrealty@gmail.com.</p>
+            <p>If you have questions or comments about this privacy policy, you may reach our compliance team at <a href={`mailto:${supportEmail}`} style={{ color: 'var(--neon-lime)' }}>{supportEmail}</a> or call <a href={`tel:${cfg.contactPhone}`} style={{ color: 'var(--neon-lime)' }}>{cfg.contactPhone}</a>.</p>
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer
+        mahaRera={cfg.mahaRera}
+        primarySlug={cfg.primarySlug}
+        coDevSlug={cfg.primarySlug === '/kohinoor-the-arena-pimpri'
+          ? '/mahalaxmi-the-arena-pimpri'
+          : '/kohinoor-the-arena-pimpri'}
+        projectName={cfg.projectName}
+      />
     </>
   );
 }

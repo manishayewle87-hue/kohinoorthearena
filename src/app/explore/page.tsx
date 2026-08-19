@@ -43,61 +43,62 @@ const MICRO_MARKETS = [
 ];
 
 const CONFIGS = ["2-bhk", "3-bhk", "4-bhk"];
+const INTENTS = ["2-bhk", "3-bhk", "4-bhk"];
 
-export default async function ExploreSitemap() {
+export default async function Explore() {
   const headersList = await headers();
   const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
   const cfg = getDomainConfig(host);
-  
-  const baseSlug = cfg.primarySlug === '/' ? 'kohinoor-the-arena-pimpri' : cfg.primarySlug.replace('/', '');
 
   return (
     <>
       <Navbar />
-      <main style={{ paddingTop: '100px', background: 'var(--bg-dark)', minHeight: '100vh', paddingBottom: '4rem' }}>
+      <main style={{ padding: '8rem 0 4rem 0', minHeight: '80vh' }}>
         <div className="container">
-          <div className="text-center" style={{ marginBottom: "3rem" }}>
-            <span className="badge-neon">• PROPERTY DIRECTORY •</span>
-            <h1 className="section-title">EXPLORE <span className="highlight-neon">PUNE REAL ESTATE</span></h1>
-            <p className="section-subtitle">Browse luxury properties across 60+ micro-markets in Pune & PCMC.</p>
-          </div>
+          <h1 className="section-title text-center" style={{ marginBottom: '1rem' }}>Explore Properties in Pune</h1>
+          <p className="text-center" style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '3rem', maxWidth: '700px', margin: '0 auto 3rem auto' }}>
+            Discover luxury 2, 3 &amp; 4 BHK flats, premium residences, and sports township developments across every prime micro-market in Pimpri Chinchwad and Pune.
+          </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-            {CONFIGS.map(config => (
-              <div key={config} style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '2rem' }}>
-                <h3 style={{ color: 'var(--neon-lime)', marginBottom: '1.5rem', textTransform: 'uppercase' }}>
-                  {config.replace('-', ' ')} Flats in Pune
-                </h3>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                  {MICRO_MARKETS.map(market => {
-                    const marketDisplay = market.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-                    const intentSlug = `${config}-flats-in-${market}`;
-                    return (
-                      <li key={market}>
-                        <Link 
-                          href={`/${baseSlug}/${intentSlug}`}
-                          style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none', fontSize: '0.9rem', transition: 'color 0.2s' }}
-                          className="hover-neon-text"
-                        >
-                          {config.replace('-', ' ').toUpperCase()} in {marketDisplay}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.5rem' }}>
+            {MICRO_MARKETS.map((loc) => {
+              const locDisplay = loc.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+              return (
+                <div key={loc} className="glass-card" style={{ padding: '1.5rem' }}>
+                  <h3 style={{ fontSize: '1.2rem', color: 'var(--neon-lime)', marginBottom: '1rem' }}>{locDisplay}</h3>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {INTENTS.map((intent) => {
+                      const intentDisplay = intent.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                      return (
+                        <li key={intent}>
+                          <Link href={`/${intent}-flats-${loc}`} style={{ color: 'rgba(255,255,255,0.8)', textDecoration: 'none', fontSize: '0.85rem' }}>
+                            {intentDisplay} Flats in {locDisplay} &rarr;
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+            })}
           </div>
           
           <div style={{ marginTop: '3rem', textAlign: 'center', padding: '2rem', background: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)' }}>
-            <h4 style={{ color: '#fff', marginBottom: '1rem' }}>Global & NRI Investors</h4>
+            <h4 style={{ color: '#fff', marginBottom: '1rem' }}>Global &amp; NRI Investors</h4>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', maxWidth: '600px', margin: '0 auto' }}>
               We assist Non-Resident Indians (NRIs) from the USA, UK, UAE, and across the globe in securing premium high-yield real estate assets in Pune&apos;s fastest-growing IT corridors.
             </p>
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer
+        mahaRera={cfg.mahaRera}
+        primarySlug={cfg.primarySlug}
+        coDevSlug={cfg.primarySlug === '/kohinoor-the-arena-pimpri'
+          ? '/mahalaxmi-the-arena-pimpri'
+          : '/kohinoor-the-arena-pimpri'}
+        projectName={cfg.projectName}
+      />
     </>
   );
 }

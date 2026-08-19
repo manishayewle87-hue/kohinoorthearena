@@ -3,15 +3,39 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
+import { headers } from "next/headers";
+import { getDomainConfig } from "@/lib/domain-config";
 
-export const metadata: Metadata = {
-  title: "Real Estate Market Insights | Mahalaxmi The Arena",
-  description: "Read the latest insights and trends on the Pimpri Chinchwad and Pune real estate market.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
+
+  const title = `Real Estate Market Insights & Guides | ${cfg.arenaName} by ${cfg.brand}`;
+  const description = `Read expert analyses, investment guides, and real estate market trends for Pimpri Chinchwad (PCMC) and Pune by ${cfg.brand}.`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `${cfg.canonical}/blog` },
+    openGraph: {
+      title,
+      description,
+      url: `${cfg.canonical}/blog`,
+      siteName: `${cfg.arenaName} by ${cfg.brand}`,
+      images: [{ url: cfg.ogImage, width: 1200, height: 630, alt: title }],
+      type: 'website',
+      locale: 'en_IN',
+    },
+  };
+}
 
 export const revalidate = 3600;
 
-export default function BlogList() {
+export default async function BlogList() {
+  const headersList = await headers();
+  const host = headersList.get('host') || 'kohinoorthearena.vercel.app';
+  const cfg = getDomainConfig(host);
   const posts = getBlogPosts();
 
   return (
@@ -21,7 +45,7 @@ export default function BlogList() {
         <div className="container">
           <h1 className="section-title text-center" style={{ marginBottom: '1rem' }}>Market Insights</h1>
           <p className="text-center" style={{ color: 'rgba(255,255,255,0.7)', marginBottom: '3rem' }}>
-            Latest trends, tips, and news on the Pune Real Estate Market.
+            Latest trends, investment guides, and analysis on the Pune &amp; PCMC Real Estate Market.
           </p>
           
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
@@ -38,7 +62,14 @@ export default function BlogList() {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer
+        mahaRera={cfg.mahaRera}
+        primarySlug={cfg.primarySlug}
+        coDevSlug={cfg.primarySlug === '/kohinoor-the-arena-pimpri'
+          ? '/mahalaxmi-the-arena-pimpri'
+          : '/kohinoor-the-arena-pimpri'}
+        projectName={cfg.projectName}
+      />
     </>
   );
 }

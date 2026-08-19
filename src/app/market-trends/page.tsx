@@ -113,7 +113,14 @@ export default async function MarketTrends() {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer
+        mahaRera={cfg.mahaRera}
+        primarySlug={cfg.primarySlug}
+        coDevSlug={cfg.primarySlug === '/kohinoor-the-arena-pimpri'
+          ? '/mahalaxmi-the-arena-pimpri'
+          : '/kohinoor-the-arena-pimpri'}
+        projectName={cfg.projectName}
+      />
     </>
   );
 }

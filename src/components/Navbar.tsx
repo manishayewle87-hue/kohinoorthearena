@@ -168,7 +168,7 @@ export default function Navbar() {
             <i className="ri-run-line"></i>
           </div>
           <div className="drawer-brand-name">
-            MAHALAXMI <span>THE ARENA</span>
+            {typeof window !== 'undefined' && window.location.hostname.includes('kohinoor') ? 'KOHINOOR' : 'MAHALAXMI'} <span>THE ARENA</span>
           </div>
         </div>
         <button className="drawer-nav-link" onClick={() => scrollToAndClose('philosophy')}>
