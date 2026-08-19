@@ -192,18 +192,17 @@ const FALLBACK_CONFIG: DomainConfig = DOMAIN_CONFIGS['kohinoorthearena.in'];
 
 export function getDomainConfig(host: string): DomainConfig {
   // Strip port for localhost development
-  const cleanHost = host.split(':')[0];
+  const cleanHost = host.split(':')[0].toLowerCase();
 
-  // Exact match first
+  // 1. Exact match (handles 'kohinoorthearena.in' and 'mahalaxmithearena.in')
   if (DOMAIN_CONFIGS[cleanHost]) return DOMAIN_CONFIGS[cleanHost];
 
-  // Partial match (handles www. prefix)
-  for (const [key, config] of Object.entries(DOMAIN_CONFIGS)) {
-    if (cleanHost.includes(key) || cleanHost.includes(key.replace('www.', ''))) {
-      return config;
-    }
-  }
+  // 2. Strip www. prefix and try again
+  //    'www.kohinoorthearena.in' → 'kohinoorthearena.in'
+  const withoutWww = cleanHost.replace(/^www\./, '');
+  if (DOMAIN_CONFIGS[withoutWww]) return DOMAIN_CONFIGS[withoutWww];
 
+  // 3. Vercel preview fallback — return Kohinoor as default
   return FALLBACK_CONFIG;
 }
 

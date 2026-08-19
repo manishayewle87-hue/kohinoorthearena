@@ -22,7 +22,7 @@ export async function GET() {
 
 ## Contact Information
 - **Website**: ${cfg.canonical}
-- **Email**: info@kohinoorthearena.in
+- **Email**: info@${cfg.canonical.replace('https://www.', '')}
 - **Phone**: ${cfg.contactPhone}
 
 ## Description

@@ -9,11 +9,14 @@ export const runtime = 'nodejs';
 const CORE_PATHS = [
   '',
   '/blog',
+  '/explore',
+  '/market-trends',
   '/privacy-policy',
   '/terms',
-  '/kohinoor-the-arena-pimpri-chinchwad-pune',
-  '/mahalaxmi-the-arena-luxury-flats-in-pimpri',
-  '/life-in-motion-pimpri-sports-township-pcmc',
+  '/kohinoor-the-arena-pimpri',
+  '/mahalaxmi-the-arena-pimpri',
+  '/life-in-motion-pimpri',
+  '/pcmc-premium-real-estate',
 ];
 
 function buildAllUrls(): string[] {
@@ -22,7 +25,7 @@ function buildAllUrls(): string[] {
   const posts = getBlogPosts();
   for (const baseUrl of ALL_DOMAINS) {
     CORE_PATHS.forEach(p => urls.push(`${baseUrl}${p}`));
-    pseoPages.forEach(p => urls.push(`${baseUrl}/flats-in-pune/${p.slug}`));
+    pseoPages.forEach(p => urls.push(`${baseUrl}/${p.slug}`));
     posts.forEach(p => urls.push(`${baseUrl}/blog/${p.slug}`));
   }
   return urls;
@@ -48,10 +51,10 @@ export async function POST(request: Request) {
     // ── Phase 4 Indexation Velocity Engine (Multi-Engine Pinging) ──
     if (body.type === 'PING_SITEMAP') {
       const sitemapUrls = [
-        'https://kohinoorthearena.in/sitemap.xml',
-        'https://mahalaxmithearena.in/sitemap.xml'
+        'https://www.kohinoorthearena.in/sitemap.xml',
+        'https://www.mahalaxmithearena.in/sitemap.xml',
       ];
-      
+
       const pingResults = [];
       for (const sUrl of sitemapUrls) {
         try {
@@ -74,7 +77,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid URL format.' }, { status: 422 });
     }
 
-    const allowedHosts = ['kohinoorthearena.in', 'mahalaxmithearena.in', 'kohinoorthearena.vercel.app'];
+    // Allow both www and non-www for both domains
+    const allowedHosts = [
+      'kohinoorthearena.in', 'www.kohinoorthearena.in',
+      'mahalaxmithearena.in', 'www.mahalaxmithearena.in',
+      'kohinoorthearena.vercel.app',
+    ];
     if (!allowedHosts.includes(urlObj.hostname)) {
       return NextResponse.json({ error: 'URL hostname not in allowed list.' }, { status: 403 });
     }
