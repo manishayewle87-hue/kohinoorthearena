@@ -42,6 +42,16 @@ const nextConfig: NextConfig = {
     ];
   },
 
+  // ── Sitemap Rewrite for Google Search Console ──────────────────────
+  async rewrites() {
+    return [
+      {
+        source: '/sitemap.xml',
+        destination: '/sitemap/0.xml',
+      },
+    ];
+  },
+
   // ── HTTP Security + Crawl Headers ──────────────────────────────────
   async headers() {
     return [
