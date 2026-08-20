@@ -251,7 +251,7 @@ export const ARENA_DATA = {
       tag: "Smart Urban Living",
       carpetArea: "830 - 1,206 Sq. Ft.",
       balconyArea: "95 - 140 Sq. Ft.",
-      priceEstimate: "₹ 88.5 Lakhs Onwards*",
+      priceEstimate: "₹ 1.20 Cr Onwards*",
       highlights: [
         "3,000 mm Slab-to-Slab Floor Height",
         "1800 x 1200 mm Large Format Vitrified Flooring",
@@ -268,7 +268,7 @@ export const ARENA_DATA = {
       tag: "Smart Family Living",
       carpetArea: "986 - 1,340 Sq. Ft.",
       balconyArea: "120 - 175 Sq. Ft.",
-      priceEstimate: "₹ 1.28 Cr Onwards*",
+      priceEstimate: "₹ 1.75 Cr Onwards*",
       highlights: [
         "Spacious Living & Dining with Panoramic Balcony",
         "Master Bedroom with Smart Automation",
@@ -285,7 +285,7 @@ export const ARENA_DATA = {
       tag: "Dual Aspect Luxury",
       carpetArea: "1,250 - 1,626 Sq. Ft.",
       balconyArea: "165 - 210 Sq. Ft.",
-      priceEstimate: "₹ 1.49 Cr Onwards*",
+      priceEstimate: "₹ 2.05 Cr Onwards*",
       highlights: [
         "Corner Apartment with Cross Ventilation",
         "Grand Foyer Entrance & Walk-in Wardrobe Space",
@@ -302,7 +302,7 @@ export const ARENA_DATA = {
       tag: "The Pinnacle of Arena",
       carpetArea: "1,600 - 2,600 Sq. Ft.",
       balconyArea: "240 - 380 Sq. Ft.",
-      priceEstimate: "₹ 2.15 Cr Onwards*",
+      priceEstimate: "₹ 2.95 Cr Onwards*",
       highlights: [
         "Exclusive Towers A1 & B1 (33 Floors + Attic Level)",
         "Panoramic 270-Degree Pune & Pimpri Skyline Views",
@@ -468,7 +468,7 @@ export const ARENA_DATA = {
       elevators: "3 Passenger + 1 Service",
       bathrooms: "2 Luxury Bathrooms",
       parking: "1 Covered Car Park",
-      priceRange: "₹ 88.5 Lakhs Onwards*",
+      priceRange: "₹ 1.20 Cr Onwards*",
       idealFor: "Working Achievers & Young Couples"
     },
     {
@@ -480,7 +480,7 @@ export const ARENA_DATA = {
       elevators: "3 Passenger + 1 Service",
       bathrooms: "3 Luxury Bathrooms",
       parking: "1 - 2 Covered Car Parks",
-      priceRange: "₹ 1.25 Cr Onwards*",
+      priceRange: "₹ 1.75 Cr Onwards*",
       idealFor: "Growing Families & Ambitious Parents"
     },
     {
@@ -492,7 +492,7 @@ export const ARENA_DATA = {
       elevators: "3 Passenger + 1 Service",
       bathrooms: "3 Bathrooms + Powder Room",
       parking: "2 Covered Car Parks",
-      priceRange: "₹ 1.48 Cr Onwards*",
+      priceRange: "₹ 2.05 Cr Onwards*",
       idealFor: "Multi-generational Families seeking Corner Privacy"
     },
     {
@@ -504,7 +504,7 @@ export const ARENA_DATA = {
       elevators: "3 Passenger + 1 Service",
       bathrooms: "4 Ensuite Bathrooms + Powder Room",
       parking: "2 - 3 Covered Car Parks",
-      priceRange: "₹ 1.95 Cr Onwards*",
+      priceRange: "₹ 2.95 Cr Onwards*",
       idealFor: "Executives, Founders & High-Net-Worth Families"
     }
   ],

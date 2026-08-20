@@ -17,7 +17,7 @@ const floorPlans = [
     id: '2bhk',
     title: '2 BHK Luxury',
     size: '768 - 820 Sq.Ft.',
-    basePriceINR: 8850000,
+    basePriceINR: 12000000,
     description: 'Perfect for modern families, featuring smart space utilization, a private balcony, and premium fixtures throughout.',
     image: '/assets/images/floorplan_2bhk.jpg',
     features: ['Vastu Compliant', 'Zero Wastage Layout', 'Premium Finishes']
@@ -26,7 +26,7 @@ const floorPlans = [
     id: '3bhk-premium',
     title: '3 BHK Premium',
     size: '980 - 1050 Sq.Ft.',
-    basePriceINR: 12800000,
+    basePriceINR: 17500000,
     description: 'Spacious living areas designed for maximum natural light and cross ventilation, offering an unparalleled living experience.',
     image: '/assets/images/floorplan_3bhk_premium.jpg', 
     features: ['East-West Entry', 'Dedicated Dining Area', 'Walk-in Wardrobe Space']
@@ -35,7 +35,7 @@ const floorPlans = [
     id: '4bhk-penthouse',
     title: '4 BHK Sky Penthouse',
     size: '1500+ Sq.Ft.',
-    basePriceINR: 21500000,
+    basePriceINR: 29500000,
     description: 'The pinnacle of luxury in Pimpri. Unobstructed city views, expansive decks, and elite craftsmanship.',
     image: '/assets/images/floorplan_4bhk.jpg',
     features: ['Panoramic Views', 'Private Elevator Lobby', 'Maids Room']

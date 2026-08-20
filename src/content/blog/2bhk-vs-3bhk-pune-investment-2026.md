@@ -10,9 +10,9 @@ One of the most common questions from first-time real estate investors in Pune i
 
 | Metric | 2 BHK | 3 BHK |
 |--------|-------|-------|
-| Starting Price (PCMC Premium) | ₹88.5 Lakhs | ₹1.28 Crore |
-| Monthly EMI (20Y, 8.5%) | ~₹76,000 | ~₹1,10,000 |
-| Monthly Rental (Premium Township) | ₹28,000–35,000 | ₹38,000–52,000 |
+| Starting Price (PCMC Premium) | ₹1.20 Crore | ₹1.75 Crore |
+| Monthly EMI (20Y, 8.5%) | ~₹83,000 | ~₹1,21,000 |
+| Monthly Rental (Premium Township) | ₹32,000–42,000 | ₹48,000–65,000 |
 | Gross Rental Yield | 3.8–4.7% | 3.6–4.9% |
 | Target Tenant | Young couples, singles | Families, senior IT professionals |
 | Resale Liquidity | Very High | High |
@@ -35,8 +35,8 @@ Moreover, the resale market for 3 BHK units in sports townships is distinctly th
 
 Given current market conditions in PCMC and the Hinjewadi IT corridor, our analysis suggests:
 
-- **First-time investor, budget-conscious:** → **2 BHK at ₹88.5 Lakhs**
-- **Established investor, 5+ year horizon:** → **3 BHK at ₹1.28 Crore**
+- **First-time investor, budget-conscious:** → **2 BHK at ₹1.20 Crore**
+- **Established investor, 5+ year horizon:** → **3 BHK at ₹1.75 Crore**
 - **NRI investor seeking rental yield + appreciation:** → **3 BHK** (higher ticket, lower management headache, longer leases)
 
 Both configurations are available at **Mahalaxmi The Arena** and **Kohinoor The Arena** — Pune's first ILESEUM-managed sports township in Pimpri.

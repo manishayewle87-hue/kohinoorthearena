@@ -115,10 +115,10 @@ export default function Booking() {
               <div className="form-group">
                 <label htmlFor="vip-config">Interested Configuration</label>
                 <select id="vip-config" name="configuration">
-                  <option>2 BHK Luxury Sports Residence (₹ 88.5 L*)</option>
-                  <option>3 BHK Premium Residence (₹ 1.28 Cr*)</option>
-                  <option>3 BHK Grand Corner Suite (₹ 1.49 Cr*)</option>
-                  <option>4 BHK Sky Residence & Penthouse (₹ 2.15 Cr*)</option>
+                  <option>2 BHK Luxury Sports Residence (₹ 1.20 Cr*)</option>
+                  <option>3 BHK Premium Residence (₹ 1.75 Cr*)</option>
+                  <option>3 BHK Grand Corner Suite (₹ 2.05 Cr*)</option>
+                  <option>4 BHK Sky Residence & Penthouse (₹ 2.95 Cr*)</option>
                   <option>Commercial Plaza Frontage Unit</option>
                 </select>
               </div>

@@ -21,7 +21,7 @@ export async function GET() {
 - **Towers**: 11 High-Rise Residential Towers (30+ Floors)
 - **Units**: ~2,500 Luxury Smart Residences
 - **Configurations**: 2 BHK, 3 BHK, and 4 BHK Luxury Residences
-- **Starting Price**: ₹${cfg.projectConfig.startingPrice} (2 BHK) | ₹1.28 Cr Onwards (3 BHK) | ₹2.15 Cr (4 BHK)
+- **Starting Price**: ${cfg.projectConfig.startingPrice} (2 BHK) | ₹1.75 Cr Onwards (3 BHK) | ₹2.95 Cr (4 BHK)
 - **Possession Year**: ${cfg.projectConfig.possessionYear}
 - **Active Sports Ecosystem**: 80,000 Sq. Ft. managed professionally by ILESEUM Sports Management
 - **Official Website**: ${cfg.canonical}

@@ -204,7 +204,7 @@ export default async function RootLayout({
         {
           '@type': 'Question',
           name: `What is the price of 2 BHK & 3 BHK in Mahalaxmi Kohinoor Pimpri?`,
-          acceptedAnswer: { '@type': 'Answer', text: `Prices at Mahalaxmi Kohinoor start from ₹88.5 Lakhs for 2 BHK Smart Residences and ₹1.28 Crore onwards for 3 BHK Luxury Residences. Flexible payment plans and home loan approvals from SBI, HDFC, ICICI, and Axis Bank are available.` },
+          acceptedAnswer: { '@type': 'Answer', text: `Prices at Mahalaxmi Kohinoor start from ₹1.20 Crore for 2 BHK Smart Residences, ₹1.75 Crore onwards for 3 BHK Luxury Residences, and ₹2.95 Crore onwards for 4 BHK Sky Penthouses. Flexible payment plans and home loan approvals from SBI, HDFC, ICICI, and Axis Bank are available.` },
         },
         {
           '@type': 'Question',

@@ -33,7 +33,7 @@ With ESOPs and quarterly bonuses, IT professionals are increasingly sophisticate
 
 **Mahalaxmi The Arena** and **Kohinoor The Arena** in Pimpri are specifically engineered for this demographic. As Pune's first **ILESEUM-managed sports township**, the 80,000 sq. ft. active ecosystem includes facilities that most standalone apartment projects simply cannot replicate.
 
-The starting price of **₹88.5 Lakhs for a 2 BHK** positions it well below Baner and Aundh pricing while delivering superior lifestyle infrastructure. For a mid-level IT professional at 6-8 LPA, this represents an accessible entry point into a premium asset.
+The starting price of **₹1.20 Crore for a 2 BHK** positions it well below Baner and Aundh pricing while delivering superior lifestyle infrastructure. For IT professionals seeking high capital appreciation and rental yield, this represents an accessible entry point into a premium asset.
 
 ## The Bottom Line
 

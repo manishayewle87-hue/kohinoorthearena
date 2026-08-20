@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 export default function Calculator() {
-  const [price, setPrice] = useState(128); // in Lakhs
+  const [price, setPrice] = useState(120); // in Lakhs (1.20 Cr)
   const [downPercent, setDownPercent] = useState(20);
   const [tenureYears, setTenureYears] = useState(20);
   const [interestRate, setInterestRate] = useState(8.5);
@@ -45,8 +45,8 @@ export default function Calculator() {
               </div>
               <input 
                 type="range" 
-                min="80" 
-                max="300" 
+                min="120" 
+                max="350" 
                 step="5" 
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}

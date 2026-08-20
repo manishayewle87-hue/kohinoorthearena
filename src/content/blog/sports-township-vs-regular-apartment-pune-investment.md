@@ -39,7 +39,7 @@ Based on PCMC circle rates, RERA registered transactions, and the infrastructure
 - **Year 1-2:** 12-15% (new project premium + possession excitement)
 - **Year 3-5:** 10-12% annually (IT corridor demand + scarcity of sports township supply)
 
-For a ₹1.28 Crore 3 BHK investment, this projects to **₹2.05-2.20 Crore** at 5-year exit — a **₹77-92 Lakh capital gain** on a ₹38 Lakh down payment.
+For a ₹1.75 Crore 3 BHK investment, this projects to **₹2.80-3.00 Crore** at 5-year exit — a **₹1.05-1.25 Crore capital gain** on a ₹35 Lakh down payment.
 
 ## The Verdict
 

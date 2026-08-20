@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     question: "What is the price of 2 BHK & 3 BHK at Mahalaxmi Kohinoor Pimpri?",
-    answer: "Prices start from ₹88.5 Lakhs for 2 BHK Smart Residences and ₹1.28 Cr Onwards for 3 BHK Luxury Residences. The 3 BHK Grand Corner Suites start from ₹1.49 Cr Onwards. All residences feature zero-wastage layouts, panoramic balconies, and premium branded sanitary fittings."
+    answer: "Prices start from ₹1.20 Cr for 2 BHK Smart Residences, ₹1.75 Cr Onwards for 3 BHK Premium Residences, and ₹2.05 Cr Onwards for 3 BHK Grand Corner Suites. The 4 BHK Sky Penthouses start from ₹2.95 Cr Onwards. All residences feature zero-wastage layouts, panoramic balconies, and premium branded sanitary fittings."
   },
   {
     question: "How close is The Arena to PCMC Metro Station and Kohinoor World Towers (KWT)?",
